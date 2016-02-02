@@ -414,6 +414,17 @@ Children:
   - Children:
     - Children: []
       Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20']
+          default: '0'
+          name: CAN ID
+          validators: null
+          value: '0'
+      Base: PowerDistributionPanel
+      Name: PowerPanel
+    - Children: []
+      Properties:
         Output Channel (Relay): !!robotbuilder.data.properties.ChoicesProperty
           choices: &id017 ['0', '1', '2', '3']
           default: '0'
@@ -515,9 +526,9 @@ Properties:
     validators: null
     value: []
   Java Package: !!robotbuilder.data.properties.StringProperty {default: org.usfirst.frc0000,
-    name: Java Package, validators: null, value: org.usfirst.frc997}
+    name: Java Package, validators: null, value: org.usfirst.frc.team997.robot}
   Use Default Java Package: !!robotbuilder.data.properties.BooleanProperty {default: true,
-    name: Use Default Java Package, validators: null, value: true}
+    name: Use Default Java Package, validators: null, value: false}
   Team Number: !!robotbuilder.data.properties.IntegerProperty {default: 0, name: Team Number,
     validators: null, value: 997}
   Export Subsystems: !!robotbuilder.data.properties.BooleanProperty {default: true,
