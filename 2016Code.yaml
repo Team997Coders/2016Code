@@ -519,7 +519,7 @@ Properties:
   Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\RED\workspace',
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: 'C:\Users\RED\git'}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
-    name: Export Commands, validators: null, value: true}
+    name: Export Commands, validators: null, value: false}
   Autonomous command parameters: !!robotbuilder.data.properties.ParametersProperty
     default: []
     name: Autonomous command parameters
@@ -532,7 +532,7 @@ Properties:
   Team Number: !!robotbuilder.data.properties.IntegerProperty {default: 0, name: Team Number,
     validators: null, value: 997}
   Export Subsystems: !!robotbuilder.data.properties.BooleanProperty {default: true,
-    name: Export Subsystems, validators: null, value: true}
+    name: Export Subsystems, validators: null, value: false}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
   Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\RED\',
