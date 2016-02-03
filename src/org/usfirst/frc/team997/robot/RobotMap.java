@@ -9,12 +9,14 @@ public class RobotMap {
 	rightMotorPort           = 1, // drive
 	shooterMotorPort         = 3, // shooter
 	shooterAngleMotorPort    = 4, // shooter
-
+	servoMotorPort           = 5, // ball pusher servo
+	aimingMotorPort          = 6, // aimer
+ 
 	// DIO
-	leftEncoderFirstPort     = 0, // drive
-	leftEncoderSecondPort    = 1, // drive
-	rightEncoderFirstPort    = 2, // drive
-	rightEncoderSecondPort   = 3, // drive
+	rightEncoderFirstPort    = 0, // drive
+	rightEncoderSecondPort   = 1, // drive
+	leftEncoderFirstPort     = 2, // drive
+	leftEncoderSecondPort    = 3, // drive
 	shooterEncoderFirstPort  = 4, // shooter
 	shooterEncoderSecondPort = 5, // shooter
 
@@ -22,8 +24,12 @@ public class RobotMap {
 	gyroPort                 = 0, // drive
 	ultrasonicPort           = 1, // drive
 	hallEffectPort           = 2, // shooter
+	shooterAnglePort         = 3, // shooter angle
 
-	// Spike
-	flashLightPort           = 0, // misc
-	circleLightPort          = 1; // misc
+	// Spike/Relay
+	circleLightPort          = 0, // misc
+	flashLightPort           = 1, // misc
+	
+	//Joystick
+	JoystickPort             = 0;
 }

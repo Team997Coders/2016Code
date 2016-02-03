@@ -1,6 +1,9 @@
 package org.usfirst.frc.team997.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 
 /**
@@ -8,7 +11,42 @@ import org.usfirst.frc.team997.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //// CREATING BUTTONS
+    
+	
+	private final Controller theController;
+	
+	
+	public OI() {
+		
+		theController = new Controller(RobotMap.JoystickPort);
+	}
+	
+	private double deadband(double a) {
+		
+		//deadband for joystick output
+		
+		if (Math.abs(a)>.15){
+			return a;
+		} else {
+			return 0;
+		}
+	}
+	
+	public double lefty() {
+		return deadband(theController.getLeftRawY());
+	}
+	
+	public double righty (){
+		return deadband(theController.getRightRawX());
+	}
+	
+	
+	public void userinfo() {
+		SmartDashboard.putNumber("leftstickY", theController.getLeftRawY());
+		SmartDashboard.putNumber("rightstickY", theController.getRightRawY());
+	}
+	
+	//// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
