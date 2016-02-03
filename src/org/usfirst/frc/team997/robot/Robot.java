@@ -1,12 +1,20 @@
 
 package org.usfirst.frc.team997.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.ExampleSubsystem;
+
+import java.io.File;
+import java.util.TimeZone;
+
+import org.usfirst.frc.team997.robot.DataLogger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,15 +29,43 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static final PowerDistributionPanel pdp = new PowerDistributionPanel();
+	
+	DriverStation driverStation = DriverStation.getInstance();
+	DataLogger dataLogger;
 
     Command autonomousCommand;
     SendableChooser chooser;
+    
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+		// Set dataLogger and Time information
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Detroit"));
+		
+		File logDirectory = null;
+		if (logDirectory == null) logDirectory = findLogDirectory(new File("/u"));
+		if (logDirectory == null) logDirectory = findLogDirectory(new File("/v"));
+		if (logDirectory == null) logDirectory = findLogDirectory(new File("/x"));
+		if (logDirectory == null) logDirectory = findLogDirectory(new File("/y"));
+		if (logDirectory == null) {
+			logDirectory = new File("/home/lvuser/logs");
+		    if (!logDirectory.exists())
+		    {
+			    logDirectory.mkdir();
+		    }
+		}
+		if (logDirectory != null && logDirectory.isDirectory())
+		{
+			String logMessage = String.format("Log directory is %s\n", logDirectory);
+			System.out.print (logMessage);
+			dataLogger = new DataLogger(logDirectory);
+			dataLogger.setMinimumInterval(1000);
+		}
+
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
@@ -97,6 +133,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+		if (dataLogger.shouldLogData())
+		{
+			// fololowing two lijnes added 3/17/2015 DEW
+			dataLogger.addDataItem("rightDriveCurrent", Robot.pdp.getCurrent(0));
+			dataLogger.saveDataItems();
+		}
+
     }
     
     /**
@@ -105,4 +149,14 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+    
+	public File findLogDirectory (File root) {
+		// does the root directory exist?
+		if (!root.isDirectory()) return null;
+		
+		File logDirectory = new File(root, "logs");
+		if (!logDirectory.isDirectory()) return null;
+		
+		return logDirectory;
+	}
 }
