@@ -7,16 +7,17 @@ public class RobotMap {
 	// PWM
 	leftMotorPort            = 0, // drive
 	rightMotorPort           = 1, // drive
-	shooterMotorPort         = 3, // shooter
+	shooterMotorPort         = 2, // shooter
 	shooterAngleMotorPort    = 4, // shooter
+	shooterServo			 = 6, // shooter
 
 	// DIO
 	leftEncoderFirstPort     = 0, // drive
 	leftEncoderSecondPort    = 1, // drive
 	rightEncoderFirstPort    = 2, // drive
 	rightEncoderSecondPort   = 3, // drive
-	shooterEncoderFirstPort  = 4, // shooter
-	shooterEncoderSecondPort = 5, // shooter
+	shooterEncoderFirstPort  = 6, // shooter SPEED SENSOR
+	shooterEncoderSecondPort = 7, // shooter BALL SENSOR
 
 	// Analog
 	gyroPort                 = 0, // drive
