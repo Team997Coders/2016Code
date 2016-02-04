@@ -36,7 +36,9 @@ public class TankDrive extends Command {
     }
 
     // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    // subsystems is scheduled to run 
+    // this is saying if something weird happens or gets interrupted to return to zero meaning don't drive into a wall and stop moving 
     protected void interrupted() {
+    	Robot.drivetrain.drivevoltage(0,0);
     }
 }
