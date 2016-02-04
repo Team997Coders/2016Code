@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort);
-	public static final Gatherer gatherer = new Gatherer(RobotMap.gatherArmMotorPort, RobotMap.rollerMotorPort);
+	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
 	public static OI oi;
 
     Command autonomousCommand;
