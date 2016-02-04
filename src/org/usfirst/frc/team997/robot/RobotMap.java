@@ -24,7 +24,7 @@ public class RobotMap {
 	// Analog
 	gyroPort                 = 0, // drive
 	ultrasonicPort           = 1, // drive
-	hallEffectPort           = 2, // shooter
+	armAnglePort             = 2, // shooter
 	shooterAnglePort         = 3, // shooter angle
 
 	// Spike/Relay
