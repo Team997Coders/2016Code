@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team997.robot.subsystems.Gatherer;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,6 +24,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort);
+	public static final Gatherer gatherer = new Gatherer(RobotMap.gatherArmMotorPort, RobotMap.rollerMotorPort);
 	public static OI oi;
 
     Command autonomousCommand;

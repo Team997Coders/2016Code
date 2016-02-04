@@ -2,9 +2,12 @@ package org.usfirst.frc.team997.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
+import org.usfirst.frc.team997.robot.commands.GatherIn;
+import org.usfirst.frc.team997.robot.commands.GatherOut;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -13,14 +16,21 @@ import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 public class OI {
     
 	
-	private final Controller theController;
-	
+	private final Controller myController;
+	private final Button gatherIn;
+	private final Button gatherOut;
 	
 	public OI() {
 		
-		theController = new Controller(RobotMap.JoystickPort);
+		myController = new Controller(RobotMap.JoystickPort);
+		
+		gatherIn = new JoystickButton(myController, 1);
+		gatherIn.whenPressed(new GatherIn());
+		
+		gatherOut = new JoystickButton(myController, 2);
+		gatherOut.whenPressed(new GatherOut());
 	}
-	
+
 	private double deadband(double a) {
 		
 		//deadband for joystick output
@@ -33,17 +43,17 @@ public class OI {
 	}
 	
 	public double lefty() {
-		return deadband(theController.getLeftRawY());
+		return deadband(myController.getLeftRawY());
 	}
 	
 	public double righty (){
-		return deadband(theController.getRightRawX());
+		return deadband(myController.getRightRawX());
 	}
 	
 	
 	public void userinfo() {
-		SmartDashboard.putNumber("leftstickY", theController.getLeftRawY());
-		SmartDashboard.putNumber("rightstickY", theController.getRightRawY());
+		SmartDashboard.putNumber("leftstickY", myController.getLeftRawY());
+		SmartDashboard.putNumber("rightstickY", myController.getRightRawY());
 	}
 	
 	//// CREATING BUTTONS
