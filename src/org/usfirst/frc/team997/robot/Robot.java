@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team997.robot.subsystems.Gatherer;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -34,7 +32,6 @@ public class Robot extends IterativeRobot {
 
     public static Compressor compressor;
     public static PowerDistributionPanel pdp;
-    public static Gatherer gatherer;
     public static DriveTrain driveTrain;
 
     public void robotInit() {
@@ -45,7 +42,6 @@ public class Robot extends IterativeRobot {
 
         compressor = new Compressor();
         pdp = new PowerDistributionPanel();
-        gatherer = new Gatherer();
        // driveTrain = new DriveTrain();
         SmartDashboard.putData("Auto mode", chooser);
     }
