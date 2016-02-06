@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.commands.GatherIn;
 import org.usfirst.frc.team997.robot.commands.GatherOut;
@@ -19,6 +20,7 @@ public class OI {
 	private final Controller myController;
 	private final Button gatherIn;
 	private final Button gatherOut;
+	private final Button arm;
 	
 	public OI() {
 		
@@ -29,6 +31,9 @@ public class OI {
 		
 		gatherOut = new JoystickButton(myController, 2);
 		gatherOut.whenPressed(new GatherOut());
+		
+		arm = new JoystickButton(myController, 3);
+		arm.whenPressed(new Arm(43)); //DO NOT TRUST THIS VALUE. IT IS ARBITRARY. IT LIES!!!!
 	}
 
 	private double deadband(double a) {

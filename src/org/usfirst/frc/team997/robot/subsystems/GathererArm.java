@@ -14,7 +14,7 @@ public class GathererArm extends PIDSubsystem {
 	private VictorSP armMotor;
 	private AnalogInput armAngle;
 	public static final double MIN = 42,
-	MAX = 147;
+	MAX = 147; //
 	
     // Initialize your subsystem here
     public GathererArm() {
