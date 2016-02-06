@@ -29,20 +29,14 @@ public class ArcadeDrive extends Command {
     	//leftstick and right are falling all the way forward and right - leftmotor will be slowish and right motor at full speed
     	 double getArcadeleftspeed
     	= deadBand(Robot.oi.lefty() + Robot.oi.rightx());
-    		
- 
 
     	 double getArcaderightspeed
     	 = deadBand(Robot.oi.lefty() - Robot.oi.rightx());
     	
 
     	Robot.driveTrain.driveVoltage(getArcadeleftspeed,getArcaderightspeed);
-    
-    	
-    	
-    	
-    	
     }
+    
     private double deadBand(double a) {
     	if(Math.abs(a)>0.15) {
     		return a;
@@ -50,6 +44,7 @@ public class ArcadeDrive extends Command {
     		return 0;
     	}
     }
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
