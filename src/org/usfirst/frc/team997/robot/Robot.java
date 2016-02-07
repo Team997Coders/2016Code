@@ -37,11 +37,13 @@ public class Robot extends IterativeRobot {
 	public static final DriveTrain driveTrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
 			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 
-			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort);
+			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort,
+			               RobotMap.gyroPort);
 	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
 	public static final GathererArm gathererArm = 
 			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
 	//public static final GathererArmNoSP gathererArm = new GathererArmNoSP(RobotMap.gatherArmMotorPort);
+
 	public static OI oi;
 
 	public static ADIS16448_IMU imu;
