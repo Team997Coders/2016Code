@@ -58,6 +58,10 @@ public class Shooter extends Subsystem {
     // easier with one less inversion in the calculations.  The sensor is tracking time intervals
     // which aligns better with the period.
     
+    public double getPeriod() {
+    	return period;
+    }
+    
     public void spinup(double speed) {
     	// this is just the initial spinup speed to apply to the wheels.  The 
     	// next method will be used to track it.
