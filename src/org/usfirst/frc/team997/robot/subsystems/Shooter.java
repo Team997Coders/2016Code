@@ -19,13 +19,13 @@ public class Shooter extends Subsystem {
 	private Servo shooterKicker;
     public Shooter(int shootSensorPort, int shootMotorPort, int shootServoPort, int shootUpSource){
     	//shooterSensor detects when ball is fully in shooter grasp
-    	shooterSensor = new DigitalInput(RobotMap.shooterEncoderSecondPort);
+    	shooterSensor = new DigitalInput(shootSensorPort);
     	//shooterMotor is the VictorSP that controls the shooter wheels
-    	shooterMotor = new VictorSP(RobotMap.shooterMotorPort);
+    	shooterMotor = new VictorSP(shootMotorPort);
     	//shooterServo is the Servo that controls the kicker
-    	shooterKicker = new Servo(RobotMap.shooterServo);
+    	shooterKicker = new Servo(shootServoPort);
     	//makes UpSource. the thing
-    	shooterCounter.setUpSource(RobotMap.shooterEncoderFirstPort);
+    	shooterCounter.setUpSource(shootUpSource);
     	//something involving units per time
     	shooterCounter.setDistancePerPulse(1);
     	//shooterCounter counts the rotation of the wheels (using reflective tape)
