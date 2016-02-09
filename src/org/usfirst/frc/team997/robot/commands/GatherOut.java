@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleShift extends Command {
+public class GatherOut extends Command {
 
-    public ToggleShift() {
+	private double rollOutSpeed = -0.45;
+    public GatherOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.gatherer);
     }
 
     // Called just before this Command runs the first time
@@ -21,12 +22,8 @@ public class ToggleShift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//checks the status of the gear and then changes it to 0 or 1.
-    	if(Robot.drivetrain.getGear() == 0) {
-    		Robot.drivetrain.shift(1);
-    	} else if(Robot.drivetrain.getGear() == 1) {
-    		Robot.drivetrain.shift(0);
-    	}
+    	
+    	Robot.gatherer.gathervoltage(rollOutSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

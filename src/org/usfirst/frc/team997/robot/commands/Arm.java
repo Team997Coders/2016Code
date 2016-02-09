@@ -7,31 +7,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleShift extends Command {
+public class Arm extends Command {
+	
+	private double position;
 
-    public ToggleShift() {
+    public Arm(double position) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.gathererarm);
+    	this.position = position;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.gathererarm.setSetpoint(position);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//checks the status of the gear and then changes it to 0 or 1.
-    	if(Robot.drivetrain.getGear() == 0) {
-    		Robot.drivetrain.shift(1);
-    	} else if(Robot.drivetrain.getGear() == 1) {
-    		Robot.drivetrain.shift(0);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(Robot.gathererarm.getSetpoint() - Robot.gathererarm.getPosition()) < 0.1;
     }
 
     // Called once after isFinished returns true
