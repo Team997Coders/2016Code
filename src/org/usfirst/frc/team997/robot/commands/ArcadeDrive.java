@@ -12,7 +12,7 @@ public class ArcadeDrive extends Command {
     public ArcadeDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.driveTrain);
+    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -34,7 +34,7 @@ public class ArcadeDrive extends Command {
     	 = deadBand(Robot.oi.lefty() - Robot.oi.rightx());
     	
 
-    	Robot.driveTrain.driveVoltage(getArcadeleftspeed,getArcaderightspeed);
+    	Robot.drivetrain.driveVoltage(getArcadeleftspeed,getArcaderightspeed);
     }
     
     private double deadBand(double a) {

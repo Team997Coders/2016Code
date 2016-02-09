@@ -1,18 +1,18 @@
-
 package org.usfirst.frc.team997.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team997.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class ToggleShift extends Command {
 
-    public ExampleCommand() {
+    public ToggleShift() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+        // eg. requires(chassis);
+    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -21,6 +21,13 @@ public class ExampleCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	//checks the status of the gear and then changes it to 0 or 1.
+    	if(Robot.drivetrain.getGear() == 0) {
+    		Robot.drivetrain.shift(1);
+    	} else if(Robot.drivetrain.getGear() == 1) {
+    		Robot.drivetrain.shift(0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
