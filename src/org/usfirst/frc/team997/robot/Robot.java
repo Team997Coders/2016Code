@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team997.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team997.robot.subsystems.Shooter;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
@@ -32,7 +31,6 @@ public class Robot extends IterativeRobot {
 	
 	public static Relay clight;
 	private CameraServer camera;
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final Shooter shooter = new Shooter(
 			RobotMap.bannerEncoderSpeedPort, RobotMap.shooterMotorPort,
 			RobotMap.servoMotorPort, RobotMap.bannerEncoderBallPort);
