@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team997.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +31,9 @@ public class Robot extends IterativeRobot {
 	public static Relay clight;
 	private CameraServer camera;
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final Shooter shooter = new Shooter(
+			RobotMap.bannerEncoderSpeedPort, RobotMap.shooterMotorPort,
+			RobotMap.servoMotorPort, RobotMap.bannerEncoderBallPort);
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort);
 	public static OI oi;
 
@@ -38,7 +42,9 @@ public class Robot extends IterativeRobot {
 
     public static Compressor compressor;
     public static PowerDistributionPanel pdp;
-   
+
+    public static Gatherer gatherer;
+    public static DriveTrain driveTrain;
 
     public void robotInit() {
 		oi = new OI();
@@ -49,6 +55,7 @@ public class Robot extends IterativeRobot {
 
         compressor = new Compressor();
         pdp = new PowerDistributionPanel();
+        gatherer = new Gatherer();
        // driveTrain = new DriveTrain();
         SmartDashboard.putData("Auto mode", chooser);
         camera = CameraServer.getInstance();
@@ -96,6 +103,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         Smartdashboard();
+        Robot.shooter.smartDashboard();
     }
     
     public void testPeriodic() {
