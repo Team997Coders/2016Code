@@ -1,7 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
 public class RobotMap {
-	public static final int
+	static final int
 	// @begin Ports
 	// NAME                  = PORT
 
