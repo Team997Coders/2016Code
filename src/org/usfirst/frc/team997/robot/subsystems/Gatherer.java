@@ -13,11 +13,8 @@ package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
-import org.usfirst.frc.team997.robot.commands.*;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.VictorSP;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -118,6 +115,15 @@ public class Gatherer extends PIDSubsystem {
     	}
     }
     
+    public void stop() {
+    	gathererWheelMotor.set(0);
+    	armAngleMotor.set(0);
+    }
+    
+    public boolean atSetpoint() {
+    	return Math.abs(armAngleSensor.get() - this.getSetpoint()) > RobotMap.gathererAngleTolerance;
+    }
+    
     public void setWheelVoltage(double voltage) {
     	gathererWheelMotor.set(voltage);
     }
@@ -128,5 +134,6 @@ public class Gatherer extends PIDSubsystem {
     	SmartDashboard.putBoolean("Gatherer Up Limit", upLimit);
     	SmartDashboard.putBoolean("Gatherer Down Limit", downLimit);
     	SmartDashboard.putBoolean("Gatherer Current Limit", currentLimit);
+    	SmartDashboard.putBoolean("Gatherer PID Enabled?", this.getPIDController().isEnabled());
     }
 }
