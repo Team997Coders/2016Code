@@ -10,12 +10,17 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Arm extends Command {
 	
 	private double position;
+	private boolean toggleArm;
+	
 
     public Arm(double position) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.gathererarm);
     	this.position = position;
+    	
+		toggleArm = true;
+		
     }
 
     // Called just before this Command runs the first time
@@ -25,6 +30,13 @@ public class Arm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(toggleArm = true) {
+			Robot.oi.armPos = 43;
+			toggleArm = false;
+		} else if(toggleArm = false) {
+			Robot.oi.armPos = 0;
+			toggleArm = true;
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
