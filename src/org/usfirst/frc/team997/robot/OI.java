@@ -18,6 +18,8 @@ public class OI {
 	private final Button gatherOut;
 	private final Button arm;
 	private final Button shifterButton;
+	private boolean toggleArm;
+	private double armPos;
 	
 	public OI() {
 		myController = new Controller(RobotMap.joystickPort);
@@ -28,8 +30,19 @@ public class OI {
 		gatherOut = new JoystickButton(myController, 2);
 		gatherOut.whenPressed(new GatherOut());
 		
+		toggleArm = true;
+		
+		armPos = 0;
+		
+		if(toggleArm = true) {
+			armPos = 43;
+			toggleArm = false;
+		} else if(toggleArm = false) {
+			armPos = 0;
+			toggleArm = true;
+		}
 		arm = new JoystickButton(myController, 3);
-		arm.whenPressed(new Arm(43)); //DO NOT TRUST THIS VALUE. IT IS ARBITRARY. IT LIES!!!!
+		arm.whenPressed(new Arm(Robot.oi.armPos)); //DO NOT TRUST THIS VALUE. IT IS ARBITRARY. IT LIES!!!!
 		
 		shifterButton = new JoystickButton(myController, 4); // FIX ME
 		shifterButton.whenPressed(new ToggleShift());

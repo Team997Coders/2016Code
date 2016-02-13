@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Shooter;
+
+import com.analog.adis16448.frc.ADIS16448_IMU;
+
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
 
@@ -39,11 +42,14 @@ public class Robot extends IterativeRobot {
 	public static final GathererArm gathererarm = new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.armAnglePort);
 	public static OI oi;
 
+	public static ADIS16448_IMU imu;
+
     private Command autonomousCommand;
     private SendableChooser chooser;
 
     public static Compressor compressor;
     public static PowerDistributionPanel pdp;
+    
 
     public void robotInit() {
 		oi = new OI();
@@ -57,11 +63,13 @@ public class Robot extends IterativeRobot {
        // driveTrain = new DriveTrain();
         SmartDashboard.putData("Auto mode", chooser);
         camera = CameraServer.getInstance();
-        camera.setQuality(50);
+        camera.setQuality(42);
         camera.startAutomaticCapture("cam0");
         
         clight = new Relay(RobotMap.circleLightPort);
-       
+        
+        imu = new ADIS16448_IMU();
+        imu.calibrate();
     }
 	
     public void disabledInit(){
@@ -99,9 +107,20 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
+
+        SmartDashboard.putNumber("imu rate X",imu.getRateX());
+        SmartDashboard.putNumber("imu angle X", imu.getAngleX());
+        SmartDashboard.putNumber("imu rate Y", imu.getRateY());
+        SmartDashboard.putNumber("imu angle Y", imu.getAngleY());
+        SmartDashboard.putNumber("imu rate Z", imu.getRateZ());
+        SmartDashboard.putNumber("imu angle Z", imu.getAngle());
+        SmartDashboard.putNumber("roll angle", imu.getRoll());
+        
         Scheduler.getInstance().run();
         Smartdashboard();
         Robot.shooter.smartDashboard();
+        
+       // SmartDashboard.
     }
     
     public void testPeriodic() {
