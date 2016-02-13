@@ -31,8 +31,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	private static ADIS16448_IMU imu;
-	
 	public static Relay clight;
 	//private CameraServer camera;
 	public static final Shooter shooter = new Shooter(
@@ -67,6 +65,7 @@ public class Robot extends IterativeRobot {
         pdp = new PowerDistributionPanel();
        // driveTrain = new DriveTrain();
         SmartDashboard.putData("Auto mode", chooser);
+        /*
         camera = CameraServer.getInstance();
         camera.setQuality(42);
         camera.startAutomaticCapture("cam0");
