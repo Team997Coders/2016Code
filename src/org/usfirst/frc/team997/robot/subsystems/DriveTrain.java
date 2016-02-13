@@ -73,14 +73,14 @@ public class DriveTrain extends Subsystem {
 	}*/
 	
 	public void smartDashboard(){
-		SmartDashboard.putNumber("gear value" , getGear());
+		
+		
+		//SmartDashboard.putNumber("gear value" , getGear()); //not needed since we are not using gears anymore
 	}
 	//it sets things and stuff to Arcade drive
 	protected void initDefaultCommand() {
 		setDefaultCommand( new ArcadeDrive());
-		//setDefaultCommand(new NoSwerveArcadeDrive());
-	// TODO Auto-generated method stub
-   //setDefaultCommand(new MySpecialCommand());
+	  //setDefaultCommand(new MySpecialCommand());
          
 	}
 	

@@ -1,23 +1,19 @@
 package org.usfirst.frc.team997.robot.commands;
 
-import org.usfirst.frc.team997.robot.Robot;
-import org.usfirst.frc.team997.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CollectBall extends Command {
-	/** this command will lower and start the gatherer, and shooter to have them gather in until the ball is in the shooter 
-	 *  (aka the beam break says its there)
-	 * TODO change it so then it does ^.
-	 * 
-	 */
-    public CollectBall() {
+public class ShooterAngleHigh extends Command {
+/** puts the shooter to the highest angle it can be.
+ * 
+ * 
+ * 
+ */
+    public ShooterAngleHigh() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
@@ -26,14 +22,11 @@ public class CollectBall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//calls the gathering method
-    	Robot.shooter.gatherBall();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//stops when the shooter sensor detects the ball
-        return Robot.shooter.getshooterSensor();
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -45,5 +38,3 @@ public class CollectBall extends Command {
     protected void interrupted() {
     }
 }
-
-// people who read unnecessary comments are cool

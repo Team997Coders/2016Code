@@ -5,36 +5,67 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.ShootReturn;
+import org.usfirst.frc.team997.robot.commands.ShooterAngleHigh;
 import org.usfirst.frc.team997.robot.commands.ToggleShift;
 import org.usfirst.frc.team997.robot.commands.circleLightToggle;
 import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.commands.GatherIn;
 import org.usfirst.frc.team997.robot.commands.GatherOut;
+import org.usfirst.frc.team997.robot.commands.shooterAngleLow;
+import org.usfirst.frc.team997.robot.commands.shooterAngleMedium;
+import org.usfirst.frc.team997.robot.commands.spinUpShooter;
 
 public class OI {
+	//controllers
 	private final Controller myController;
-	private final Button gatherIn;
-	private final Button gatherOut;
+	private Joystick driverTwo;
+	
+	//Buttons 
+	private final Button shootAngleHighButton;
+	private final Button shootAngleMediumButton;
+	private final Button shootAngleLowButton;
+	private final Button spinUpShooterButton;
+	private final Button CollectBallbutton;
+	private final Button shootReturnButton;
 	private final Button arm;
-	private final Button shifterButton;
-	public double armPos;
+	//private final Button shifterButton;
+	
+	
 	
 	public OI() {
+		//primary Driver Button/Controls 
 		myController = new Controller(RobotMap.joystickPort);
 		
-		gatherIn = new JoystickButton(myController, 1);
-		gatherIn.whenPressed(new GatherIn());
+		CollectBallbutton = new JoystickButton(driverTwo, 5);
+		CollectBallbutton.whenPressed(new CollectBall());
 		
-		gatherOut = new JoystickButton(myController, 2);
-		gatherOut.whenPressed(new GatherOut());
-		
-		armPos = 0;
 		arm = new JoystickButton(myController, 3);
-		arm.whenPressed(new Arm(armPos)); //DO NOT TRUST THIS VALUE. IT IS ARBITRARY. IT LIES!!!!
+		arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, ITS A LIE!!!
 		
-		shifterButton = new JoystickButton(myController, 4); // FIX ME
-		shifterButton.whenPressed(new ToggleShift());
+		//shifterButton = new JoystickButton(myController, 4); //dont need unless driver wants it! 
+		//shifterButton.whenPressed(new ToggleShift()); 
+		
+		//Secondary Driver Buttons/Controls
+		driverTwo = new Joystick(RobotMap.joystickPortTwo);
+		
+		shootReturnButton = new JoystickButton(driverTwo, 1);
+		shootReturnButton.whenPressed(new ShootReturn());
+		
+		spinUpShooterButton = new JoystickButton(driverTwo, 2);
+		spinUpShooterButton.whenPressed(new spinUpShooter());
+		
+		shootAngleMediumButton = new JoystickButton (driverTwo, 3);
+		shootAngleMediumButton.whenPressed(new shooterAngleMedium());
+		
+		shootAngleLowButton = new JoystickButton(driverTwo, 4);
+		shootAngleLowButton.whenPressed(new shooterAngleLow());
+		
+		shootAngleHighButton = new JoystickButton (driverTwo, 5);
+		shootAngleHighButton.whenPressed(new ShooterAngleHigh());
+		
 	}
 
 	private double deadband(double a) {
@@ -59,6 +90,11 @@ public class OI {
 	public void userinfo() {
 		SmartDashboard.putNumber("leftstickY", myController.getLeftRawY());
 		SmartDashboard.putNumber("rightstickY", myController.getRightRawY());
+	}
+	
+	//gets the value of the triggers on the Primary Drivers triggers.
+	public double getGathererVoltage(){
+		return myController.getRawTriggerAxis();
 	}
 
 	//this is saying to find the fantastic  angle of the right joystick

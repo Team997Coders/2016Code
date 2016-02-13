@@ -32,7 +32,8 @@ public class RobotMap {
 	flashLightPort           = 1, // misc
 
 	//Joystick
-	joystickPort             = 0;
+	joystickPort             = 0,
+	joystickPortTwo          = 1;
 	
 	static final double
 	maxAccelDrive            = 10;

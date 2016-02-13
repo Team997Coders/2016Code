@@ -5,6 +5,7 @@ import org.usfirst.frc.team997.robot.RobotMap;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -48,5 +49,10 @@ public class GathererArm extends PIDSubsystem {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
     	armMotor.set(output);
+    }
+    
+    public void smartdashboardupdate(){
+    	SmartDashboard.putNumber("this is its curent value", super.getSetpoint());
+    	SmartDashboard.putNumber("this is the current position", super.getPosition());
     }
 }
