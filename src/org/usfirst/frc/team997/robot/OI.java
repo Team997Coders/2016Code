@@ -63,7 +63,7 @@ public class OI {
 	}
 	
 	public double righty(){
-		return deadband(myController.getRightRawX());
+		return deadband(myController.getRightRawY());
 	}
 	
 	
@@ -74,6 +74,7 @@ public class OI {
 
 	//this is saying to find the fantastic  angle of the right joystick
 	public double rightx(){
+	
 		return myController.getRightRawX();
 	}
 }

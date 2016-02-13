@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team997.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -19,6 +18,8 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -30,14 +31,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	private static ADIS16448_IMU imu;
 	
 	public static Relay clight;
-	private CameraServer camera;
+	//private CameraServer camera;
 	public static final Shooter shooter = new Shooter(
 			RobotMap.bannerEncoderSpeedPort, RobotMap.shooterMotorPort,
 			RobotMap.servoMotorPort, RobotMap.bannerEncoderBallPort);
-	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort);
+	public static final DriveTrain drivetrain = 
+			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
+			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 
+			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort, 
+			               RobotMap.maxAccelDrive);
 	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
 	public static final GathererArm gathererarm = new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.armAnglePort);
 	public static OI oi;
@@ -53,19 +58,19 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
 		oi = new OI();
+		
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
         
 //        chooser.addObject("My Auto", new MyAutoCommand());
-
-        compressor = new Compressor();
+        imu = new ADIS16448_IMU();
         pdp = new PowerDistributionPanel();
        // driveTrain = new DriveTrain();
         SmartDashboard.putData("Auto mode", chooser);
         camera = CameraServer.getInstance();
         camera.setQuality(42);
         camera.startAutomaticCapture("cam0");
-        
+        */
         clight = new Relay(RobotMap.circleLightPort);
         
         imu = new ADIS16448_IMU();
@@ -130,6 +135,9 @@ public class Robot extends IterativeRobot {
     
 public void Smartdashboard(){
 	Robot.drivetrain.smartDashboard();
+	 Robot.shooter.smartDashboard();
+	 SmartDashboard.putData("Imu", imu);
+	 SmartDashboard.putNumber("Imu angle", imu.getAngleY());
 }
 
 

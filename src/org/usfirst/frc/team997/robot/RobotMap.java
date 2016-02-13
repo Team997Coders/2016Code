@@ -2,7 +2,6 @@ package org.usfirst.frc.team997.robot;
 
 public class RobotMap {
 	static final int
-	// @begin Ports
 	// NAME                  = PORT
 
 	// PWM
@@ -34,4 +33,7 @@ public class RobotMap {
 
 	//Joystick
 	joystickPort             = 0;
+	
+	static final double
+	maxAccelDrive            = 10;
 }

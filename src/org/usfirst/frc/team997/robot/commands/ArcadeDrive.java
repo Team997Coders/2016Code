@@ -28,10 +28,10 @@ public class ArcadeDrive extends Command {
     	//leftstick  and right are falling all the way forward and left - left motor will be full speed and rightmotor at slowish speed
     	//leftstick and right are falling all the way forward and right - leftmotor will be slowish and right motor at full speed
     	 double getArcadeleftspeed
-    	= deadBand(Robot.oi.lefty() + Robot.oi.rightx());
+    	= deadBand(Robot.oi.lefty() - Robot.oi.rightx());
 
     	 double getArcaderightspeed
-    	 = deadBand(Robot.oi.lefty() - Robot.oi.rightx());
+    	 = deadBand(Robot.oi.lefty() + Robot.oi.rightx());
     	
 
     	Robot.drivetrain.driveVoltage(getArcadeleftspeed,getArcaderightspeed);
