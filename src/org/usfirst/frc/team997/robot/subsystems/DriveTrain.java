@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	private AccelMotor rightmotor;
 	
 	private int gear; 
-	//this is saying where to find the VictorSP
+	//Assign victor ports. 
 	public DriveTrain(int leftPort, int rightPort,
 			          int leftEncoderFirstPort, int leftEncoderSecondPort,
 			          int rightEncoderFirstPort, int rightEncoderSecondPort,

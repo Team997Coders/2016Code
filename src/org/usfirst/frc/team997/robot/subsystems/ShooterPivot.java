@@ -11,8 +11,7 @@ public class ShooterPivot extends PIDSubsystem {
 	
 	private VictorSP pivotMotor;
 	private AnalogInput shootAngle;
-	public static final double MIN = 42,
-	MAX = 147;
+	public static final double MIN = 42, MAX = 147;//aribitrary..but the meaning of life.
 	
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		super("shooterPivot", 1, 0, 0);
@@ -37,7 +36,7 @@ public class ShooterPivot extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	pivotMotor.set(output);
+    	pivotMotor.set(output);  //TODO need safety measures, min / max and currrent
     }
     
 

@@ -13,8 +13,7 @@ public class GathererArm extends PIDSubsystem {
 
 	private VictorSP armMotor;
 	private AnalogInput armAngle;
-	public static final double MIN = 42,
-	MAX = 147; 
+	public static final double MIN = 42,MAX = 147; 
 	
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
@@ -42,7 +41,7 @@ public class GathererArm extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    	return armAngle.getAverageVoltage();  //NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
+    	return armAngle.getAverageVoltage();  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     }
     
     protected void usePIDOutput(double output) {

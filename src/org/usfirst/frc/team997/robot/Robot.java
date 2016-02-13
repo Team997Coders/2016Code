@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team997.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot {
     private Command autonomousCommand;
     private SendableChooser chooser;
 
-    public static Compressor compressor;
+   //public static Compressor compressor;
     public static PowerDistributionPanel pdp;
     
 
@@ -63,15 +64,15 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         imu = new ADIS16448_IMU();
         pdp = new PowerDistributionPanel();
-       // driveTrain = new DriveTrain();
         SmartDashboard.putData("Auto mode", chooser);
         /*
+         
         camera = CameraServer.getInstance();
         camera.setQuality(42);
         camera.startAutomaticCapture("cam0");
-        */
-        clight = new Relay(RobotMap.circleLightPort);
         
+        clight = new Relay(RobotMap.circleLightPort);
+        */
         imu = new ADIS16448_IMU();
         imu.calibrate();
     }
@@ -111,20 +112,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
-
-        SmartDashboard.putNumber("imu rate X",imu.getRateX());
-        SmartDashboard.putNumber("imu angle X", imu.getAngleX());
-        SmartDashboard.putNumber("imu rate Y", imu.getRateY());
-        SmartDashboard.putNumber("imu angle Y", imu.getAngleY());
-        SmartDashboard.putNumber("imu rate Z", imu.getRateZ());
-        SmartDashboard.putNumber("imu angle Z", imu.getAngle());
-        SmartDashboard.putNumber("roll angle", imu.getRoll());
-        
         Scheduler.getInstance().run();
         Smartdashboard();
-        Robot.shooter.smartDashboard();
-        
-       // SmartDashboard.
+       
     }
     
     public void testPeriodic() {
@@ -137,6 +127,17 @@ public void Smartdashboard(){
 	 Robot.shooter.smartDashboard();
 	 SmartDashboard.putData("Imu", imu);
 	 SmartDashboard.putNumber("Imu angle", imu.getAngleY());
+	 
+	 //imu info put on the smartdashboard
+	 SmartDashboard.putNumber("imu rate X",imu.getRateX());
+     SmartDashboard.putNumber("imu angle X", imu.getAngleX());
+     SmartDashboard.putNumber("imu rate Y", imu.getRateY());
+     SmartDashboard.putNumber("imu angle Y", imu.getAngleY());
+     SmartDashboard.putNumber("imu rate Z", imu.getRateZ());
+     SmartDashboard.putNumber("imu angle Z", imu.getAngle());
+     SmartDashboard.putNumber("roll angle", imu.getRoll());
+	 
+	 
 }
 
 
