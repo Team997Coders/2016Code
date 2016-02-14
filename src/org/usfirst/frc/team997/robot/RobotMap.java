@@ -11,8 +11,8 @@ public class RobotMap {
 	gatherArmMotorPort       = 3, // gatherer arm
 	rollerMotorPort          = 4, // gatherer roller
 	aimingMotorPort          = 5, // aimer.  shooter lifter?
-	servoMotorFirstPort      = 8, // ball pusher servo left
-	servoMotorSecondPort     = 9, // ball pusher servo right
+	servoMotorSecondPort     = 8, // ball pusher servo right
+	servoMotorFirstPort      = 9, // ball pusher servo left
 
 	// DIO
 	rightEncoderFirstPort    = 0, // drive
