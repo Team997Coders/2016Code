@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Arm extends Command {
 	
-	private double position; // dont trust the values of the position at all...
+	private double position; // TODO don't trust the values of the position at all...
 	private boolean toggleArm;
 	
 

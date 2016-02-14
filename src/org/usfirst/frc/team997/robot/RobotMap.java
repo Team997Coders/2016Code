@@ -35,6 +35,11 @@ public class RobotMap {
 	joystickPort             = 0,
 	joystickPortTwo          = 1;
 	
-	static final double
-	maxAccelDrive            = 10;
+	//Misc. variables
+	public static final double
+	maxAccelDrive            = 10,
+	lowPoint                 = 0,
+	midPoint                 = 21,
+	highPoint                = 42,
+	collectBallArmPos        = 0;
 }

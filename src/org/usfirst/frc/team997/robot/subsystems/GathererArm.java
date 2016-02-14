@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
+import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -14,7 +15,7 @@ public class GathererArm extends PIDSubsystem {
 
 	private VictorSP armMotor;
 	private AnalogInput armAngle;
-	public static final double MIN = 42,MAX = 147; 
+	public static final double MIN = 0, MAX = 45, maxCurrent = 40; //TODO Angle must never go past 90
 	
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
@@ -45,10 +46,28 @@ public class GathererArm extends PIDSubsystem {
     	return armAngle.getAverageVoltage();  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     }
     
+    public void safeVoltage(double voltage) {
+    	//Checks if the two voltages and if they are not within safe ranges sets motor to zero
+    	if(armAngle.getAverageVoltage() < MIN) {
+    		armMotor.set(0);
+    	} else if(armAngle.getAverageVoltage() > MAX) {
+    		armMotor.set(0);;
+    	} else if(Robot.pdp.getCurrent(14) > maxCurrent || Robot.pdp.getCurrent(15) > maxCurrent) {
+    		armMotor.set(0);
+    	}
+    	
+    	//sets motor to voltage if voltage is safe
+    	armMotor.set(voltage);
+    }
+    
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	armMotor.set(output);
+    	safeVoltage(output);
+    }
+    
+    public void trigger(double input) {
+    	safeVoltage(input);
     }
     
     public void smartdashboardupdate(){

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Shooter;
+import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static final Shooter shooter = new Shooter(
 			RobotMap.bannerEncoderSpeedPort, RobotMap.shooterMotorPort,
 			RobotMap.servoMotorPort, RobotMap.bannerEncoderBallPort);
+	public static final ShooterPivot shooterpivot = new ShooterPivot(RobotMap.aimingMotorPort, RobotMap.shooterAnglePort);
 	public static final DriveTrain drivetrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
 			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 

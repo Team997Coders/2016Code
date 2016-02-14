@@ -43,9 +43,9 @@ public class OI {
 		CollectBallbutton.whenPressed(new CollectBall());
 		
 		arm = new JoystickButton(myController, 3);
-		arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, ITS A LIE!!!
+		arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
 		
-		//shifterButton = new JoystickButton(myController, 4); //dont need unless driver wants it! 
+		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
 		
 		//Secondary Driver Buttons/Controls
