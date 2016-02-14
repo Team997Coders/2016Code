@@ -1,12 +1,13 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import org.usfirst.frc.team997.robot.commands.AccelCommand;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class AccelMotor {
+public class AccelMotor extends Subsystem {
     private VelMotor motor;
     private double maxAccel, desiredVel, accelCappedVel;
     /// currently unused, would be used for smart dashboard
@@ -24,19 +25,9 @@ public class AccelMotor {
     	this.motor.setDesiredVelocity(0);
     }
 
-    public void start() {
-    	try {
-    		// every 5 milliseconds, run update()
-    		new Timer().schedule(new TimerTask() { public void run() { update(); } },
-    				             0, 5);
-    	} catch (Exception e) {
-    	}
-    	motor.start();
-    }
-
     /// updates the `accelCappedVel` member and calls VelMotor's setDesiredVelocity
     /// Controlls for a high acceleration on the robot.
-    private void update() {
+    public void update() {
     	if (Math.abs(accelCappedVel - desiredVel) < maxAccel || maxAccel == 0) {
     		// if accelCappedVel is in the range (desiredVel - maxAccel, desiredVel + maxAccel) :
     		accelCappedVel = desiredVel;
@@ -49,6 +40,7 @@ public class AccelMotor {
     	}
     	// Assigns to the velocity controller.
     	motor.setDesiredVelocity(accelCappedVel);
+    	motor.update();
     }
 
     /// Sets the `desiredVel` member
@@ -56,5 +48,12 @@ public class AccelMotor {
 
     /// Sets the `maxAccel` member
     public void setMaxAccel(double d) { maxAccel = d; }
+
+    /// DOES NOT USE ACCELERATION CONTROL.  Used in AccelCommand's interrupted.
+    public void stopMovingAbrupt() { motor.stopMovingAbrupt(); }
+    
+	protected void initDefaultCommand() {
+		setDefaultCommand(new AccelCommand(this));
+	}
 }
 

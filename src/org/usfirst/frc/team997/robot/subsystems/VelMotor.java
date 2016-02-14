@@ -1,16 +1,12 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class VelMotor {
+class VelMotor {
     private SpeedController motor;
     private Encoder encoder;
     private double desiredVelocity, currentCurrent, calibrationFactor;
@@ -30,9 +26,10 @@ public class VelMotor {
     	}
     }
     
-    // called every 5 milliseconds.
+    // called by AccelMotor's update (no visibility means only classes
+    // in this package (subsystems) can call it).
     // gradually changes the actual velocity (controlling for velocity)
-    private void update() {
+    void update() {
     	double error = deadband(desiredVelocity - encoder.getRate(), .05);
     	currentCurrent = max(currentCurrent + error * calibrationFactor, 1);
     	motor.set(deadband(currentCurrent, .05));
@@ -45,16 +42,11 @@ public class VelMotor {
     	else return a;
     }
     
-    /// Refactor into Command
-    public void start() {
-    	try {
-    		// every 5 seconds, call update();
-    		new Timer().schedule(new TimerTask() { public void run() { update(); } },
-    				             0, 5);
-    	} catch (Exception e) {
-    	}
+    /// DOES NOT USE ACCELERATION CONTROL.  Will stop the motor it controlls (aka interrupted).
+    void stopMovingAbrupt() {
+    	motor.set(0);
     }
-    
+
     public void setDesiredVelocity(double d) { desiredVelocity = d; }
 }
 
