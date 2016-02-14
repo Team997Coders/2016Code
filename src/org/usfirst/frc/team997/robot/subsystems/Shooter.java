@@ -1,7 +1,5 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import org.usfirst.frc.team997.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
@@ -16,10 +14,9 @@ public class Shooter extends Subsystem {
 	private VictorSP shooterMotor;
 	private Counter shooterCounter;
 	private DigitalInput shooterSensor;
-	private Servo shooterKicker;
-   
-	public Shooter(int shootSensorPort, int shootMotorPort, int shootServoPort, int shootUpSource){
-    	
+	private Servo shooterKickerFirst, shooterKickerSecond;
+
+    public Shooter(int shootSensorPort, int shootMotorPort, int shootServoFirstPort, int shootServoSecondPort, int shootUpSource){
     	//shooterSensor detects when ball is fully in shooter grasp
     	shooterSensor = new DigitalInput(shootSensorPort);
     	
@@ -27,8 +24,8 @@ public class Shooter extends Subsystem {
     	shooterMotor = new VictorSP(shootMotorPort);
     	
     	//shooterServo is the Servo that controls the kicker
-    	shooterKicker = new Servo(shootServoPort);
-    	
+    	shooterKickerFirst = new Servo(shootServoFirstPort);
+    	shooterKickerSecond = new Servo(shootServoSecondPort);
     	//makes UpSource. the thing
     	shooterCounter = new Counter();
     	shooterCounter.setUpSource(shootUpSource);
@@ -40,14 +37,19 @@ public class Shooter extends Subsystem {
     	shooterCounter = new Counter();	
     }
     
+    private void setKickers(double d) {
+    	shooterKickerFirst.set(d);
+    	shooterKickerSecond.set(1 - d);
+    }
+
     public void retractKicker(){
     	//moves kicker back to default position (.8)
-    	shooterKicker.set(.8);
+    	setKickers(.8);
     }
     
     public void kickKicker(){    	
     	//kicks out kicker to kicking position (.5)
-    	shooterKicker.set(.5);
+    	setKickers(.5);
     }
     
     public void speedUp(){

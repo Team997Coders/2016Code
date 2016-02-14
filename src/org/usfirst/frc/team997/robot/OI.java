@@ -1,25 +1,14 @@
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.Arm;
+import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.ShootReturn;
+import org.usfirst.frc.team997.robot.commands.spinUpShooter;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team997.robot.commands.CollectBall;
-import org.usfirst.frc.team997.robot.commands.ShootReturn;
-import org.usfirst.frc.team997.robot.commands.ShooterAngleHigh;
-import org.usfirst.frc.team997.robot.commands.ToggleShift;
-import org.usfirst.frc.team997.robot.commands.circleLightToggle;
-import org.usfirst.frc.team997.robot.commands.Arm;
-import org.usfirst.frc.team997.robot.commands.ExampleCommand;
-import org.usfirst.frc.team997.robot.commands.GatherIn;
-import org.usfirst.frc.team997.robot.commands.GatherOut;
-import org.usfirst.frc.team997.robot.commands.HighShooterLowGather;
-import org.usfirst.frc.team997.robot.commands.LowShooterHighGather;
-import org.usfirst.frc.team997.robot.commands.MidShooterLowGather;
-import org.usfirst.frc.team997.robot.commands.shooterAngleLow;
-import org.usfirst.frc.team997.robot.commands.shooterAngleMedium;
-import org.usfirst.frc.team997.robot.commands.spinUpShooter;
 
 public class OI {
 	//controllers

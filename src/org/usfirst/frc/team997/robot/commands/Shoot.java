@@ -30,7 +30,6 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.speedUp();
     	if (mytimer.get() >= 1) {
     		Robot.shooter.kickKicker();
     	} else {
