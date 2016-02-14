@@ -110,22 +110,22 @@ public class RobotMap {
         driveTrainUltrasonic = new Ultrasonic(6, 7);
         LiveWindow.addSensor("DriveTrain", "Ultrasonic", driveTrainUltrasonic);
         
-        gathererArmAngleMotor = new Talon(2);
+        gathererArmAngleMotor = new Talon(3);
         LiveWindow.addActuator("Gatherer", "ArmAngleMotor", (Talon) gathererArmAngleMotor);
         
         gathererArmAngleSensor = new AnalogPotentiometer(2, 1.0, 0.0);
         LiveWindow.addSensor("Gatherer", "ArmAngleSensor", gathererArmAngleSensor);
         
-        gathererGathererWheelMotor = new VictorSP(5);
-        LiveWindow.addActuator("Gatherer", "GathererWheelMotor", (VictorSP) gathererGathererWheelMotor);
+        gathererGathererWheelMotor = new Talon(4);
+        LiveWindow.addActuator("Gatherer", "GathererWheelMotor", (Talon) gathererGathererWheelMotor);
         
         shooterAngleSensor = new AnalogPotentiometer(1, 1.0, 0.0);
         LiveWindow.addSensor("Shooter", "AngleSensor", shooterAngleSensor);
         
-        shooterAngleMotor = new Talon(4);
+        shooterAngleMotor = new Talon(5);
         LiveWindow.addActuator("Shooter", "AngleMotor", (Talon) shooterAngleMotor);
         
-        shooterShooterMotor = new VictorSP(3);
+        shooterShooterMotor = new VictorSP(2);
         LiveWindow.addActuator("Shooter", "ShooterMotor", (VictorSP) shooterShooterMotor);
         
         shooterSpeedSensor = new DigitalInput(4);
