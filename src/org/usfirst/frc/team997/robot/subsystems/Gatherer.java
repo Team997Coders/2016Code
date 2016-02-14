@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -13,8 +14,6 @@ public class Gatherer extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	
-public static final double maxCurrent = 20;	
 private VictorSP rollerMotor;
 	
 public Gatherer(int rollerPort) { 
@@ -23,7 +22,7 @@ public Gatherer(int rollerPort) {
 
 public void safeValue(double voltage) {
 	//checks if the motor is using too much current
-	if(Robot.pdp.getCurrent(4) > maxCurrent) {
+	if(Robot.pdp.getCurrent(4) > RobotMap.Voltages.gathererMax) {
 		rollerMotor.set(0);
 	}
 	

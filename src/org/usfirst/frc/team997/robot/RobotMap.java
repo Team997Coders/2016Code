@@ -45,4 +45,13 @@ public class RobotMap {
 	armLow                   = 0,
 	armHigh                  = 42,
 	collectBallArmPos        = 0;
+
+	public static class Voltages {
+		public static final double
+		shooterPivotMin      = 0, // arbitrary
+		shooterPivotMax      = 42, // arbitrary
+		gathererMax          = 20, // arbitrary
+		gathererArmMin       = 0, // arbitrary
+		gathererArmMax       = 45; // arbitrary
+	}
 }

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Talon;
@@ -14,33 +15,29 @@ public class ShooterPivot extends PIDSubsystem {
 	
 	private Talon pivotMotor;
 	private AnalogInput shootAngle;
-	public static final double MIN = 0, MAX = 42, maxCurrent = 30 ; //arbitrary ..but the meaning of life.
+	public static final double maxCurrent = 30 ; //arbitrary ..but the meaning of life.
 	
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		super("shooterPivot", 1, 0, 0);
     	getPIDController().setContinuous(false);
-    	setSetpoint(MIN); //ARBRITARY; I honestly do not know what this might do to the robot
+    	setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I honestly do not know what this might do to the robot
     	enable();
 
     	pivotMotor = new Talon(aimingMotorPort);
     	shootAngle = new AnalogInput(shooterAnglePort);
 	}
-    
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
     protected double returnPIDInput() {
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    	return shootAngle.getAverageVoltage() / MAX; //TODO THIS IS ARBRITARY; you probably shouldn't run it cuz things might go wrong  
-    	}
+    	// TODO THIS IS ARBRITARY; you probably shouldn't run
+    	// it cuz things might go wrong
+    	return shootAngle.getAverageVoltage() / RobotMap.Voltages.shooterPivotMax;   
+    }
     
     public void safeVoltage(double voltage) {
     	//checks if voltage/current w/in safe ranges. If not, sets motor to 0
-    	if(shootAngle.getAverageVoltage() > MAX) {
+    	if(shootAngle.getAverageVoltage() > RobotMap.Voltages.shooterPivotMax) {
     		pivotMotor.set(0);
-    	} else if(shootAngle.getAverageVoltage() < MIN) {
+    	} else if(shootAngle.getAverageVoltage() < RobotMap.Voltages.shooterPivotMin) {
     		pivotMotor.set(0);
     	} else if(Robot.pdp.getCurrent(5) > maxCurrent) {
     		pivotMotor.set(0);

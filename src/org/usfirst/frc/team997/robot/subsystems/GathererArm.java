@@ -15,7 +15,7 @@ public class GathererArm extends PIDSubsystem {
 
 	private VictorSP armMotor;
 	private AnalogInput armAngle;
-	public static final double MIN = 0, MAX = 45, maxCurrent = 40; //TODO Angle must never go past 90
+	public static final double maxCurrent = RobotMap.Voltages.gathererArmMax /*>>> 40 */; //TODO Angle must never go past 90
 	
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
@@ -26,7 +26,7 @@ public class GathererArm extends PIDSubsystem {
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
         // enable() - Enables the PID controller.
-    	setSetpoint(MIN);
+    	setSetpoint(RobotMap.Voltages.gathererArmMin);
     	enable();
     	
     	armMotor = new VictorSP(gatherArmMotorPort);
@@ -48,9 +48,9 @@ public class GathererArm extends PIDSubsystem {
     
     public void safeVoltage(double voltage) {
     	//Checks if the two voltages and if they are not within safe ranges sets motor to zero
-    	if(armAngle.getAverageVoltage() < MIN) {
+    	if(armAngle.getAverageVoltage() < RobotMap.Voltages.gathererArmMin) {
     		armMotor.set(0);
-    	} else if(armAngle.getAverageVoltage() > MAX) {
+    	} else if(armAngle.getAverageVoltage() > RobotMap.Voltages.gathererArmMax) {
     		armMotor.set(0);;
     	} else if(Robot.pdp.getCurrent(14) > maxCurrent || Robot.pdp.getCurrent(15) > maxCurrent) {
     		armMotor.set(0);
