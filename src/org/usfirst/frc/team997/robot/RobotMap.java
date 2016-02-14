@@ -131,10 +131,10 @@ public class RobotMap {
         shooterSpeedSensor = new DigitalInput(4);
         LiveWindow.addSensor("Shooter", "SpeedSensor", shooterSpeedSensor);
         
-        shooterBallControlServoL = new Servo(6);
+        shooterBallControlServoL = new Servo(8);
         LiveWindow.addActuator("Shooter", "BallControlServoL", shooterBallControlServoL);
         
-        shooterBallControlServoR = new Servo(7);
+        shooterBallControlServoR = new Servo(9);
         LiveWindow.addActuator("Shooter", "BallControlServoR", shooterBallControlServoR);
         
         shooterBallDistSensor = new AnalogInput(3);
