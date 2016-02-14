@@ -14,6 +14,9 @@ import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.commands.GatherIn;
 import org.usfirst.frc.team997.robot.commands.GatherOut;
+import org.usfirst.frc.team997.robot.commands.HighShooterLowGather;
+import org.usfirst.frc.team997.robot.commands.LowShooterHighGather;
+import org.usfirst.frc.team997.robot.commands.MidShooterLowGather;
 import org.usfirst.frc.team997.robot.commands.shooterAngleLow;
 import org.usfirst.frc.team997.robot.commands.shooterAngleMedium;
 import org.usfirst.frc.team997.robot.commands.spinUpShooter;
@@ -58,13 +61,13 @@ public class OI {
 		spinUpShooterButton.whenPressed(new spinUpShooter());
 		
 		shootAngleMediumButton = new JoystickButton (driverTwo, 3);
-		shootAngleMediumButton.whenPressed(new shooterAngleMedium());
+		shootAngleMediumButton.whenPressed(new MidShooterLowGather());
 		
 		shootAngleLowButton = new JoystickButton(driverTwo, 4);
-		shootAngleLowButton.whenPressed(new shooterAngleLow());
+		shootAngleLowButton.whenPressed(new LowShooterHighGather());
 		
 		shootAngleHighButton = new JoystickButton (driverTwo, 5);
-		shootAngleHighButton.whenPressed(new ShooterAngleHigh());
+		shootAngleHighButton.whenPressed(new HighShooterLowGather());
 		
 	}
 

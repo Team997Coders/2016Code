@@ -41,5 +41,7 @@ public class RobotMap {
 	lowPoint                 = 0,
 	midPoint                 = 21,
 	highPoint                = 42,
+	armLow                   = 0,
+	armHigh                  = 42,
 	collectBallArmPos        = 0;
 }
