@@ -2,6 +2,9 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.HighShooterLowGather;
+import org.usfirst.frc.team997.robot.commands.LowShooterHighGather;
+import org.usfirst.frc.team997.robot.commands.MidShooterLowGather;
 import org.usfirst.frc.team997.robot.commands.ShootReturn;
 import org.usfirst.frc.team997.robot.commands.spinUpShooter;
 
