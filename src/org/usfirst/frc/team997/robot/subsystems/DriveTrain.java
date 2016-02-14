@@ -63,7 +63,7 @@ public class DriveTrain extends Subsystem {
 //	}
 	public void driveVoltage(double leftSpeed, double rightSpeed) {
 		this.leftmotor.setDesiredVelocity(leftSpeed);
-		this.rightmotor.setDesiredVelocity(rightSpeed);
+		this.rightmotor.setDesiredVelocity(-rightSpeed);
 	}
 	
 	/*public void driveVoltage(double leftspeed, double rightspeed){
