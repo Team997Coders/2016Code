@@ -34,9 +34,6 @@ public class OI {
 		//primary Driver Button/Controls 
 		myController = new Controller(RobotMap.joystickPort);
 		
-		CollectBallbutton = new JoystickButton(driverTwo, 5);
-		CollectBallbutton.whenPressed(new CollectBall());
-		
 		arm = new JoystickButton(myController, 3);
 		arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
 		
@@ -45,6 +42,9 @@ public class OI {
 		
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
+
+		CollectBallbutton = new JoystickButton(driverTwo, 5);
+		CollectBallbutton.whenPressed(new CollectBall());
 		
 		shootReturnButton = new JoystickButton(driverTwo, 1);
 		shootReturnButton.whenPressed(new ShootReturn());
