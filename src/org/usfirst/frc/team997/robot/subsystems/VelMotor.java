@@ -29,10 +29,6 @@ public class VelMotor {
     	return x;
     }
     
-    private TimerTask updateTask = new TimerTask() {
-    	public void run() { update(); }
-    };
-    
     private void update() {
     	double error = deadband(desiredVelocity - encoder.getRate(), .05);
     	currentCurrent = max(currentCurrent + error * calibrationFactor, 1);
@@ -47,7 +43,9 @@ public class VelMotor {
     
     public void start() {
     	try {
-    		new Timer().schedule(updateTask, 0, 5);
+    		// every 5 seconds, call update();
+    		new Timer().schedule(new TimerTask() { public void run() { update(); } },
+    				             0, 5);
     	} catch (Exception e) {
     	}
     }

@@ -27,7 +27,9 @@ public class AccelMotor {
     }
     public void start() {
     	try {
-    		new Timer().schedule(updaterTask, 0, 5);
+    		// every 5 milliseconds, run update()
+    		new Timer().schedule(new TimerTask() { public void run() { update(); } },
+    				             0, 5);
     	} catch (Exception e) {
     	}
     	motor.start();
@@ -44,9 +46,6 @@ public class AccelMotor {
     }
     public void setDesiredVelocity(double d) { desiredVel = d; }
 
-    private TimerTask updaterTask = new TimerTask() {
-    	public void run() { update(); }
-    };
 
     public void setMaxAccel(double d) { maxAccel = d; }
 }
