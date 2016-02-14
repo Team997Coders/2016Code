@@ -23,7 +23,7 @@ public class OI {
 	private final Button shootAngleMediumButton;
 	private final Button shootAngleLowButton;
 	private final Button spinUpShooterButton;
-	private final Button CollectBallbutton;
+	private final Button collectBallButton;
 	private final Button shootReturnButton;
 	private final Button arm;
 	//private final Button shifterButton;
@@ -43,8 +43,8 @@ public class OI {
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
 
-		CollectBallbutton = new JoystickButton(driverTwo, 5);
-		CollectBallbutton.whenPressed(new CollectBall());
+		collectBallButton = new JoystickButton(driverTwo, 5);
+		collectBallButton.whenPressed(new CollectBall());
 		
 		shootReturnButton = new JoystickButton(driverTwo, 1);
 		shootReturnButton.whenPressed(new ShootReturn());
