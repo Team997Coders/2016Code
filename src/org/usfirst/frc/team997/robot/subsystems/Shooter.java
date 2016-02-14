@@ -35,7 +35,7 @@ public class Shooter extends Subsystem {
     
     private void setKickers(double d) {
     	shooterKickerFirst.set(d);
-    	shooterKickerSecond.set(-d);
+    	shooterKickerSecond.set(1 - d);
     }
 
     public void retractKicker(){
