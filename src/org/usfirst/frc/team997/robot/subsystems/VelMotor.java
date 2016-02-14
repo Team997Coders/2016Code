@@ -23,24 +23,29 @@ public class VelMotor {
     }
     
     private double deadband(double x, double band) {
-    	if (x < band && x > -band) {
+    	if (Math.abs(x) < band) {
     		return 0;
+    	} else {
+    		return x;
     	}
-    	return x;
     }
     
+    // called every 5 milliseconds.
+    // gradually changes the actual velocity (controlling for velocity)
     private void update() {
     	double error = deadband(desiredVelocity - encoder.getRate(), .05);
     	currentCurrent = max(currentCurrent + error * calibrationFactor, 1);
     	motor.set(deadband(currentCurrent, .05));
     }
     
-    public double max(double a, double max) {
+    /// Maximum of two numbers.
+    private double max(double a, double max) {
     	if (a > max) return max;
     	else if (a < -max) return -max;
     	else return a;
     }
     
+    /// Refactor into Command
     public void start() {
     	try {
     		// every 5 seconds, call update();
