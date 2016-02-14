@@ -36,6 +36,7 @@ public class VelMotor {
     private void update() {
     	double error = deadband(desiredVelocity - encoder.getRate(), .05);
     	currentCurrent = max(currentCurrent + error * calibrationFactor, 1);
+    	motor.set(deadband(currentCurrent, .05));
     }
     
     public double max(double a, double max) {
