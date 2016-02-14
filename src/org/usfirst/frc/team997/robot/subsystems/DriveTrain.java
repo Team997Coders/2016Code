@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 //this is saying that leftmotor and rightmotor are VictorSP
 public class DriveTrain extends Subsystem {
-	private AccelMotor leftmotor;
-	private AccelMotor rightmotor;
+	public AccelMotor leftmotor;
+	public AccelMotor rightmotor;
 	
 	private int gear; 
 	//Assign victor ports. 

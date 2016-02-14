@@ -1,16 +1,12 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class VelMotor {
+class VelMotor {
     private SpeedController motor;
     private Encoder encoder;
     private double desiredVelocity, currentCurrent, calibrationFactor;
@@ -23,34 +19,34 @@ public class VelMotor {
     }
     
     private double deadband(double x, double band) {
-    	if (x < band && x > -band) {
+    	if (Math.abs(x) < band) {
     		return 0;
+    	} else {
+    		return x;
     	}
-    	return x;
     }
     
-    private TimerTask updateTask = new TimerTask() {
-    	public void run() { update(); }
-    };
-    
-    private void update() {
+    // called by AccelMotor's update (no visibility means only classes
+    // in this package (subsystems) can call it).
+    // gradually changes the actual velocity (controlling for velocity)
+    void update() {
     	double error = deadband(desiredVelocity - encoder.getRate(), .05);
     	currentCurrent = max(currentCurrent + error * calibrationFactor, 1);
+    	motor.set(deadband(currentCurrent, .05));
     }
     
-    public double max(double a, double max) {
+    /// Maximum of two numbers.
+    private double max(double a, double max) {
     	if (a > max) return max;
     	else if (a < -max) return -max;
     	else return a;
     }
     
-    public void start() {
-    	try {
-    		new Timer().schedule(updateTask, 0, 5);
-    	} catch (Exception e) {
-    	}
+    /// DOES NOT USE ACCELERATION CONTROL.  Will stop the motor it controlls (aka interrupted).
+    void stopMovingAbrupt() {
+    	motor.set(0);
     }
-    
+
     public void setDesiredVelocity(double d) { desiredVelocity = d; }
 }
 
