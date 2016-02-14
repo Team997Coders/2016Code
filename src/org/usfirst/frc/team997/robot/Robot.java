@@ -1,26 +1,20 @@
 
 package org.usfirst.frc.team997.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
+import org.usfirst.frc.team997.robot.commands.ExampleCommand;
+import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team997.robot.subsystems.Gatherer;
+import org.usfirst.frc.team997.robot.subsystems.GathererArm;
+import org.usfirst.frc.team997.robot.subsystems.Shooter;
+
+import com.analog.adis16448.frc.ADIS16448_IMU;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team997.robot.commands.ExampleCommand;
-import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team997.robot.subsystems.Shooter;
-
-import com.analog.adis16448.frc.ADIS16448_IMU;
-
-import org.usfirst.frc.team997.robot.subsystems.Gatherer;
-import org.usfirst.frc.team997.robot.subsystems.GathererArm;
-
-import com.analog.adis16448.frc.ADIS16448_IMU;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -36,7 +30,8 @@ public class Robot extends IterativeRobot {
 	//private CameraServer camera;
 	public static final Shooter shooter = new Shooter(
 			RobotMap.bannerEncoderSpeedPort, RobotMap.shooterMotorPort,
-			RobotMap.servoMotorPort, RobotMap.bannerEncoderBallPort);
+			RobotMap.servoMotorFirstPort, RobotMap.servoMotorSecondPort,
+			RobotMap.bannerEncoderBallPort);
 	public static final DriveTrain drivetrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
 			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 
