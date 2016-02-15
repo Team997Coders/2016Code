@@ -51,7 +51,7 @@ public class GathererArm extends PIDSubsystem {
     	if(armAngle.getAverageVoltage() < RobotMap.Voltages.gathererArmMin) {
     		armMotor.set(0);
     	} else if(armAngle.getAverageVoltage() > RobotMap.Voltages.gathererArmMax) {
-    		armMotor.set(0);;
+    		armMotor.set(0);
     	} else if(Robot.pdp.getCurrent(14) > maxCurrent || Robot.pdp.getCurrent(15) > maxCurrent) {
     		armMotor.set(0);
     	}
