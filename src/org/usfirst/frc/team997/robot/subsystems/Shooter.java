@@ -1,5 +1,7 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
+import org.usfirst.frc.team997.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
@@ -43,18 +45,18 @@ public class Shooter extends Subsystem {
     }
 
     public void retractKicker(){
-    	//moves kicker back to default position (.8)
-    	setKickers(.8);
+    	//moves kicker back to default position
+    	shooterKickerSecond.set(RobotMap.kickerRightMax);
     }
     
     public void kickKicker(){    	
-    	//kicks out kicker to kicking position (.5)
-    	setKickers(.5);
+    	//kicks out kicker to kicking position
+    	shooterKickerSecond.set(RobotMap.kickerRightMin);
     }
     
     public void speedUp(){
     	//causes shooterMotor (controlling the shooter wheels) to speed up
-    	shooterMotor.set(-.8);
+    	shooterMotor.set(RobotMap.shooterShootingSpeed);
     }
     
     public void slowDown(){

@@ -44,14 +44,23 @@ public class RobotMap {
 	highPoint                = 42,
 	armLow                   = 0,
 	armHigh                  = 42,
-	collectBallArmPos        = 0;
+	collectBallArmPos        = 0,
+	
+	shooterShootingSpeed     = -.6,
+	
+	gathererInSpeed          = .3,
+
+	kickerRightMin           = .5, // distance out when kicking
+	kickerRightMax           = .7, // distance out when retracting
+	kickerLeftMin            = 0, // distance out when retracting (unmeasured)
+	kickerLeftMax            = 0; // distance out when kicking (unmeasured)
 
 	public static class Voltages {
 		public static final double
 		shooterPivotMin      = 0, // arbitrary
 		shooterPivotMax      = 42, // arbitrary
 		gathererMax          = 20, // arbitrary
-		gathererArmMin       = 0, // arbitrary
+		gathererArmMin       = 0, // arbitrary (NOT 0)
 		gathererArmMax       = 45; // arbitrary
 	}
 }

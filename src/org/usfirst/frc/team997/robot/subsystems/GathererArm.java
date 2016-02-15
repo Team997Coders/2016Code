@@ -43,7 +43,7 @@ public class GathererArm extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    	return armAngle.getAverageVoltage();  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
+    	return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmMax;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     }
     
     public void safeVoltage(double voltage) {
@@ -56,7 +56,7 @@ public class GathererArm extends PIDSubsystem {
     		armMotor.set(0);
     	}
     	
-    	//sets motor to voltage if voltage is safe
+    	//sets motor to voltage (0 if unsafe)
     	armMotor.set(voltage);
     }
     

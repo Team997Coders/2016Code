@@ -35,7 +35,7 @@ public class CollectBall extends Command {
     	Robot.gathererarm.setSetpoint(RobotMap.collectBallArmPos);
     	
     	//makes the wheel on the end of the gatherer arm roll the ball in
-    	Robot.gatherer.gathervoltage(0.45);
+    	Robot.gatherer.gathervoltage(RobotMap.gathererInSpeed);
     	
     }
 
