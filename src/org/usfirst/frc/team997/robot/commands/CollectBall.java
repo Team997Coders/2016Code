@@ -28,6 +28,9 @@ public class CollectBall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//makes sure kicker is retracted before gathering
+    	Robot.shooter.retractKicker();
+    	
     	//calls the gathering method which gathers ball as long as sensor is not activated
     	Robot.shooter.gatherBall();
     	
