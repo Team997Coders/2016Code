@@ -18,7 +18,7 @@ public class ShooterPivot extends PIDSubsystem {
 	public static final double maxCurrent = 30 ; //arbitrary ..but the meaning of life.
 	
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
-		super("shooterPivot", 1, 0, 0);
+		super("shooterPivot", 3.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
     	setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I honestly do not know what this might do to the robot
     	enable();

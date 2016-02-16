@@ -54,5 +54,4 @@ public class Controller extends Joystick {
 	public boolean getRB(){
 		return joy.getRawButton(4);
 	}
-	
 }

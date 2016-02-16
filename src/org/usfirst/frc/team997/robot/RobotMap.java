@@ -39,28 +39,28 @@ public class RobotMap {
 	//Misc. variables
 	public static final double
 	maxAccelDrive            = 10,
-	lowPoint                 = 0,
-	midPoint                 = 21,
-	highPoint                = 42,
-	armLow                   = 0,
-	armHigh                  = 42,
-	collectBallArmPos        = 0,
+	lowPoint                 = 0.12, //Shooter
+	midPoint                 = 0.27, //shooter
+	highPoint                = 42, //ARBITRARY shooter
+	armLow                   = 0.75, //arm
+	armHigh                  = 0.28, //ARM
+	collectBallArmPos        = 0, //ARBITRARY arm
 	
-	shooterShootingSpeed     = -.6,
+	shooterShootingSpeed     = .6, //shooter
 	
-	gathererInSpeed          = .3,
+	gathererInSpeed          = .4, //gatherer arm (?)
 
-	kickerRightMin           = .5, // distance out when kicking
-	kickerRightMax           = .7, // distance out when retracting
-	kickerLeftMin            = 0, // distance out when retracting (unmeasured)
-	kickerLeftMax            = 0; // distance out when kicking (unmeasured)
+	kickerRightMin           = .5, // NEED TO CHANGE distance out when kicking
+	kickerRightMax           = 0.0, // distance out when retracting
+	kickerLeftMin            = 0, // NEED TO CHANGE distance out when retracting (unmeasured)
+	kickerLeftMax            = 1.0; // distance out when kicking (unmeasured)
 
 	public static class Voltages {
 		public static final double
 		shooterPivotMin      = 0, // arbitrary
 		shooterPivotMax      = 42, // arbitrary
-		gathererMax          = 20, // arbitrary
-		gathererArmMin       = 0, // arbitrary (NOT 0)
-		gathererArmMax       = 45; // arbitrary
+		gathererMax          = 20, // arbitrary current
+		gathererArmMin       = 0, // arbitrary (NOT 0) voltage
+		gathererArmMax       = 45; // arbitrary voltage
 	}
 }

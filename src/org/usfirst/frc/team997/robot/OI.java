@@ -5,6 +5,7 @@ import org.usfirst.frc.team997.robot.commands.CollectBall;
 import org.usfirst.frc.team997.robot.commands.HighShooterLowGather;
 import org.usfirst.frc.team997.robot.commands.LowShooterHighGather;
 import org.usfirst.frc.team997.robot.commands.MidShooterLowGather;
+import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShootReturn;
 import org.usfirst.frc.team997.robot.commands.spinUpShooter;
 
@@ -24,7 +25,7 @@ public class OI {
 	private final Button shootAngleLowButton;
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
-	private final Button shootReturnButton;
+	private final Button shootButton;
 	private final Button arm;
 	//private final Button shifterButton;
 	
@@ -46,8 +47,8 @@ public class OI {
 		collectBallButton = new JoystickButton(driverTwo, 5);
 		collectBallButton.whenPressed(new CollectBall());
 		
-		shootReturnButton = new JoystickButton(driverTwo, 1);
-		shootReturnButton.whenPressed(new ShootReturn());
+		shootButton = new JoystickButton(driverTwo, 1);
+		shootButton.whenPressed(new Shoot());
 		
 		spinUpShooterButton = new JoystickButton(driverTwo, 2);
 		spinUpShooterButton.whenPressed(new spinUpShooter());
@@ -60,6 +61,7 @@ public class OI {
 		
 		shootAngleHighButton = new JoystickButton (driverTwo, 5);
 		shootAngleHighButton.whenPressed(new HighShooterLowGather());
+		
 		
 	}
 

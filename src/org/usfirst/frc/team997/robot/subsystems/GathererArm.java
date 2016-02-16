@@ -20,7 +20,7 @@ public class GathererArm extends PIDSubsystem {
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
-    	super("gathererArm", 1.0, 0.0, 0.0);
+    	super("gathererArm", 3.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
     	// Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
