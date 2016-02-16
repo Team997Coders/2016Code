@@ -40,6 +40,7 @@ public class RobotMap {
 	public static final double
 	maxAccelDrive            = 10,
 	lowPoint                 = 0.12, //Shooter
+	rampAngle				 = 0.20, //Shooter to go over defenses
 	midPoint                 = 0.27, //shooter
 	highPoint                = 42, //ARBITRARY shooter
 	armLow                   = 0.75, //arm
