@@ -65,7 +65,7 @@ public class OI {
 		
 	}
 
-	private double deadband(double a) {
+	public static double deadband(double a) {
 		//deadband for joystick output
 		
 		if (Math.abs(a)>.15){
