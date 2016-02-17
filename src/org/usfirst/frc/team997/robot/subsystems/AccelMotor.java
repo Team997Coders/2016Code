@@ -3,6 +3,7 @@ package org.usfirst.frc.team997.robot.subsystems;
 import org.usfirst.frc.team997.robot.commands.AccelCommand;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -54,6 +55,13 @@ public class AccelMotor extends Subsystem {
     
 	protected void initDefaultCommand() {
 		setDefaultCommand(new AccelCommand(this));
+	}
+	
+	void smartDashboard() {
+		SmartDashboard.putNumber("AccelMotor " + name + " maxAccel", maxAccel);
+		SmartDashboard.putNumber("AccelMotor " + name + " desiredVel", desiredVel);
+		SmartDashboard.putNumber("AccelMotor " + name + " accelCappedVel", accelCappedVel);
+		this.motor.smartDashboard(name);
 	}
 }
 

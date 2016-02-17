@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.OI;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -42,5 +43,13 @@ class VelMotor {
     }
 
     public void setDesiredVelocity(double d) { desiredVelocity = d; }
+
+	void smartDashboard(String name) {
+		SmartDashboard.putNumber("VelMotor " + name + " desiredVelocity", desiredVelocity);
+		SmartDashboard.putNumber("VelMotor " + name + " currentCurrent", currentCurrent);
+		SmartDashboard.putNumber("VelMotor " + name + " calibrationFactor", calibrationFactor);
+		SmartDashboard.putNumber("VelMotor " + name + " encoder distance", encoder.getDistance());
+		SmartDashboard.putNumber("VelMotor " + name + " encoder distance", encoder.getRate());
+	}
 }
 

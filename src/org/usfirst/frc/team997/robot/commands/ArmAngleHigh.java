@@ -27,7 +27,7 @@ public class ArmAngleHigh extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(Robot.gathererarm.getPosition() - Robot.gathererarm.getSetpoint()) < 0.1; // subtract and deadband
     }
 
     // Called once after isFinished returns true

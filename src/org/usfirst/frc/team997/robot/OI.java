@@ -38,14 +38,15 @@ public class OI {
 		arm = new JoystickButton(myController, 3);
 		arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
 		
+		collectBallButton = new JoystickButton(myController, 4);
+		collectBallButton.whenPressed(new CollectBall());
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
 		
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
 
-		collectBallButton = new JoystickButton(driverTwo, 5);
-		collectBallButton.whenPressed(new CollectBall());
+		
 		
 		shootButton = new JoystickButton(driverTwo, 1);
 		shootButton.whenPressed(new Shoot());
@@ -55,12 +56,15 @@ public class OI {
 		
 		shootAngleMediumButton = new JoystickButton (driverTwo, 3);
 		shootAngleMediumButton.whenPressed(new MidShooterLowGather());
+		SmartDashboard.putData("mid shooter low gather", shootAngleMediumButton);
 		
 		shootAngleLowButton = new JoystickButton(driverTwo, 4);
 		shootAngleLowButton.whenPressed(new LowShooterHighGather());
+		SmartDashboard.putData("low shooter high gather", shootAngleLowButton);
 		
 		shootAngleHighButton = new JoystickButton (driverTwo, 5);
 		shootAngleHighButton.whenPressed(new HighShooterLowGather());
+		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
 		
 		
 	}
@@ -68,7 +72,13 @@ public class OI {
 	public static double deadband(double a) {
 		//deadband for joystick output
 		
-		if (Math.abs(a)>.15){
+		return deadband(a, RobotMap.deadBandValue);
+	}
+
+	public static double deadband(double a, double dead) {
+		//deadband for joystick output
+		
+		if (Math.abs(a) > dead){
 			return a;
 		} else {
 			return 0;
@@ -76,7 +86,7 @@ public class OI {
 	}
 	
 	public double lefty() {
-		return deadband(myController.getLeftRawY());
+		return -deadband(myController.getLeftRawY());
 	}
 	
 	public double righty(){
@@ -90,13 +100,13 @@ public class OI {
 	}
 	
 	//gets the value of the triggers on the Primary Drivers triggers.
-	public double getGathererVoltage(){
-		return myController.getRawTriggerAxis();
+	public double getRawTriggerAxis(){
+		return myController.getTriggerRight() - myController.getTriggerLeft();
 	}
 
 	//this is saying to find the fantastic  angle of the right joystick
 	public double rightx(){
 	
-		return myController.getRightRawX();
+		return -myController.getRightRawX();
 	}
 }

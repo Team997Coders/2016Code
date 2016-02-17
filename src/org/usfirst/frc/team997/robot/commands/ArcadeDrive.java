@@ -3,6 +3,7 @@ package org.usfirst.frc.team997.robot.commands;
 import org.usfirst.frc.team997.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -32,8 +33,9 @@ public class ArcadeDrive extends Command {
 
     	 double getArcaderightspeed
     	 = deadBand(Robot.oi.lefty() + Robot.oi.rightx());
-    	
 
+    	 SmartDashboard.putNumber("Arcade Left", getArcadeleftspeed);
+    	 SmartDashboard.putNumber("Arcade Right", getArcaderightspeed);
     	Robot.drivetrain.driveVoltage(getArcadeleftspeed,getArcaderightspeed);
     }
     

@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static Relay clight;
 	//private CameraServer camera;
 	public static final Shooter shooter = new Shooter(
-			RobotMap.bannerEncoderSpeedPort, RobotMap.shooterMotorPort,
+			RobotMap.ultrasonicPort, RobotMap.shooterMotorPort,
 			RobotMap.servoMotorFirstPort, RobotMap.servoMotorSecondPort,
 			RobotMap.bannerEncoderBallPort);
 	public static final ShooterPivot shooterpivot = new ShooterPivot(RobotMap.aimingMotorPort, RobotMap.shooterAnglePort);
@@ -70,7 +70,6 @@ public class Robot extends IterativeRobot {
         
         clight = new Relay(RobotMap.circleLightPort);
         */
-        imu = new ADIS16448_IMU();
         imu.calibrate();
     }
 	

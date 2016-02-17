@@ -41,8 +41,12 @@ public class Controller extends Joystick {
 	
 	//gets the trigger axis which we have not implemented yet
 	
-	public double getRawTriggerAxis(){ 
+	public double getTriggerRight(){ 
 		return joy.getRawAxis(3);
+	}
+	
+	public double getTriggerLeft() {
+		return joy.getRawAxis(2);
 	}
 	
 	//

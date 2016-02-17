@@ -45,12 +45,13 @@ public class CollectBall extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//stops when the shooter sensor detects the ball
-        return Robot.shooter.getshooterSensor(); 
- 
+        return Robot.shooter.getshooterSensor();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.slowDown();
+    	Robot.gatherer.safeValue(0);
     }
 
     // Called when another command which requires one or more of the same

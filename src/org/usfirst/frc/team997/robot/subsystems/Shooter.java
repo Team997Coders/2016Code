@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
@@ -15,12 +16,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
 	private VictorSP shooterMotor;
 	private Counter shooterCounter;
-	private DigitalInput shooterSensor;
+	private AnalogInput shooterSensor;
 	private Servo shooterKickerFirst, shooterKickerSecond;
 
     public Shooter(int shootSensorPort, int shootMotorPort, int shootServoFirstPort, int shootServoSecondPort, int shootUpSource){
     	//shooterSensor detects when ball is fully in shooter grasp
-    	shooterSensor = new DigitalInput(shootSensorPort);
+    	shooterSensor = new AnalogInput(shootSensorPort);
     	
     	//shooterMotor is the VictorSP that controls the shooter wheels
     	shooterMotor = new VictorSP(shootMotorPort);
@@ -56,7 +57,7 @@ public class Shooter extends Subsystem {
     
     public void speedUp(){
     	//causes shooterMotor (controlling the shooter wheels) to speed up
-    	shooterMotor.set(RobotMap.shooterShootingSpeed);
+    	shooterMotor.set(-RobotMap.shooterShootingSpeed);
     }
     
     public void slowDown(){
@@ -66,22 +67,23 @@ public class Shooter extends Subsystem {
     
     public void gatherBall(){
     	//gathers ball as long as the sensor is not activated
-    	if (shooterSensor.get()){
-    		shooterMotor.set(0);
+    	if (shooterSensor.getAverageVoltage() > 1){
+    		shooterMotor.set(-0);
     	} else {
-    		shooterMotor.set(.45);
+    		shooterMotor.set(-RobotMap.shooterInSpeed);
     	}
     }
     
     public boolean getshooterSensor() {
-    	//returns value of sensor (i'm guessing it's like 0 or 1 to indicate sensed or not?)
-		return shooterSensor.get();
+    	return shooterSensor.getAverageVoltage() > 1;
 	}
     
     public void smartDashboard() {
     	SmartDashboard.putNumber("Shooter Rate", shooterCounter.getRate());
     	SmartDashboard.putNumber("Average Speed of Shooter", shooterCounter.getSamplesToAverage());
 		SmartDashboard.putNumber("Period", shooterCounter.getPeriod());
+		SmartDashboard.putNumber("Shooter Sensor", shooterSensor.getAverageVoltage());
+		SmartDashboard.putNumber("SENSOR SHOOTER VALUE", shooterSensor.getAccumulatorValue());
     }
 	
     // Put methods for controlling this subsystem

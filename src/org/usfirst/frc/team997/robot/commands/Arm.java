@@ -30,10 +30,10 @@ public class Arm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(toggleArm = true) {
+    	if(toggleArm == true) {
 			position = 43;
 			toggleArm = false;
-		} else if(toggleArm = false) {
+		} else {
 			position = 0;
 			toggleArm = true;
 		}

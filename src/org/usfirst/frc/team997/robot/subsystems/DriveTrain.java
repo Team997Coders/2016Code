@@ -18,8 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 //this is saying that leftmotor and rightmotor are VictorSP
 public class DriveTrain extends Subsystem {
-	public AccelMotor leftmotor;
-	public AccelMotor rightmotor;
+	private VictorSP left, right;
+	/*public AccelMotor leftmotor;
+	public AccelMotor rightmotor;*/
 	
 	private int gear; 
 	//Assign victor ports. 
@@ -27,12 +28,14 @@ public class DriveTrain extends Subsystem {
 			          int leftEncoderFirstPort, int leftEncoderSecondPort,
 			          int rightEncoderFirstPort, int rightEncoderSecondPort,
 			          double maxAccelDrive) {
-		leftmotor = new AccelMotor(new VelMotor(new VictorSP(leftPort), 
+		left = new VictorSP(leftPort);
+		right = new VictorSP(rightPort);
+		/*leftmotor = new AccelMotor(new VelMotor(new VictorSP(leftPort), 
 				                                new Encoder(leftEncoderFirstPort, leftEncoderSecondPort), 0),
 		                           maxAccelDrive);
 		rightmotor = new AccelMotor(new VelMotor(new VictorSP(rightPort),
 				                                 new Encoder(rightEncoderFirstPort, rightEncoderSecondPort), 0),
-				                    maxAccelDrive);
+				                    maxAccelDrive);*/
 	    gear = 1;
 	}
 	
@@ -62,8 +65,12 @@ public class DriveTrain extends Subsystem {
 //		}
 //	}
 	public void driveVoltage(double leftSpeed, double rightSpeed) {
-		this.leftmotor.setDesiredVelocity(leftSpeed);
-		this.rightmotor.setDesiredVelocity(-rightSpeed);
+		SmartDashboard.putNumber("driveVoltage Left", leftSpeed);
+		SmartDashboard.putNumber("driveVoltage Right", rightSpeed);
+		this.left.set(leftSpeed);
+		this.right.set(-rightSpeed);
+		/*this.leftmotor.setDesiredVelocity(leftSpeed);
+		this.rightmotor.setDesiredVelocity(-rightSpeed);*/
 	}
 	
 	/*public void driveVoltage(double leftspeed, double rightspeed){
@@ -73,8 +80,10 @@ public class DriveTrain extends Subsystem {
 	}*/
 	
 	public void smartDashboard(){
-		
-		
+		/*
+		this.leftmotor.smartDashboard();
+		this.rightmotor.smartDashboard();
+		*/
 		//SmartDashboard.putNumber("gear value" , getGear()); //not needed since we are not using gears anymore
 	}
 	//it sets things and stuff to Arcade drive
