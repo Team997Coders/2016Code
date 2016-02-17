@@ -2,11 +2,12 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.HighShooterLowGather;
 import org.usfirst.frc.team997.robot.commands.LowShooterHighGather;
 import org.usfirst.frc.team997.robot.commands.MidShooterLowGather;
 import org.usfirst.frc.team997.robot.commands.Shoot;
-import org.usfirst.frc.team997.robot.commands.ShootReturn;
+import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
 import org.usfirst.frc.team997.robot.commands.spinUpShooter;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -66,7 +67,13 @@ public class OI {
 		shootAngleHighButton.whenPressed(new HighShooterLowGather());
 		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
 		
+		SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.collectBallArmPos));
+		SmartDashboard.putData("Gatherer Arm High", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+		SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		
+		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.lowPoint));
+		SmartDashboard.putData("Shooter Pivot Midpoint", new ShooterToAngle(RobotMap.midPoint));
+		SmartDashboard.putData("Shooter Pivot High", new ShooterToAngle(RobotMap.highPoint));
 	}
 
 	public static double deadband(double a) {
@@ -97,6 +104,7 @@ public class OI {
 	public void userinfo() {
 		SmartDashboard.putNumber("leftstickY", myController.getLeftRawY());
 		SmartDashboard.putNumber("rightstickY", myController.getRightRawY());
+		SmartDashboard.putNumber("TriggerAxis", this.getRawTriggerAxis());
 	}
 	
 	//gets the value of the triggers on the Primary Drivers triggers.

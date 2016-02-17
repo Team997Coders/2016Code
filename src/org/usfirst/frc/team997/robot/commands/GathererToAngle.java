@@ -40,7 +40,7 @@ public class GathererToAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.gathererarm.getPosition() - m_angle) < 0.2;
+        return Robot.gathererarm.onTarget();
     }
 
     // Called once after isFinished returns true

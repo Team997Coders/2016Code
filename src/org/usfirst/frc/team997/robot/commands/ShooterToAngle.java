@@ -40,7 +40,7 @@ public class ShooterToAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.shooterpivot.getPosition() - m_angle) < 0.2;
+    	return Robot.shooterpivot.onTarget();
     }
 
     // Called once after isFinished returns true
