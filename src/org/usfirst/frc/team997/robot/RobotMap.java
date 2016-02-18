@@ -62,12 +62,15 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterPivotMin                = 0, // arbitrary
-		shooterPivotMax                = 42, // arbitrary
-		gathererMax                    = 20, // arbitrary current
-		gathererArmBeforeHitRobot      = 2.3, // arbitrary (NOT 0) voltage
-		gathererArmBeforeHitGround     = 5.5; // arbitrary voltage
+		shooterMax					   = 20,  // maximum shooter pivot current
+		shooterPivotMin                = 0,   // Lowest shooter position
+		shooterPivotMax                = 42,  // Highest shooter position
+		gathererMax                    = 20,  // maximum gatherer arm current
+		collextArmPostion              = 6.0, // Where should the arm be to collect balls
+		gathererArmBeforeHitRobot      = 2.3, // Highest gatherer arm position (vertical)
+		gathererArmBeforeHitGround     = 5.5; // Lowest gatherer arm position (flat)
 	}
+	
 	public static class PDP {
 		public static class Port {
 			public static final int

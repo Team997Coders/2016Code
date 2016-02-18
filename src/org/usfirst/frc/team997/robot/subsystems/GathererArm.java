@@ -7,6 +7,7 @@ import org.usfirst.frc.team997.robot.commands.GatherTrigger;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -20,25 +21,25 @@ public class GathererArm extends PIDSubsystem {
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
-    	super("gathererArm", 50.0, 0.0, 0.3);
+    	super("gathererArm", 8.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
-    	this.setAbsoluteTolerance(0.5);
+    	getPIDController().setAbsoluteTolerance(0.3);
+    	getPIDController().setInputRange(0.2, 4.8);
+        getPIDController().setOutputRange(-0.5, 0.5);
+    	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());
+
     	// Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
         // enable() - Enables the PID controller.
-    	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitRobot);
-    	enable();
     	
     	armMotor = new VictorSP(gatherArmMotorPort);
+    	LiveWindow.addActuator("GathererArm", "ArmAngleMotor", armMotor);
     	armAngle = new AnalogInput(armAnglePort);
-    
-    }
-    
-    private double getAngle() {
-    	double a = armAngle.getAverageVoltage();
-    	if (a < 1) { return 5 + a; }
-    	else { return a; }
+    	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", armAngle);
+    	
+    	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitRobot);
+    	enable();
     }
     
     public void initDefaultCommand() {
@@ -48,71 +49,47 @@ public class GathererArm extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-    	//return armAngle.getAverageVoltage();  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
-    	if (this.readyToSDOne) SmartDashboard.putNumber("Input into PID function", this.getAngle());
-    	this.readyToSDOne = false;
-    	return this.getAngle();
-    }
-    
-    public void safeVoltage(double voltage) {
-    	//Checks if the two voltages and if they are not within safe ranges sets motor to zero
-    	voltage /= 2;
-    	voltage = safePDP(safeLocation(voltage));
-    	armMotor.pidWrite(bound(voltage, -1, 1));
-    }
-    
-    private double bound(double d, double min, double max) {
-    	if (d < min) return min;
-    	else if (d > max) return max;
-    	else return d;
-    }
-    
-    // turn off if out of bounds and not going in bounds
-    private double safeLocation(double voltage) {
-    	if (voltage == 0 ||
-    		getAngle() < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage < 0 ||
-    		getAngle() > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0) {
-    		return 0;
-    	} else {
-    		return voltage;
-    	}
-    }
-
-    // turn off if too much PDP voltage
-    private double safePDP(double voltage) {
-    	if (voltage == 0 ||
-    		Robot.pdp.getCurrent(RobotMap.PDP.Port.armLiftFirst) > RobotMap.PDP.Limit.armLiftFirst ||
-        	Robot.pdp.getCurrent(RobotMap.PDP.Port.armLiftSecond) > RobotMap.PDP.Limit.armLiftSecond) {
-    		return 0;
-    	} else {
-    		return voltage;
-    	}
+        // Return your input value for the PID loop
+        // e.g. a sensor, like a potentiometer:
+        // yourPot.getAverageVoltage() / kYourMaxVoltage;
+    	//return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmBeforeHitRobot;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
+    	
+    	// remember the arm feedback is backwards!
+    	return 5.0-armAngle.getAverageVoltage();
     }
     
     protected void usePIDOutput(double voltage) {
-    	//sets motor to voltage (0 if unsafe)
-    	if (readyToSDTwo) SmartDashboard.putNumber("GatherArm PID Tells me to", voltage);
-    	readyToSDTwo = false;
-    	armMotor.pidWrite(safePDP(safeLocation(voltage)));
+    	armMotor.pidWrite(voltage);
+    }
+    
+    public void lockArmPosition() {
+    	setSetpoint(armAngle.getAverageVoltage());
+    	System.out.println("Armn Position Locked at"+armAngle.getAverageVoltage());
+    	enable();
     }
 
-    private boolean isEnabled = false;
-    public void enable() {
-    	super.enable();
-    	isEnabled = true;
+    public void safeVoltage(double voltage) {
+    	double angle = armAngle.getAverageVoltage();
+    	// gatherer arm goes from low=5.5 to high=2.3 in reverse
+    	// we don't want the arm going higher than 2.3 or lower than 5.5
+    	// positive voltage makes the arm go up.
+    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage < 0 ) {
+    		// arm is down and we don't want it to go lower
+    		lockArmPosition();
+    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage > 0 ) {
+    		// arm is up and we don't want it going any further back
+    	    lockArmPosition();
+    	} else {
+    		armMotor.set(voltage);
+    	}
     }
-    public void disable() {
-    	super.disable();
-    	isEnabled = false;
-    }
-
-    public void smartdashboardupdate() {
-    	readyToSDOne = true;
-    	readyToSDTwo = true;
-    	SmartDashboard.putNumber("Gatherer Arm", armAngle.getAverageVoltage());
-    	SmartDashboard.putNumber("Gatherer Arm Setpoint", this.getSetpoint());
-    	SmartDashboard.putNumber("Gatherer Arm Position", this.getPosition());
-    	SmartDashboard.putNumber("GathererArm PID", Robot.gathererarm.getAngle());
-    	SmartDashboard.putBoolean("PID enabled GatherTrigger", isEnabled);
+    
+    public void smartdashboardupdate(){
+    	SmartDashboard.putNumber("Setpoint: This is its curent value", super.getSetpoint());
+    	SmartDashboard.putNumber("Position: This is the current position", super.getPosition());
+    	SmartDashboard.putNumber("Gatherer Arm Feedback Pot Voltage", armAngle.getAverageVoltage());
+    	SmartDashboard.putNumber("Gatherer Arm Error Term", getPIDController().getError());
+    	SmartDashboard.putBoolean("GathererArm PID Status", getPIDController().isEnabled());
+    	SmartDashboard.putBoolean("GathererArm On Target?", super.onTarget());
     }
 }
