@@ -1,10 +1,10 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 import org.usfirst.frc.team997.robot.commands.GatherTrigger;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -15,9 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class GathererArm extends PIDSubsystem {
 	private VictorSP armMotor;
-	private AnalogInput armAngle;
-	private boolean readyToSDOne = false, readyToSDTwo = false;
-
+	private AnalogPotentiometer armAngle;
+	
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
@@ -34,9 +33,9 @@ public class GathererArm extends PIDSubsystem {
         // enable() - Enables the PID controller.
     	
     	armMotor = new VictorSP(gatherArmMotorPort);
-    	LiveWindow.addActuator("GathererArm", "ArmAngleMotor", armMotor);
-    	armAngle = new AnalogInput(armAnglePort);
-    	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", armAngle);
+    	LiveWindow.addActuator("GathererArm", "ArmAngleMotor", (VictorSP) armMotor);
+    	armAngle = new AnalogPotentiometer(armAnglePort);
+    	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", (AnalogPotentiometer) armAngle);
     	
     	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitRobot);
     	enable();
@@ -55,7 +54,7 @@ public class GathererArm extends PIDSubsystem {
     	//return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmBeforeHitRobot;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     	
     	// remember the arm feedback is backwards!
-    	return 5.0-armAngle.getAverageVoltage();
+    	return 4.8-armAngle.get();
     }
     
     protected void usePIDOutput(double voltage) {
@@ -63,13 +62,13 @@ public class GathererArm extends PIDSubsystem {
     }
     
     public void lockArmPosition() {
-    	setSetpoint(armAngle.getAverageVoltage());
-    	System.out.println("Armn Position Locked at"+armAngle.getAverageVoltage());
+    	setSetpoint(armAngle.get());
+    	System.out.println("Armn Position Locked at"+armAngle.get());
     	enable();
     }
 
     public void safeVoltage(double voltage) {
-    	double angle = armAngle.getAverageVoltage();
+    	double angle = armAngle.get();
     	// gatherer arm goes from low=5.5 to high=2.3 in reverse
     	// we don't want the arm going higher than 2.3 or lower than 5.5
     	// positive voltage makes the arm go up.
@@ -87,7 +86,7 @@ public class GathererArm extends PIDSubsystem {
     public void smartdashboardupdate(){
     	SmartDashboard.putNumber("Setpoint: This is its curent value", super.getSetpoint());
     	SmartDashboard.putNumber("Position: This is the current position", super.getPosition());
-    	SmartDashboard.putNumber("Gatherer Arm Feedback Pot Voltage", armAngle.getAverageVoltage());
+    	SmartDashboard.putNumber("Gatherer Arm Feedback Pot Voltage", armAngle.get());
     	SmartDashboard.putNumber("Gatherer Arm Error Term", getPIDController().getError());
     	SmartDashboard.putBoolean("GathererArm PID Status", getPIDController().isEnabled());
     	SmartDashboard.putBoolean("GathererArm On Target?", super.onTarget());

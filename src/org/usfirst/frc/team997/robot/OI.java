@@ -67,12 +67,12 @@ public class OI {
 		shootAngleHighButton.whenPressed(new HighShooterLowGather());
 		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
 		
+		SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.Voltages.collextArmPostion));
 		SmartDashboard.putData("Gatherer Arm High", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
-		SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.lowPoint));
-		SmartDashboard.putData("Shooter Pivot Midpoint", new ShooterToAngle(RobotMap.midPoint));
+		SmartDashboard.putData("Shooter Pivot Midpoint", new ShooterToAngle(RobotMap.midPoint));  // nominal Shooting position
 		SmartDashboard.putData("Shooter Pivot High", new ShooterToAngle(RobotMap.highPoint));
 	}
 
@@ -116,5 +116,9 @@ public class OI {
 	public double rightx(){
 	
 		return -myController.getRightRawX();
+	}
+	
+	public double userz() {
+		return (driverTwo.getZ() + 1.0)/2.0;
 	}
 }

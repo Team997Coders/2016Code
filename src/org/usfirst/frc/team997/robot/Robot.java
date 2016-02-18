@@ -71,6 +71,9 @@ public class Robot extends IterativeRobot {
         clight = new Relay(RobotMap.circleLightPort);
         */
         imu.calibrate();
+        
+        // Need to reset the servo's position to be ready to capture a ball
+        Robot.shooter.retractKicker();
     }
 	
     public void disabledInit(){

@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class GatherTrigger extends Command {
+	
+	public boolean locked=false;
 
 	/**this command takes the triggers input and moves the position of the gatherer based upon them. 
 	 * 
@@ -31,8 +33,13 @@ public class GatherTrigger extends Command {
     	if (dead != 0) {
     		Robot.gathererarm.disable();
     		Robot.gathererarm.safeVoltage(dead);
-    	} else {
+    		locked=false;
+    	} else if (dead == 0 && locked == false){
     		Robot.gathererarm.setSetpoint(Robot.gathererarm.getPosition());
+    		Robot.gathererarm.enable();
+    		locked = true;
+    		System.out.println("Arm Locked");
+    	} else {
     		Robot.gathererarm.enable();
     	}
     }
