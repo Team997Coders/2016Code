@@ -100,7 +100,7 @@ Children:
           validators: &id009 [DigitalChannel]
           value: '1'
       Base: Quadrature Encoder
-      Name: LeftDriveEncoder
+      Name: RightDriveEncoder
     - Children: []
       Properties:
         Channel A Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
@@ -132,27 +132,7 @@ Children:
           validators: *id009
           value: '3'
       Base: Quadrature Encoder
-      Name: RightDriveEncoder
-    - Children: []
-      Properties:
-        Ping Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
-            '24', '25']
-          default: '0'
-          name: Ping Channel (Digital)
-          validators: [DigitalChannel]
-          value: '6'
-        Echo Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
-            '24', '25']
-          default: '0'
-          name: Echo Channel (Digital)
-          validators: [DigitalChannel]
-          value: '7'
-      Base: Ultrasonic
-      Name: Ultrasonic
+      Name: LeftDriveEncoder
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
@@ -171,34 +151,47 @@ Children:
   - Children:
     - Children: []
       Properties:
-        Type: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: Talon
-          name: Type
-          validators: null
-          value: Talon
+        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
+            '24', '25']
+          default: '0'
+          name: Input Channel (Digital)
+          validators: [DigitalChannel]
+          value: '4'
+      Base: Digital Input
+      Name: SpeedSensor
+    - Children: []
+      Properties:
         Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id002
+          choices: &id010 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19']
           default: '0'
           name: Output Channel (PWM)
-          validators: *id003
-          value: '2'
-      Base: Speed Controller
-      Name: ArmAngleMotor
+          validators: &id011 [PWMOutput]
+          value: '8'
+      Base: Servo
+      Name: BallControlServoL
+    - Children: []
+      Properties:
+        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id010
+          default: '0'
+          name: Output Channel (PWM)
+          validators: *id011
+          value: '9'
+      Base: Servo
+      Name: BallControlServoR
     - Children: []
       Properties:
         Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id010 ['0', '1', '2', '3', '4', '5', '6', '7']
+          choices: ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
           name: Input Channel (Analog)
-          validators: &id011 [AnalogInput]
-          value: '2'
-        Full Range: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Full Range,
-          validators: null, value: 1.0}
-        Offset: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Offset,
-          validators: null, value: 0.0}
-      Base: Analog Potentiometer
-      Name: ArmAngleSensor
+          validators: [AnalogInput]
+          value: '3'
+      Base: Analog Input
+      Name: BallDistSensor
     - Children: []
       Properties:
         Type: !!robotbuilder.data.properties.ChoicesProperty
@@ -212,9 +205,55 @@ Children:
           default: '0'
           name: Output Channel (PWM)
           validators: *id003
-          value: '5'
+          value: '2'
       Base: Speed Controller
-      Name: GathererWheelMotor
+      Name: ShooterMotor
+    Properties:
+      Default command parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Default command parameters
+        validators: null
+        value: []
+      Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Default Command, type: Command, validators: null, value: None}
+      Constants: !!robotbuilder.data.properties.ConstantsProperty
+        default: []
+        name: Constants
+        validators: null
+        value: &id012 []
+    Base: Subsystem
+    Name: Shooter
+  - Children:
+    - Children: []
+      Properties:
+        Type: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: Talon
+          name: Type
+          validators: null
+          value: Talon
+        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id002
+          default: '0'
+          name: Output Channel (PWM)
+          validators: *id003
+          value: '3'
+      Base: Speed Controller
+      Name: ArmAngleMotor
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: &id013 ['0', '1', '2', '3', '4', '5', '6', '7']
+          default: '0'
+          name: Input Channel (Analog)
+          validators: &id014 [AnalogInput]
+          value: '2'
+        Full Range: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Full Range,
+          validators: null, value: 1.0}
+        Offset: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Offset,
+          validators: null, value: 0.0}
+      Base: Analog Potentiometer
+      Name: ArmAngleSensor
     Properties:
       Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Limit Output, validators: null, value: true}
@@ -250,30 +289,62 @@ Children:
         default: 0
         name: Input
         type: PIDSource
-        validators: &id014 [ChildDropdownSelected]
-        value: Gatherer ArmAngleSensor
+        validators: &id015 [ChildDropdownSelected]
+        value: GathererArm ArmAngleSensor
       Maximum Output: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Maximum Output,
         validators: null, value: 0.5}
       Output: !!robotbuilder.data.properties.ChildSelectionProperty
         default: 0
         name: Output
         type: PIDOutput
-        validators: &id015 [ChildDropdownSelected]
-        value: Gatherer ArmAngleMotor
+        validators: &id016 [ChildDropdownSelected]
+        value: GathererArm ArmAngleMotor
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: None}
       Maximum Input: !!robotbuilder.data.properties.DoubleProperty {default: 5, name: Maximum Input,
         validators: null, value: 5.0}
     Base: PID Subsystem
+    Name: GathererArm
+  - Children:
+    - Children: []
+      Properties:
+        Type: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: Talon
+          name: Type
+          validators: null
+          value: VictorSP
+        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id002
+          default: '0'
+          name: Output Channel (PWM)
+          validators: *id003
+          value: '4'
+      Base: Speed Controller
+      Name: GathererWheelMotor
+    Properties:
+      Default command parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Default command parameters
+        validators: null
+        value: []
+      Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Default Command, type: Command, validators: null, value: None}
+      Constants: !!robotbuilder.data.properties.ConstantsProperty
+        default: []
+        name: Constants
+        validators: null
+        value: *id012
+    Base: Subsystem
     Name: Gatherer
   - Children:
     - Children: []
       Properties:
         Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id010
+          choices: *id013
           default: '0'
           name: Input Channel (Analog)
-          validators: *id011
+          validators: *id014
           value: '1'
         Full Range: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Full Range,
           validators: null, value: 1.0}
@@ -294,68 +365,9 @@ Children:
           default: '0'
           name: Output Channel (PWM)
           validators: *id003
-          value: '4'
+          value: '5'
       Base: Speed Controller
       Name: AngleMotor
-    - Children: []
-      Properties:
-        Type: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: Talon
-          name: Type
-          validators: null
-          value: VictorSP
-        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id002
-          default: '0'
-          name: Output Channel (PWM)
-          validators: *id003
-          value: '3'
-      Base: Speed Controller
-      Name: ShooterMotor
-    - Children: []
-      Properties:
-        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
-            '24', '25']
-          default: '0'
-          name: Input Channel (Digital)
-          validators: [DigitalChannel]
-          value: '4'
-      Base: Digital Input
-      Name: SpeedSensor
-    - Children: []
-      Properties:
-        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id012 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-            '11', '12', '13', '14', '15', '16', '17', '18', '19']
-          default: '0'
-          name: Output Channel (PWM)
-          validators: &id013 [PWMOutput]
-          value: '6'
-      Base: Servo
-      Name: BallControlServoL
-    - Children: []
-      Properties:
-        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id012
-          default: '0'
-          name: Output Channel (PWM)
-          validators: *id013
-          value: '7'
-      Base: Servo
-      Name: BallControlServoR
-    - Children: []
-      Properties:
-        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7']
-          default: '0'
-          name: Input Channel (Analog)
-          validators: [AnalogInput]
-          value: '3'
-      Base: Analog Input
-      Name: BallDistSensor
     Properties:
       Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Limit Output, validators: null, value: true}
@@ -391,22 +403,22 @@ Children:
         default: 0
         name: Input
         type: PIDSource
-        validators: *id014
-        value: Shooter AngleSensor
+        validators: *id015
+        value: ShooterPivot AngleSensor
       Maximum Output: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Maximum Output,
         validators: null, value: 0.5}
       Output: !!robotbuilder.data.properties.ChildSelectionProperty
         default: 0
         name: Output
         type: PIDOutput
-        validators: *id015
-        value: Shooter AngleMotor
+        validators: *id016
+        value: ShooterPivot AngleMotor
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: None}
       Maximum Input: !!robotbuilder.data.properties.DoubleProperty {default: 5, name: Maximum Input,
         validators: null, value: 5.0}
     Base: PID Subsystem
-    Name: Shooter
+    Name: ShooterPivot
   Properties: {}
   Base: Subsystems
   Name: Subsystems
@@ -414,10 +426,10 @@ Children:
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: &id019 ['0', '1', '2', '3', '4', '5']
+        choices: &id020 ['0', '1', '2', '3', '4', '5']
         default: 1
         name: Number
-        validators: &id020 [Joystick]
+        validators: &id021 [Joystick]
         value: '0'
     Base: Joystick
     Name: DriverControls
@@ -434,7 +446,7 @@ Children:
           - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
             type: int, value: '0'}
         Button: !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id016 ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+          choices: &id017 ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
             '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
             '24', '25', '26', '27', '28', '29', '30', '31', '32']
           default: '1'
@@ -445,10 +457,10 @@ Children:
           default: None
           name: Command
           type: Command
-          validators: &id017 [TypeDropdownSelected]
+          validators: &id018 [TypeDropdownSelected]
           value: GathererToAngle
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id018 [whileHeld, whenPressed, whenReleased]
+          choices: &id019 [whileHeld, whenPressed, whenReleased]
           default: whileHeld
           name: When to Run
           validators: null
@@ -467,31 +479,93 @@ Children:
           - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
             type: int, value: '0'}
         Button: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id016
+          choices: *id017
           default: '1'
           name: Button
           validators: null
-          value: '1'
+          value: '2'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
           type: Command
-          validators: *id017
+          validators: *id018
           value: GathererToAngle
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id018
+          choices: *id019
           default: whileHeld
           name: When to Run
           validators: null
           value: whenPressed
       Base: Joystick Button
       Name: GathererToBack
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: OperatorControls}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value:
+          - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
+            type: int, value: '0'}
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id017
+          default: '1'
+          name: Button
+          validators: null
+          value: '3'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id018
+          value: ShooterToAngle
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id019
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whenPressed
+      Base: Joystick Button
+      Name: ShooterLow
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: OperatorControls}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value:
+          - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
+            type: int, value: '45'}
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id017
+          default: '1'
+          name: Button
+          validators: null
+          value: '4'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id018
+          value: ShooterToAngle
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id019
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whenPressed
+      Base: Joystick Button
+      Name: ShooterMiddle
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: *id019
+        choices: *id020
         default: 1
         name: Number
-        validators: *id020
+        validators: *id021
         value: '1'
     Base: Joystick
     Name: OperatorControls
@@ -576,7 +650,7 @@ Children:
     Base: Command
     Name: ShooterToAngle
   - Children: []
-    Properties: &id022
+    Properties: &id023
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -688,7 +762,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id023 [List]
+        validators: &id024 [List]
         value:
         - !!robotbuilder.data.CommandGroupEntry
           command:
@@ -706,14 +780,14 @@ Children:
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id021 []
+                default: &id022 []
                 name: Parameter presets
                 validators: null
-                value: *id021
+                value: *id022
               supports: {}
               type: Command
             name: DriveToDistance
-            properties: *id022
+            properties: *id023
           hasMatch: true
           order: Sequential
           parameters:
@@ -745,7 +819,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id023
+        validators: *id024
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
@@ -766,7 +840,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id023
+        validators: *id024
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
@@ -787,9 +861,9 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id023
+        validators: *id024
         value:
-        - &id026 !!robotbuilder.data.CommandGroupEntry
+        - &id027 !!robotbuilder.data.CommandGroupEntry
           command:
             base:
               help: A command specifies an action that the robot can perform.
@@ -805,10 +879,10 @@ Children:
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id024 []
+                default: &id025 []
                 name: Parameter presets
                 validators: null
-                value: *id024
+                value: *id025
               supports: {}
               type: Command
             name: ShooterToAngle
@@ -867,10 +941,10 @@ Children:
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id025 []
+                default: &id026 []
                 name: Parameter presets
                 validators: null
-                value: *id025
+                value: *id026
               supports: {}
               type: Command
             name: GathererToAngle
@@ -908,7 +982,7 @@ Children:
             value:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
               type: int, value: '0'}
-          previous: *id026
+          previous: *id027
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
