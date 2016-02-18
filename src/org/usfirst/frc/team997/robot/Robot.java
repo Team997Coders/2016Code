@@ -122,6 +122,7 @@ public void Smartdashboard(){
 	Robot.drivetrain.smartDashboard();
 	 Robot.shooter.smartDashboard();
 	 Robot.gathererarm.smartdashboardupdate();
+	 Robot.shooterpivot.smartDashboard();
 	 SmartDashboard.putData("Imu", imu);
 	 SmartDashboard.putNumber("Imu angle", imu.getAngleY());
 	 

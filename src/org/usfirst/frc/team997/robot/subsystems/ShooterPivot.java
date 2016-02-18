@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,6 +23,7 @@ public class ShooterPivot extends PIDSubsystem {
     	getPIDController().setContinuous(false);
     	setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I honestly do not know what this might do to the robot
     	enable();
+    	this.setAbsoluteTolerance(0.2);
 
     	pivotMotor = new Talon(aimingMotorPort);
     	shootAngle = new AnalogInput(shooterAnglePort);
@@ -57,6 +59,10 @@ public class ShooterPivot extends PIDSubsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void smartDashboard() {
+    	SmartDashboard.putNumber("Shooter Pivot", this.shootAngle.getAverageVoltage());
     }
 }
 

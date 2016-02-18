@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.HighShooterLowGather;
 import org.usfirst.frc.team997.robot.commands.LowShooterHighGather;
 import org.usfirst.frc.team997.robot.commands.MidShooterLowGather;
@@ -66,6 +67,7 @@ public class OI {
 		shootAngleHighButton.whenPressed(new HighShooterLowGather());
 		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
 		
+		SmartDashboard.putData("move to angle 3", new GathererToAngle(3));
 		
 	}
 

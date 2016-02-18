@@ -67,8 +67,8 @@ public class DriveTrain extends Subsystem {
 	public void driveVoltage(double leftSpeed, double rightSpeed) {
 		SmartDashboard.putNumber("driveVoltage Left", leftSpeed);
 		SmartDashboard.putNumber("driveVoltage Right", rightSpeed);
-		this.left.set(leftSpeed);
-		this.right.set(-rightSpeed);
+		this.left.pidWrite(leftSpeed);
+		this.right.pidWrite(-rightSpeed);
 		/*this.leftmotor.setDesiredVelocity(leftSpeed);
 		this.rightmotor.setDesiredVelocity(-rightSpeed);*/
 	}

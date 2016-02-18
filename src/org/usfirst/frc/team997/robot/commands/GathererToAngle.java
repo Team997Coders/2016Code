@@ -36,11 +36,13 @@ public class GathererToAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Robot.gathererarm.setSetpoint(m_angle);
+        Robot.gathererarm.enable();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.gathererarm.getPosition() - m_angle) < 0.2;
+        return Robot.gathererarm.onTarget();
     }
 
     // Called once after isFinished returns true

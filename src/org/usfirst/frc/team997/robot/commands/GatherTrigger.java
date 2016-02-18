@@ -31,18 +31,15 @@ public class GatherTrigger extends Command {
     	if (dead != 0) {
     		Robot.gathererarm.disable();
     		Robot.gathererarm.safeVoltage(dead);
-    		SmartDashboard.putBoolean("PID enabled GatherTrigger", false);
     	} else {
     		Robot.gathererarm.setSetpoint(Robot.gathererarm.getPosition());
     		Robot.gathererarm.enable();
-    		Robot.gathererarm.setSetpoint(Robot.gathererarm.getPosition());
-    		SmartDashboard.putBoolean("PID enabled GatherTrigger", true);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.gathererarm.onTarget();
     }
 
     // Called once after isFinished returns true

@@ -65,8 +65,8 @@ public class RobotMap {
 		shooterPivotMin                = 0, // arbitrary
 		shooterPivotMax                = 42, // arbitrary
 		gathererMax                    = 20, // arbitrary current
-		gathererArmBeforeHitRobot      = 1, // arbitrary (NOT 0) voltage
-		gathererArmBeforeHitGround     = 3.8; // arbitrary voltage
+		gathererArmBeforeHitRobot      = 2.3, // arbitrary (NOT 0) voltage
+		gathererArmBeforeHitGround     = 5.5; // arbitrary voltage
 	}
 	public static class PDP {
 		public static class Port {
