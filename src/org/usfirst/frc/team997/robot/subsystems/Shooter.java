@@ -48,6 +48,7 @@ public class Shooter extends Subsystem {
     public void retractKicker(){
     	//moves kicker back to default position
     	shooterKickerSecond.set(RobotMap.kickerRightMax);
+    	
     }
     
     public void kickKicker(){    	
