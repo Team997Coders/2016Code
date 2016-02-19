@@ -54,6 +54,7 @@ public class OI {
 		
 		spinUpShooterButton = new JoystickButton(driverTwo, 2);
 		spinUpShooterButton.whenPressed(new spinUpShooter());
+		SmartDashboard.putData("Sin Up shooter", spinUpShooterButton);
 		
 		shootAngleMediumButton = new JoystickButton (driverTwo, 3);
 		shootAngleMediumButton.whenPressed(new MidShooterLowGather());

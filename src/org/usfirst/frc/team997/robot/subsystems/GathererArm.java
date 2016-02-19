@@ -22,7 +22,7 @@ public class GathererArm extends PIDSubsystem {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
     	super("gathererArm", 4.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
-    	getPIDController().setAbsoluteTolerance(0.5);
+    	getPIDController().setAbsoluteTolerance(0.4);
     	getPIDController().setInputRange(0.2, 4.8);
         getPIDController().setOutputRange(-0.5, 0.5);
     	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());

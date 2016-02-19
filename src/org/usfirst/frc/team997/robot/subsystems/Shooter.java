@@ -54,6 +54,7 @@ public class Shooter extends Subsystem {
     public void kickKicker(){    	
     	//kicks out kicker to kicking position
     	shooterKickerSecond.set(RobotMap.kickerRightMin);
+    	shooterKickerFirst.set(RobotMap.kickerLeftMin);
     }
     
     public void speedUp(){
