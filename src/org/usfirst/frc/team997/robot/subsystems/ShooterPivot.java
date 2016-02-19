@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -31,34 +32,46 @@ public class ShooterPivot extends PIDSubsystem {
     	
     	setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I honestly do not know what this might do to the robot
     	enable();
+    	
+    	LiveWindow.addActuator("ShooterPivot", "ShooterPositionController", getPIDController());
+    	LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", this.pivotMotor);
+    	LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", this.shootAngle);
 	}
 
     protected double returnPIDInput() {
-    	// TODO THIS IS ARBRITARY; you probably shouldn't run
-    	// it cuz things might go wrong
     	return shootAngle.get();   
     }
     
-    public double safeVoltage(double voltage) {
-    	//checks if voltage/current w/in safe ranges. If not, sets motor to 0
-    	if(shootAngle.get() > RobotMap.Voltages.shooterPivotMax) {
+    private double getAngle() {
+    	return shootAngle.get();
+    }
+    
+    private double safeLocation(double voltage) {
+    	if (voltage == 0 ||
+    		getAngle() > RobotMap.Voltages.shooterPivotMax ||
+        	getAngle() < RobotMap.Voltages.shooterPivotMin) {
     		return 0;
-    	} else if(shootAngle.get() < RobotMap.Voltages.shooterPivotMin) {
-    		return 0;
-    	} else if(Robot.pdp.getCurrent(5) > maxCurrent) {
-    		return 0;
+    	} else {
+    		return voltage;
     	}
-    	
-    	//sets motor to (safe) voltage
-    	return voltage/5;
+    }
+    private double safeVoltage(double voltage) {
+    	//checks if voltage/current w/in safe ranges. If not, sets motor to 0
+    	if (voltage == 0 ||
+    		Robot.pdp.getCurrent(RobotMap.PDP.Port.shooterLift) > RobotMap.PDP.Limit.shooterLift) {
+    		return 0;
+    	} else {
+    		//sets motor to (safe) voltage
+    		return voltage;
+    	}
     }
     
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	pivotMotor.pidWrite(safeVoltage(output));  //TODO need safety measures, min / max and currrent *DONE JULIA*
+    	pivotMotor.pidWrite(output);
+    	//pivotMotor.pidWrite(safeLocation(safeVoltage(output)));  //TODO need safety measures, min / max and currrent *DONE JULIA*
     }
-    
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
