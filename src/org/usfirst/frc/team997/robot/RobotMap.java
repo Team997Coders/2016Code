@@ -62,7 +62,6 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterMax					   = 20,  // maximum shooter pivot current
 		shooterPivotMin                = 0,   // Lowest shooter position
 		shooterPivotMax                = 42,  // Highest shooter position
 		gathererMax                    = 20,  // maximum gatherer arm current

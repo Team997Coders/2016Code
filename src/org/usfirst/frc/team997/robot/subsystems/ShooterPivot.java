@@ -15,15 +15,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */	
 public class ShooterPivot extends PIDSubsystem {
-	
 	private Talon pivotMotor;
 	private AnalogPotentiometer shootAngle;
-	public static final double maxCurrent = 30 ; //arbitrary ..but the meaning of life.
-	
+
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		super("shooterPivot", 3.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
-    	getPIDController().setInputRange(0.2, 4.8);
+    	getPIDController().setInputRange(RobotMap.Voltages.shooterPivotMin, RobotMap.Voltages.shooterPivotMax);
         getPIDController().setOutputRange(-0.5, 0.5);
     	getPIDController().setAbsoluteTolerance(0.2);
 
