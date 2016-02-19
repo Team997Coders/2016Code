@@ -1,83 +1,88 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
+ * Describe the system:  How the pivot moves with respect to the sensor values and the
+ * motor voltages.
  *
- */	
+ */
 public class ShooterPivot extends PIDSubsystem {
 	private Talon pivotMotor;
 	private AnalogPotentiometer shootAngle;
 
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
+		// should the 'P' be negative??
 		super("shooterPivot", 3.0, 0.0, 0.3);
-    	getPIDController().setContinuous(false);
-    	getPIDController().setInputRange(RobotMap.Voltages.shooterPivotMin, RobotMap.Voltages.shooterPivotMax);
-        getPIDController().setOutputRange(-0.5, 0.5);
-    	getPIDController().setAbsoluteTolerance(0.2);
+		getPIDController().setContinuous(false);
+		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotMin, RobotMap.Voltages.shooterPivotMax);
+		getPIDController().setOutputRange(-0.5, 0.5);
+		// getPIDController().setAbsoluteTolerance(0.1);
+		getPIDController().setPercentTolerance(5.0);
 
-    	pivotMotor = new Talon(aimingMotorPort);
-    	shootAngle = new AnalogPotentiometer(shooterAnglePort);
-    	
-    	setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I honestly do not know what this might do to the robot
-    	enable();
-    	
-    	LiveWindow.addActuator("ShooterPivot", "ShooterPositionController", getPIDController());
-    	LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", this.pivotMotor);
-    	LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", this.shootAngle);
+		pivotMotor = new Talon(aimingMotorPort);
+		shootAngle = new AnalogPotentiometer(shooterAnglePort);
+
+		LiveWindow.addActuator("ShooterPivot", "ShooterPositionController", getPIDController());
+		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", (Talon) this.pivotMotor);
+		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", (AnalogPotentiometer) shootAngle);
+
+		// setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I
+		// honestly do not know what this might do to the robot
+		lockArmPosition();
+		enable();
+
 	}
 
-    protected double returnPIDInput() {
-    	return shootAngle.get();   
-    }
-    
-    private double getAngle() {
-    	return shootAngle.get();
-    }
-    
-    private double safeLocation(double voltage) {
-    	if (voltage == 0 ||
-    		getAngle() > RobotMap.Voltages.shooterPivotMax ||
-        	getAngle() < RobotMap.Voltages.shooterPivotMin) {
-    		return 0;
-    	} else {
-    		return voltage;
-    	}
-    }
-    private double safeVoltage(double voltage) {
-    	//checks if voltage/current w/in safe ranges. If not, sets motor to 0
-    	if (voltage == 0 ||
-    		Robot.pdp.getCurrent(RobotMap.PDP.Port.shooterLift) > RobotMap.PDP.Limit.shooterLift) {
-    		return 0;
-    	} else {
-    		//sets motor to (safe) voltage
-    		return voltage;
-    	}
-    }
-    
-    protected void usePIDOutput(double output) {
-        // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
-    	pivotMotor.pidWrite(output);
-    	//pivotMotor.pidWrite(safeLocation(safeVoltage(output)));  //TODO need safety measures, min / max and currrent *DONE JULIA*
-    }
+	protected double returnPIDInput() {
+		return shootAngle.get();
+	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
-    
-    public void smartDashboard() {
-    	SmartDashboard.putNumber("Shooter Pivot", shootAngle.get());
-    }
+	protected void usePIDOutput(double output) {
+		// Use output to drive your system, like a motor
+		// e.g. yourMotor.set(output);
+		pivotMotor.pidWrite(output);
+	}
+
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
+
+	public void lockArmPosition() {
+		setSetpoint(shootAngle.get());
+		System.out.println("Shooter Angle Position Locked at" + shootAngle.get());
+		enable();
+	}
+
+	public void safeVoltage(double voltage) {
+		double angle = shootAngle.get();
+		// gatherer arm goes from low=5.5 to high=2.3 in reverse
+		// we don't want the arm going higher than 2.3 or lower than 5.5
+		// positive voltage makes the arm go up.
+		if (angle > RobotMap.Voltages.shooterPivotMax && voltage > 0) {
+			// arm is down and we don't want it to go lower
+			lockArmPosition();
+		} else if (angle < RobotMap.Voltages.shooterPivotMin && voltage < 0) {
+			// arm is up and we don't want it going any further back
+			lockArmPosition();
+		} else {
+			pivotMotor.set(voltage);
+		}
+	}
+
+	public void smartDashboard() {
+		SmartDashboard.putBoolean("Shooter Pivot PID Status", getPIDController().isEnabled());
+		SmartDashboard.putNumber("Shooter Pivot Setpoint: ", super.getSetpoint());
+		SmartDashboard.putNumber("Shooter Pivot Position: ", super.getPosition());
+		SmartDashboard.putNumber("Shooter Pivot Feedback Pot Voltage", shootAngle.get());
+		SmartDashboard.putNumber("Shooter Pivot Error Term", getPIDController().getError());
+		SmartDashboard.putBoolean("Shooter Pivot On Target?", super.onTarget());
+	}
 }
-
