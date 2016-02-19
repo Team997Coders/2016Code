@@ -23,8 +23,7 @@ public class RobotMap {
 	bannerEncoderBallPort              = 5, // shooter
 
 	// Analog
-	gyroPort                           = 0, // drive
-	ultrasonicPort                     = 1, // drive
+	shooterBallSensor                  = 1, // infrared ball sensor
 	armAnglePort                       = 2, // shooter
 	shooterAnglePort                   = 3, // shooter angle
 	
