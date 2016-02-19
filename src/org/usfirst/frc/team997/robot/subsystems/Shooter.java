@@ -68,7 +68,7 @@ public class Shooter extends Subsystem {
     public void gatherBall(){
     	//gathers ball as long as the sensor is not activated
     	if (shooterSensor.getAverageVoltage() > 1){
-    		shooterMotor.set(-0);
+    		shooterMotor.set(0);
     	} else {
     		shooterMotor.set(-RobotMap.shooterInSpeed);
     	}

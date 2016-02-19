@@ -20,7 +20,7 @@ public class GathererArm extends PIDSubsystem {
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
-    	super("gathererArm", 8.0, 0.0, 0.3);
+    	super("gathererArm", 4.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(0.3);
     	getPIDController().setInputRange(0.2, 4.8);
@@ -37,7 +37,7 @@ public class GathererArm extends PIDSubsystem {
     	armAngle = new AnalogPotentiometer(armAnglePort);
     	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", (AnalogPotentiometer) armAngle);
     	
-    	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitRobot);
+    	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitGround - 0.05);
     	enable();
     }
     
@@ -54,7 +54,7 @@ public class GathererArm extends PIDSubsystem {
     	//return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmBeforeHitRobot;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     	
     	// remember the arm feedback is backwards!
-    	return 4.8-armAngle.get();
+    	return armAngle.get();
     }
     
     protected void usePIDOutput(double voltage) {

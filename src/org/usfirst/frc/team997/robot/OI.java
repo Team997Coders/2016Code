@@ -68,7 +68,7 @@ public class OI {
 		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
 		
 		SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
-		SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.Voltages.collextArmPostion));
+		SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		SmartDashboard.putData("Gatherer Arm High", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
 		
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.lowPoint));
