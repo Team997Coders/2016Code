@@ -23,7 +23,7 @@ public class GathererArm extends PIDSubsystem {
     	super("gathererArm", 4.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(0.5);
-    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitRobot, RobotMap.Voltages.gathererArmBeforeHitGround);
+    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
         getPIDController().setOutputRange(-0.5, 0.5);
     	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());
 
@@ -37,8 +37,9 @@ public class GathererArm extends PIDSubsystem {
     	armAngle = new AnalogPotentiometer(armAnglePort);
     	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", (AnalogPotentiometer) armAngle);
     	
-    	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitGround - 0.05);
-    	enable();
+    	lockArmPosition();
+    	//setSetpoint(RobotMap.Voltages.gathererArmBeforeHitGround - 0.05);
+    	//enable();
     }
     
     public void initDefaultCommand() {

@@ -109,7 +109,7 @@ public class OI {
 	
 	//gets the value of the triggers on the Primary Drivers triggers.
 	public double getRawTriggerAxis(){
-		return myController.getTriggerRight() - myController.getTriggerLeft();
+		return (myController.getTriggerRight() - myController.getTriggerLeft())/2;
 	}
 
 	//this is saying to find the fantastic  angle of the right joystick
