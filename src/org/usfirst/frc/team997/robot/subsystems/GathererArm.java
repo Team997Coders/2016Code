@@ -22,7 +22,7 @@ public class GathererArm extends PIDSubsystem {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
     	super("gathererArm", 4.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
-    	getPIDController().setAbsoluteTolerance(0.3);
+    	getPIDController().setAbsoluteTolerance(0.5);
     	getPIDController().setInputRange(0.2, 4.8);
         getPIDController().setOutputRange(-0.5, 0.5);
     	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());
@@ -37,8 +37,9 @@ public class GathererArm extends PIDSubsystem {
     	armAngle = new AnalogPotentiometer(armAnglePort);
     	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", (AnalogPotentiometer) armAngle);
     	
-    	setSetpoint(RobotMap.Voltages.gathererArmBeforeHitGround - 0.05);
-    	enable();
+    	lockArmPosition();
+    	//setSetpoint(RobotMap.Voltages.gathererArmBeforeHitGround - 0.05);
+    	//enable();
     }
     
     public void initDefaultCommand() {
@@ -72,10 +73,10 @@ public class GathererArm extends PIDSubsystem {
     	// gatherer arm goes from low=5.5 to high=2.3 in reverse
     	// we don't want the arm going higher than 2.3 or lower than 5.5
     	// positive voltage makes the arm go up.
-    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage < 0 ) {
+    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0 ) {
     		// arm is down and we don't want it to go lower
     		lockArmPosition();
-    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage > 0 ) {
+    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage < 0 ) {
     		// arm is up and we don't want it going any further back
     	    lockArmPosition();
     	} else {

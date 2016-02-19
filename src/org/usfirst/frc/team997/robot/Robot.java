@@ -107,10 +107,12 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	Robot.gathererarm.lockArmPosition();
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
     public void teleopPeriodic() {
+    	
         Scheduler.getInstance().run();
         Smartdashboard();
        
