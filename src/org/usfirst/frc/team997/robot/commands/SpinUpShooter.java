@@ -8,47 +8,38 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpinUpShooter extends Command {
-	private static int togglespin;
+	private static boolean toggleSpin = true;
+	private boolean myToggleSpin;
+
 	/**
 	 * this will be a toggle button that spins up the wheels and stops them based on when its pressed.
 	 */
-    public SpinUpShooter() {
-    	togglespin = 0;
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.shooter);
-    }
+	public SpinUpShooter() {
+		requires(Robot.shooter);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+	protected void initialize() {
+		myToggleSpin = toggleSpin;
+		toggleSpin = !toggleSpin;
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    if (togglespin == 0){
-    	Robot.shooter.speedUp();
-    	togglespin = 1;
-    } else{
-    	Robot.shooter.slowDown();
-    	togglespin = 0;
-    }
-    		
-    	
-    }
+	protected void execute() {
+		if (myToggleSpin) {
+			Robot.shooter.speedUp();
+		} else {
+			Robot.shooter.slowDown();
+		}
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	protected boolean isFinished() {
+		return !myToggleSpin || myToggleSpin == toggleSpin;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	protected void end() {
+		Robot.shooter.slowDown();
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
-   
-
+	protected void interrupted() {
+		Robot.shooter.slowDown();
+	}
 }
