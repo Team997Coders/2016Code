@@ -2,8 +2,6 @@ package org.usfirst.frc.team997.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-import edu.wpi.first.wpilibj.GenericHID;
-
 public class Controller extends Joystick {
 	
 	//creates Joystick named joy. "joy is named after the emotion that fills my heart when
