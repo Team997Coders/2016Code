@@ -26,7 +26,7 @@ public class shooterAngleLow extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterpivot.setSetpoint(RobotMap.lowPoint);
+    	Robot.shooterpivot.setSetpoint(RobotMap.Voltages.shooterPivotRobot);
     }
 
     // Make this return true when this Command no longer needs to run execute()

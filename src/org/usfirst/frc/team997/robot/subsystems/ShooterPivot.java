@@ -19,15 +19,9 @@ public class ShooterPivot extends PIDSubsystem {
 
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		// should the 'P' be negative??
-		super("shooterPivot", 3.0, 0.0, 0.3);
-<<<<<<< HEAD
-    	getPIDController().setContinuous(false);
-    	getPIDController().setInputRange(RobotMap.Voltages.shooterPivotMin, RobotMap.Voltages.shooterPivotMax);
-        getPIDController().setOutputRange(-0.5, 0.5);
-    	getPIDController().setAbsoluteTolerance(0.2);
-=======
+		super("shooterPivot", -3.0, 0.0, -0.3);
 		getPIDController().setContinuous(false);
-		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotMin, RobotMap.Voltages.shooterPivotMax);
+		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotRobot, RobotMap.Voltages.shooterPivotGround);
 		getPIDController().setOutputRange(-0.5, 0.5);
 		// getPIDController().setAbsoluteTolerance(0.1);
 		getPIDController().setPercentTolerance(5.0);
@@ -43,7 +37,7 @@ public class ShooterPivot extends PIDSubsystem {
 		// honestly do not know what this might do to the robot
 		lockArmPosition();
 		enable();
->>>>>>> 161cd869eb5fefbd9b069af6633e352c9b2f2ede
+
 
 	}
 
@@ -73,10 +67,10 @@ public class ShooterPivot extends PIDSubsystem {
 		// gatherer arm goes from low=5.5 to high=2.3 in reverse
 		// we don't want the arm going higher than 2.3 or lower than 5.5
 		// positive voltage makes the arm go up.
-		if (angle > RobotMap.Voltages.shooterPivotMax && voltage > 0) {
+		if (angle > RobotMap.Voltages.shooterPivotGround && voltage > 0) {
 			// arm is down and we don't want it to go lower
 			lockArmPosition();
-		} else if (angle < RobotMap.Voltages.shooterPivotMin && voltage < 0) {
+		} else if (angle < RobotMap.Voltages.shooterPivotRobot && voltage < 0) {
 			// arm is up and we don't want it going any further back
 			lockArmPosition();
 		} else {

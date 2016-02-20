@@ -1,4 +1,4 @@
-package src.org.usfirst.frc.team997.robot;
+package org.usfirst.frc.team997.robot;
 
 public class RobotMap {
 	static final int
@@ -25,7 +25,7 @@ public class RobotMap {
 	// Analog
 	shooterBallSensor                  = 1, // infrared ball sensor
 	armAnglePort                       = 2, // shooter
-	shooterAnglePort                   = 3, // shooter angle
+	shooterAnglePort                   = 0, // shooter angle
 	
 
 	// Spike/Relay
@@ -39,16 +39,13 @@ public class RobotMap {
 	//Misc. variables
 	public static final double
 	maxAccelDrive                      = /*1*/0,
-	lowPoint                           = 0.12, //Shooter
-	rampAngle                          = 0.20, //Shooter to go over defenses
-	midPoint                           = 0.27, //shooter
-	highPoint                          = 42, //ARBITRARY shooter
+	rampAngle                          = 0.20, //Shooter to go over defense
 	armLow                             = 0.75, //arm
 	armHigh                            = 0.3, //ARM
 	collectBallArmPos                  = 0, //ARBITRARY arm
 
 	shooterInSpeed                     = 0.45, //shooter
-	shooterShootingSpeed               = 0.6, //shooter
+	shooterShootingSpeed               = 1.0, //shooter
 	
 	gathererInSpeed                    = 0.4, //gatherer arm (?)
 
@@ -61,9 +58,9 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterPivotMin                = 0.68,   // Lowest shooter position
-		shooterPivotMax                = 0.86,  // Highest shooter position
-		gathererMax                    = 20,  // maximum gatherer arm current
+		shooterPivotRobot              = 0.70, // Lowest shooter position
+		shooterPivotGround             = 0.82, // Highest shooter position
+		shooterPivotMiddle             = 0.75, //medium shooter position (see midpoint line 44)
 		collectArmPostion              = 0.75, // Where should the arm be to collect balls
 		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical)
 		gathererArmBeforeHitGround     = 0.77; // Lowest gatherer arm position (flat)

@@ -1,4 +1,4 @@
-package src.org.usfirst.frc.team997.robot;
+package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.CollectBall;
@@ -27,7 +27,8 @@ public class OI {
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
 	private final Button shootButton;
-	private final Button arm;
+	private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
+	//private final Button arm;
 	//private final Button shifterButton;
 	
 	
@@ -36,8 +37,8 @@ public class OI {
 		//primary Driver Button/Controls 
 		myController = new Controller(RobotMap.joystickPort);
 		
-		arm = new JoystickButton(myController, 3);
-		arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
+		//arm = new JoystickButton(myController, 3);
+		//arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
 		
 		collectBallButton = new JoystickButton(myController, 4);
 		collectBallButton.whenPressed(new CollectBall());
@@ -57,24 +58,33 @@ public class OI {
 		SmartDashboard.putData("Sin Up shooter", spinUpShooterButton);
 		
 		shootAngleMediumButton = new JoystickButton (driverTwo, 3);
-		shootAngleMediumButton.whenPressed(new MidShooterLowGather());
+		shootAngleMediumButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddle));
 		SmartDashboard.putData("mid shooter low gather", shootAngleMediumButton);
 		
 		shootAngleLowButton = new JoystickButton(driverTwo, 4);
-		shootAngleLowButton.whenPressed(new LowShooterHighGather());
+		shootAngleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
 		SmartDashboard.putData("low shooter high gather", shootAngleLowButton);
 		
 		shootAngleHighButton = new JoystickButton (driverTwo, 5);
-		shootAngleHighButton.whenPressed(new HighShooterLowGather());
+		//shootAngleHighButton.whenPressed(new HighShooterLowGather());
+		shootAngleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
 		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
+		
 		
 		SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		SmartDashboard.putData("Gatherer Arm High", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+
+		gatherArmGround = new JoystickButton(myController, 5);
+		gatherArmGround.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
+		gatherArmMid = new JoystickButton(myController, 5);
+		gatherArmMid.whenPressed(new GathererToAngle(RobotMap.Voltages.collectArmPostion));
+		gatherArmRobot = new JoystickButton(myController, 5);
+		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
 		
-		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.lowPoint));
-		SmartDashboard.putData("Shooter Pivot Midpoint", new ShooterToAngle(RobotMap.midPoint));  // nominal Shooting position
-		SmartDashboard.putData("Shooter Pivot High", new ShooterToAngle(RobotMap.highPoint));
+		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
+		SmartDashboard.putData("Shooter Pivot Midpoint", new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddle));  // nominal Shooting position
+		SmartDashboard.putData("Shooter Pivot High", new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
 	}
 
 	public static double deadband(double a) {
@@ -98,7 +108,7 @@ public class OI {
 	}
 	
 	public double righty(){
-		return deadband(myController.getRightRawY());
+		return -deadband(myController.getRightRawY());
 	}
 	
 	

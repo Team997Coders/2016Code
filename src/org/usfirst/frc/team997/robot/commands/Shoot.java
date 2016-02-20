@@ -30,16 +30,12 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (mytimer.get() >= 1) {
-    		Robot.shooter.kickKicker();
-    	} else {
-    		Robot.shooter.retractKicker();
-    	}
+    	Robot.shooter.kickKicker();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return mytimer.get() > 3;
+        return mytimer.get() > 2;
     }
 
     // Called once after isFinished returns true

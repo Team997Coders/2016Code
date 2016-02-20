@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot.commands;
 
+import org.usfirst.frc.team997.robot.OI;
 import org.usfirst.frc.team997.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TankDrive extends Command {
+public class GatherTriggerNoSP extends Command {
 
-    public TankDrive() {
+    public GatherTriggerNoSP() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.gathererarm);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +22,7 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.driveVoltage(Robot.oi.lefty(), Robot.oi.righty());
+    	Robot.gathererarm.safeVoltage(OI.deadband(Robot.oi.getRawTriggerAxis()));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,9 +35,7 @@ public class TankDrive extends Command {
     }
 
     // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run 
-    // this is saying if something weird happens or gets interrupted to return to zero meaning don't drive into a wall and stop moving 
+    // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drivetrain.driveVoltage(0,0);
     }
 }

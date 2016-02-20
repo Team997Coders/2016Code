@@ -88,7 +88,8 @@ public class DriveTrain extends Subsystem {
 	}
 	//it sets things and stuff to Arcade drive
 	protected void initDefaultCommand() {
-		setDefaultCommand( new ArcadeDrive());
+		//setDefaultCommand(new ArcadeDrive());
+		setDefaultCommand(new TankDrive());
 	  //setDefaultCommand(new MySpecialCommand());
          
 	}

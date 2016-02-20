@@ -22,7 +22,7 @@ public Gatherer(int rollerPort) {
 
 public void safeValue(double voltage) {
 	//checks if the motor is using too much current
-	if(Robot.pdp.getCurrent(RobotMap.PDP.Port.gatherRoller) > RobotMap.Voltages.gathererMax) {
+	if(Robot.pdp.getCurrent(RobotMap.PDP.Port.gatherRoller) > RobotMap.PDP.Limit.gatherRoller) {
 		rollerMotor.set(0);
 	}
 	
