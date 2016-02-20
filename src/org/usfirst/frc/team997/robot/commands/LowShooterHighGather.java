@@ -28,7 +28,7 @@ public class LowShooterHighGather extends CommandGroup {
     	*/
     	
     	//Sets the shooter to a low angle while setting gatherer arm to a high angle
-    	addParallel(new shooterAngleLow());
+    	addParallel(new ShooterAngleLow());
     	addParallel(new ArmAngleHigh());
     }
 }

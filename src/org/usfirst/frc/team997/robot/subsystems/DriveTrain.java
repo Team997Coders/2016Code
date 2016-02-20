@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot.subsystems;
 
 //import org.usfirst.frc.team997.robot.commands.TankDrive;
 
+import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team997.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.VictorSP;
@@ -83,10 +84,9 @@ public class DriveTrain extends Subsystem {
 	}
 	//it sets things and stuff to Arcade drive
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new ArcadeDrive());
-		setDefaultCommand(new TankDrive());
-	  //setDefaultCommand(new MySpecialCommand());
-         
+		setDefaultCommand(new ArcadeDrive());
+		//setDefaultCommand(new TankDrive());
+	  //setDefaultCommand(new MySpecialCommand());  
 	}
 	
 }

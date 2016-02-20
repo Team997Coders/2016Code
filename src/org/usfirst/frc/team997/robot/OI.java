@@ -4,7 +4,7 @@ import org.usfirst.frc.team997.robot.commands.CollectBall;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
-import org.usfirst.frc.team997.robot.commands.spinUpShooter;
+import org.usfirst.frc.team997.robot.commands.SpinUpShooter;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -50,7 +50,7 @@ public class OI {
 		shootButton.whenPressed(new Shoot());
 		
 		spinUpShooterButton = new JoystickButton(driverTwo, 2);
-		spinUpShooterButton.whenPressed(new spinUpShooter());
+		spinUpShooterButton.whenPressed(new SpinUpShooter());
 		SmartDashboard.putData("Sin Up shooter", spinUpShooterButton);
 		
 		shootAngleMediumButton = new JoystickButton (driverTwo, 3);

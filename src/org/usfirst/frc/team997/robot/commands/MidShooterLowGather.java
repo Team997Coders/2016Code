@@ -25,7 +25,7 @@ public class MidShooterLowGather extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addParallel(new shooterAngleMedium());
+    	addParallel(new ShooterAngleMedium());
     	addParallel(new ArmAngleLow());
     }
 }

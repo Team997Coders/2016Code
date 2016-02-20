@@ -24,7 +24,7 @@ public class FlatMode extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new shooterAngleLow());
+    	addParallel(new ShooterAngleLow());
     	addParallel(new ArmAngleLow());
     }
 }

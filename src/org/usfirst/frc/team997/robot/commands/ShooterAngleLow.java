@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class shooterAngleLow extends Command {
+public class ShooterAngleLow extends Command {
 /** this sets the shooter angle to the medium angle/halfway angle.
  * 
  * 
  */
 	
-    public shooterAngleLow() {
+    public ShooterAngleLow() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooterpivot);

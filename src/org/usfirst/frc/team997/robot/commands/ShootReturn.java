@@ -31,6 +31,6 @@ public class ShootReturn extends CommandGroup {
         // arm.
 		addSequential(new Shoot());
 		addParallel(new ArmAngleLow());
-		addParallel(new shooterAngleLow());
+		addParallel(new ShooterAngleLow());
     }
 }

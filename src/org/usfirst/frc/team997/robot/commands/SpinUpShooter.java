@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class spinUpShooter extends Command {
+public class SpinUpShooter extends Command {
 	private static int togglespin;
 	/**
 	 * this will be a toggle button that spins up the wheels and stops them based on when its pressed.
 	 */
-    public spinUpShooter() {
+    public SpinUpShooter() {
     	togglespin = 0;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

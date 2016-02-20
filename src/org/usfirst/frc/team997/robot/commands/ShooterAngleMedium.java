@@ -1,19 +1,22 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class circleLightToggle extends Command {
-	private boolean  clightToggle;
-    public circleLightToggle() {
-    	 clightToggle = true;
+public class ShooterAngleMedium extends Command {
+/**this command sets the shooter at the medium or half way angle
+ * 
+ * 
+ */
+    public ShooterAngleMedium() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.shooterpivot);
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +25,12 @@ public class circleLightToggle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	lightToggle();
+    	Robot.shooterpivot.setSetpoint(RobotMap.Voltages.shooterPivotMiddle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -37,16 +40,5 @@ public class circleLightToggle extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    }
-    
-    
-    public void lightToggle() {
-    	if (clightToggle){
-    		Robot.clight.set(Relay.Value.kForward);
-    		clightToggle = false;
-    	}else{
-    		Robot.clight.set(Relay.Value.kOff);
-    		clightToggle = true;
-    	}
     }
 }
