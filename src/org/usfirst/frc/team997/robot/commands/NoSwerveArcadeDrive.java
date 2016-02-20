@@ -24,14 +24,6 @@ public class NoSwerveArcadeDrive extends Command {
     	Robot.drivetrain.driveVoltage(Robot.oi.lefty(),Robot.oi.lefty());
     }
     
-    private double deadBand(double a) {
-    	if(Math.abs(a)>0.15) {
-    		return a;
-    	} else {
-    		return 0;
-    	}
-    }
-    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
