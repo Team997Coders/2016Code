@@ -1,4 +1,4 @@
-package org.usfirst.frc.team997.robot;
+package src.org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.Arm;
 import org.usfirst.frc.team997.robot.commands.CollectBall;

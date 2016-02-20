@@ -1,4 +1,4 @@
-package org.usfirst.frc.team997.robot;
+package src.org.usfirst.frc.team997.robot;
 
 public class RobotMap {
 	static final int
