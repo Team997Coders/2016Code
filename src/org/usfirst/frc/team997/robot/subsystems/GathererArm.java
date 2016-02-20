@@ -22,8 +22,13 @@ public class GathererArm extends PIDSubsystem {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
     	super("gathererArm", 4.0, 0.0, 0.3);
     	getPIDController().setContinuous(false);
+<<<<<<< HEAD
     	getPIDController().setAbsoluteTolerance(0.5);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
+=======
+    	getPIDController().setAbsoluteTolerance(0.4);
+    	getPIDController().setInputRange(0.2, 4.8);
+>>>>>>> 161cd869eb5fefbd9b069af6633e352c9b2f2ede
         getPIDController().setOutputRange(-0.5, 0.5);
     	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());
 

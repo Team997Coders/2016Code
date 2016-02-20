@@ -23,8 +23,7 @@ public class RobotMap {
 	bannerEncoderBallPort              = 5, // shooter
 
 	// Analog
-	gyroPort                           = 0, // drive
-	ultrasonicPort                     = 1, // drive
+	shooterBallSensor                  = 1, // infrared ball sensor
 	armAnglePort                       = 2, // shooter
 	shooterAnglePort                   = 3, // shooter angle
 	
@@ -62,7 +61,6 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-
 		shooterPivotMin                = 0.68,   // Lowest shooter position
 		shooterPivotMax                = 0.86,  // Highest shooter position
 		gathererMax                    = 20,  // maximum gatherer arm current

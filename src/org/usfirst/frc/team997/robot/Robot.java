@@ -30,9 +30,8 @@ public class Robot extends IterativeRobot {
 	public static Relay clight;
 	//private CameraServer camera;
 	public static final Shooter shooter = new Shooter(
-			RobotMap.ultrasonicPort, RobotMap.shooterMotorPort,
-			RobotMap.servoMotorFirstPort, RobotMap.servoMotorSecondPort,
-			RobotMap.bannerEncoderBallPort);
+			RobotMap.shooterBallSensor, RobotMap.shooterMotorPort,
+			RobotMap.servoMotorFirstPort, RobotMap.servoMotorSecondPort);
 	public static final ShooterPivot shooterpivot = new ShooterPivot(RobotMap.aimingMotorPort, RobotMap.shooterAnglePort);
 	public static final DriveTrain drivetrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
