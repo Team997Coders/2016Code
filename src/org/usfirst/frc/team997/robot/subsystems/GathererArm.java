@@ -84,7 +84,7 @@ public class GathererArm extends PIDSubsystem {
     	}
     }
     
-    public void smartdashboardupdate(){
+    public void smartDashboard() {
     	SmartDashboard.putNumber("Setpoint: This is its curent value", super.getSetpoint());
     	SmartDashboard.putNumber("Position: This is the current position", super.getPosition());
     	SmartDashboard.putNumber("Gatherer Arm Feedback Pot Voltage", armAngle.get());

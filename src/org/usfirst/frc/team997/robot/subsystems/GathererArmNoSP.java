@@ -30,7 +30,7 @@ public class GathererArmNoSP extends Subsystem {
     public void disable() {}
     public void setSetpoint(double _1) {}
     public boolean onTarget() {return true;}
-	public void smartdashboardupdate() {}
+	public void smartDashboard() {}
 	public void lockArmPosition() {}
 	public double getSetpoint() {return 0;}
 	public double getPosition() {return 0;}

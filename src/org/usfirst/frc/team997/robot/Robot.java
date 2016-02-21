@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
 public void Smartdashboard(){
 	Robot.drivetrain.smartDashboard();
 	 Robot.shooter.smartDashboard();
-	 Robot.gathererarm.smartdashboardupdate();
+	 Robot.gathererarm.smartDashboard();
 	 Robot.shooterpivot.smartDashboard();
 	 SmartDashboard.putData("Imu", imu);
 	 SmartDashboard.putNumber("Imu angle", imu.getAngleY());
