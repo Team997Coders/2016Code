@@ -85,10 +85,10 @@ public class GathererArm extends PIDSubsystem {
     }
     
     public void smartDashboard() {
-    	SmartDashboard.putNumber("Setpoint: This is its curent value", super.getSetpoint());
-    	SmartDashboard.putNumber("Position: This is the current position", super.getPosition());
-    	SmartDashboard.putNumber("Gatherer Arm Feedback Pot Voltage", armAngle.get());
-    	SmartDashboard.putNumber("Gatherer Arm Error Term", getPIDController().getError());
+    	SmartDashboard.putNumber("GathererArm Setpoint", super.getSetpoint());
+    	SmartDashboard.putNumber("GathererArm Angle", armAngle.get());
+    	SmartDashboard.putNumber("GathererArm Average Error Term", getPIDController().getAvgError());
+    	SmartDashboard.putNumber("GathererArm Error Term", getPIDController().getError());
     	SmartDashboard.putBoolean("GathererArm PID Status", getPIDController().isEnabled());
     	SmartDashboard.putBoolean("GathererArm On Target?", super.onTarget());
     }
