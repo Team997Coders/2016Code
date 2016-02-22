@@ -3,8 +3,8 @@ package org.usfirst.frc.team997.robot.subsystems;
 //import org.usfirst.frc.team997.robot.commands.TankDrive;
 
 import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
-import org.usfirst.frc.team997.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //this is saying that leftmotor and rightmotor are VictorSP
 public class DriveTrain extends Subsystem {
 	private VictorSP left, right;
-	/*public AccelMotor leftmotor;
-	public AccelMotor rightmotor;*/
+	private Encoder leftEncoder, rightEncoder;
 	
 	private int gear; 
 	//Assign victor ports. 
@@ -26,12 +25,8 @@ public class DriveTrain extends Subsystem {
 			          double maxAccelDrive) {
 		left = new VictorSP(leftPort);
 		right = new VictorSP(rightPort);
-		/*leftmotor = new AccelMotor(new VelMotor(new VictorSP(leftPort), 
-				                                new Encoder(leftEncoderFirstPort, leftEncoderSecondPort), 0),
-		                           maxAccelDrive);
-		rightmotor = new AccelMotor(new VelMotor(new VictorSP(rightPort),
-				                                 new Encoder(rightEncoderFirstPort, rightEncoderSecondPort), 0),
-				                    maxAccelDrive);*/
+		leftEncoder = new Encoder(leftEncoderFirstPort, leftEncoderSecondPort);
+		rightEncoder = new Encoder(rightEncoderFirstPort, rightEncoderSecondPort);
 	    gear = 1;
 	}
 	
@@ -80,6 +75,8 @@ public class DriveTrain extends Subsystem {
 		this.leftmotor.smartDashboard();
 		this.rightmotor.smartDashboard();
 		*/
+		SmartDashboard.putNumber("DriveTrain Encoder Left Rate", this.leftEncoder.getRate());
+		SmartDashboard.putNumber("DriveTrain Encoder Right Rate", this.rightEncoder.getRate());
 		//SmartDashboard.putNumber("gear value" , getGear()); //not needed since we are not using gears anymore
 	}
 	//it sets things and stuff to Arcade drive
