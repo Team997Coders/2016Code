@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpinUpShooter extends Command {
-	private static boolean toggleSpin = true;
-	private boolean myToggleSpin;
+	static boolean globalSpinUp = true;
 
 	/**
 	 * this will be a toggle button that spins up the wheels and stops them based on when its pressed.
@@ -19,12 +18,10 @@ public class SpinUpShooter extends Command {
 	}
 
 	protected void initialize() {
-		myToggleSpin = toggleSpin;
-		toggleSpin = !toggleSpin;
 	}
 
 	protected void execute() {
-		if (myToggleSpin) {
+		if (globalSpinUp) {
 			Robot.shooter.speedUp();
 		} else {
 			Robot.shooter.slowDown();
@@ -32,7 +29,7 @@ public class SpinUpShooter extends Command {
 	}
 
 	protected boolean isFinished() {
-		return !myToggleSpin || myToggleSpin == toggleSpin;
+		return false;
 	}
 
 	protected void end() {
