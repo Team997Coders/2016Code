@@ -55,16 +55,16 @@ public class OI {
 		
 		shootAngleMediumButton = new JoystickButton (driverTwo, 3);
 		shootAngleMediumButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddle));
-		SmartDashboard.putData("mid shooter low gather", shootAngleMediumButton);
+		SmartDashboard.putData("Shooter To Middle", shootAngleMediumButton);
 		
 		shootAngleLowButton = new JoystickButton(driverTwo, 4);
 		shootAngleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
-		SmartDashboard.putData("low shooter high gather", shootAngleLowButton);
+		SmartDashboard.putData("Shooter to Ground", shootAngleLowButton);
 		
 		shootAngleHighButton = new JoystickButton (driverTwo, 5);
 		//shootAngleHighButton.whenPressed(new HighShooterLowGather());
 		shootAngleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
-		SmartDashboard.putData("high shooter low gather", shootAngleHighButton);
+		SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		
 		
 		SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
