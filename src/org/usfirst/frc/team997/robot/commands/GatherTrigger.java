@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.OI;
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,10 +33,16 @@ public class GatherTrigger extends Command {
     	SmartDashboard.putNumber("GatherTrigger", dead);
     	if (dead != 0) {
     		Robot.gathererarm.disable();
+    		SmartDashboard.putNumber("GatherTrigger manual", dead);
     		Robot.gathererarm.safeVoltage(dead);
     		locked=false;
-    	} else if (dead == 0 && locked == false){
-    		Robot.gathererarm.setSetpoint(Robot.gathererarm.getPosition());
+    	} else if (!locked) {
+    		double pos = Robot.gathererarm.getPosition();
+    		if (pos > RobotMap.Voltages.gathererArmBeforeHitGround)
+    			pos = RobotMap.Voltages.gathererArmBeforeHitGround;
+    		else if (pos < RobotMap.Voltages.gathererArmBeforeHitRobot)
+    			pos = RobotMap.Voltages.gathererArmBeforeHitRobot;
+    		Robot.gathererarm.setSetpoint(pos);
     		Robot.gathererarm.enable();
     		locked = true;
     		System.out.println("Arm Locked");

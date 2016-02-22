@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpinUpShooter extends Command {
-	static boolean globalSpinUp = true;
+	static boolean globalSpinUp = false;
 
 	/**
 	 * this will be a toggle button that spins up the wheels and stops them based on when its pressed.

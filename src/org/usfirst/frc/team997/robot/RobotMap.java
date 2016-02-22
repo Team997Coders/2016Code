@@ -23,10 +23,10 @@ public class RobotMap {
 	bannerEncoderBallPort              = 5, // shooter
 
 	// Analog
+	shooterPivotAnglePort              = 0, // shooter angle
 	shooterBallSensor                  = 1, // infrared ball sensor
-	armAnglePort                       = 2, // shooter
-	shooterAnglePort                   = 0, // shooter angle
-	
+	gathererArmAnglePort               = 2, // shooter
+
 
 	// Spike/Relay
 	circleLightPort                    = 0, // misc
@@ -58,12 +58,12 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterPivotRobot              = 0.70, // Lowest shooter position
-		shooterPivotGround             = 0.82, // Highest shooter position
+		shooterPivotRobot              = 0.68, // Lowest shooter position
+		shooterPivotGround             = 0.80, // Highest shooter position
 		shooterPivotMiddle             = 0.75, //medium shooter position (see midpoint line 44)
 		collectArmPostion              = 0.75, // Where should the arm be to collect balls
 		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical)
-		gathererArmBeforeHitGround     = 0.77; // Lowest gatherer arm position (flat)
+		gathererArmBeforeHitGround     = 0.87; // Lowest gatherer arm position (flat)
 	}
 	
 	public static class PDP {

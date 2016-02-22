@@ -19,7 +19,7 @@ public class GathererArm extends PIDSubsystem {
     // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
      //"super" MUST BE FIRST LINE OF CODE!!!!!!!
-    	super("gathererArm", 4.0, 0.0, 0.3);
+    	super("gathererArm", 4.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(0.1);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
@@ -73,10 +73,10 @@ public class GathererArm extends PIDSubsystem {
     	// gatherer arm goes from low=5.5 to high=2.3 in reverse
     	// we don't want the arm going higher than 2.3 or lower than 5.5
     	// positive voltage makes the arm go up.
-    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0 ) {
+    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0) {
     		// arm is down and we don't want it to go lower
     		lockArmPosition();
-    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage < 0 ) {
+    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage < 0) {
     		// arm is up and we don't want it going any further back
     	    lockArmPosition();
     	} else {
