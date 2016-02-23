@@ -16,42 +16,31 @@ public class GathererArm extends PIDSubsystem {
 	private VictorSP armMotor;
 	private AnalogPotentiometer armAngle;
 	
-    // Initialize your subsystem here
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
-     //"super" MUST BE FIRST LINE OF CODE!!!!!!!
     	super("gathererArm", 4.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(0.1);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
 
         getPIDController().setOutputRange(-0.5, 0.5);
-    	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());
 
-    	// Use these to get going:
-        // setSetpoint() -  Sets where the PID controller should move the system
-        //                  to
-        // enable() - Enables the PID controller.
-    	
     	armMotor = new VictorSP(gatherArmMotorPort);
-    	LiveWindow.addActuator("GathererArm", "ArmAngleMotor", (VictorSP) armMotor);
     	armAngle = new AnalogPotentiometer(armAnglePort);
-    	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", (AnalogPotentiometer) armAngle);
-    	
+
+    	LiveWindow.addActuator("GathererArm", "ArmPositionController", getPIDController());
+    	LiveWindow.addActuator("GathererArm", "ArmAngleMotor", armMotor);
+    	LiveWindow.addSensor("GathererArm", "ArmAngleSensor", armAngle);
+
     	lockArmPosition();
     	//setSetpoint(RobotMap.Voltages.gathererArmBeforeHitGround - 0.05);
     	//enable();
     }
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new GatherTrigger());
     }
     
     protected double returnPIDInput() {
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
     	//return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmBeforeHitRobot;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     	
     	// remember the arm feedback is backwards!

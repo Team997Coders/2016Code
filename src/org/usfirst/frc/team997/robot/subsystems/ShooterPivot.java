@@ -30,8 +30,8 @@ public class ShooterPivot extends PIDSubsystem {
 		shootAngle = new AnalogPotentiometer(shooterAnglePort);
 
 		LiveWindow.addActuator("ShooterPivot", "ShooterPositionController", getPIDController());
-		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", (Talon) this.pivotMotor);
-		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", (AnalogPotentiometer) shootAngle);
+		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", pivotMotor);
+		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", shootAngle);
 
 		// setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I
 		// honestly do not know what this might do to the robot
