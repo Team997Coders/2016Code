@@ -84,4 +84,3 @@ public class Shooter extends Subsystem {
     	setDefaultCommand(new SpinUpShooter());
     }
 }
-

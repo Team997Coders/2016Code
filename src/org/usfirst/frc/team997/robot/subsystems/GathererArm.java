@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
 public class GathererArm extends PIDSubsystem {
 	private VictorSP armMotor;
 	private AnalogPotentiometer armAngle;
@@ -21,7 +18,6 @@ public class GathererArm extends PIDSubsystem {
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(0.1);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
-
         getPIDController().setOutputRange(-0.5, 0.5);
 
     	armMotor = new VictorSP(gatherArmMotorPort);
@@ -46,7 +42,7 @@ public class GathererArm extends PIDSubsystem {
     	// remember the arm feedback is backwards!
     	return armAngle.get();
     }
-    
+  
     protected void usePIDOutput(double voltage) {
     	armMotor.pidWrite(voltage);
     }

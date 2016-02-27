@@ -4,21 +4,18 @@ import org.usfirst.frc.team997.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class SpinUpShooter extends Command {
 	static boolean globalSpinUp = false;
 
 	/**
 	 * this will be a toggle button that spins up the wheels and stops them based on when its pressed.
 	 */
+	
 	public SpinUpShooter() {
 		requires(Robot.shooter);
 	}
 
-	protected void initialize() {
-	}
+	protected void initialize() {}
 
 	protected void execute() {
 		if (globalSpinUp) {

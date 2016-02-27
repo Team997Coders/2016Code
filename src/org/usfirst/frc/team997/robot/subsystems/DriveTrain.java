@@ -27,7 +27,6 @@ public class DriveTrain extends Subsystem {
 		rightEncoder = new Encoder(rightEncoderFirstPort, rightEncoderSecondPort);
 	}
 	
-	//this is making it so the joystick and the motors can have a lovely conversation with the motors 
 	// also checks the gear status so then if gear == 1 the speed is halved and if its 0 its set at full speed.
 //	public void driveVoltage(double leftspeed, double rightspeed){
 //		if(gear == 1){

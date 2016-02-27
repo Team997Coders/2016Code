@@ -7,27 +7,20 @@ import org.usfirst.frc.team997.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
 public class GatherTrigger extends Command {
 	
-	public boolean locked=false;
+	public boolean locked = false;
 
 	/**this command takes the triggers input and moves the position of the gatherer based upon them. 
 	 * 
 	 */
-    public GatherTrigger() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+
+	public GatherTrigger() {
     	requires(Robot.gathererArm);
     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+    protected void initialize() {}
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double dead = OI.deadBand(Robot.oi.getRawTriggerAxis());
     	SmartDashboard.putNumber("GatherTrigger", dead);
@@ -35,7 +28,7 @@ public class GatherTrigger extends Command {
     		Robot.gathererArm.disable();
     		SmartDashboard.putNumber("GatherTrigger manual", dead);
     		Robot.gathererArm.safeVoltage(dead);
-    		locked=false;
+    		locked = false;
     	} else if (!locked) {
     		double pos = Robot.gathererArm.getPosition();
     		if (pos > RobotMap.Voltages.gathererArmBeforeHitGround)
@@ -51,17 +44,11 @@ public class GatherTrigger extends Command {
     	}
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return Robot.gathererArm.onTarget();
     }
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+    protected void end() {}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+    protected void interrupted() {}
 }

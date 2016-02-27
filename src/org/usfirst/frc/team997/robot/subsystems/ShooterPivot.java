@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Describe the system:  How the pivot moves with respect to the sensor values and the
  * motor voltages.
- *
  */
 public class ShooterPivot extends PIDSubsystem {
 	private Talon pivotMotor;
@@ -33,12 +32,9 @@ public class ShooterPivot extends PIDSubsystem {
 		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", pivotMotor);
 		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", shootAngle);
 
-		// setSetpoint(RobotMap.Voltages.shooterPivotMin); //ARBRITARY; I
-		// honestly do not know what this might do to the robot
+		// setSetpoint(RobotMap.Voltages.shooterPivotMin); 
 		lockArmPosition();
 		enable();
-
-
 	}
 
 	protected double returnPIDInput() {
@@ -46,15 +42,10 @@ public class ShooterPivot extends PIDSubsystem {
 	}
 
 	protected void usePIDOutput(double output) {
-		// Use output to drive your system, like a motor
-		// e.g. yourMotor.set(output);
 		pivotMotor.pidWrite(output);
 	}
 
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
-	}
+	public void initDefaultCommand() {}
 
 	public void lockArmPosition() {
 		setSetpoint(shootAngle.get());

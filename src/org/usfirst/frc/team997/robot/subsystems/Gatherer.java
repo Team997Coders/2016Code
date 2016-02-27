@@ -10,32 +10,27 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Gatherer extends Subsystem {
-    
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-private VictorSP rollerMotor;
-	
-public Gatherer(int rollerPort) { 
-	rollerMotor = new VictorSP(rollerPort);
-}
+	private VictorSP rollerMotor;
 
-public void safeValue(double voltage) {
-	//checks if the motor is using too much current
-	if(Robot.pdp.getCurrent(RobotMap.PDP.Port.gatherRoller) > RobotMap.PDP.Limit.gatherRoller) {
-		rollerMotor.set(0);
+	public Gatherer(int rollerPort) { 
+		rollerMotor = new VictorSP(rollerPort);
 	}
-	
-	//sets motor to non-explosive voltage
-	rollerMotor.set(voltage);
-}
 
-public void gathervoltage(double rollerSpeed) {
-	safeValue(rollerSpeed);
-}
+	public void safeValue(double voltage) {
+		if(Robot.pdp.getCurrent(RobotMap.PDP.Port.gatherRoller) > RobotMap.PDP.Limit.gatherRoller) {
+			rollerMotor.set(0);
+		}
+		
+		else {
+			rollerMotor.set(voltage);
+			//sets motor to non-explosive voltage
+		}
+	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	public void gathervoltage(double rollerSpeed) {
+		safeValue(rollerSpeed);
+	}
+
+	public void initDefaultCommand() {}
 }
 
