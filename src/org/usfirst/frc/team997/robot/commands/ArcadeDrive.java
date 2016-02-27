@@ -11,43 +11,36 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ArcadeDrive extends Command {
 
     public ArcadeDrive() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.driveTrain);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//leftstick moves up  than motors  dance on forward 
-    	//leftstick moves down than motors fall and die backwards
-    	//rightstick moves to the left left motor tapdances back and right motor dies forward 
-    	//rightstick moves to the right leftmotor spazzes  forward and right motor sings backwords
-    	//leftstick  and right are falling all the way forward and left - left motor will be full speed and rightmotor at slowish speed
-    	//leftstick and right are falling all the way forward and right - leftmotor will be slowish and right motor at full speed
-    	 double getArcadeleftspeed
-    	= deadBand(Robot.oi.lefty() - Robot.oi.rightx());
+    	// leftStick moves up  than motors dance on forward 
+    	// leftStick moves down than motors go backwards
+    	// rightStick moves to the left leftMotor goes back and right motor goes forward 
+    	// rightStick moves to the right leftMotor goes forward and right motor sings backwards
+    	// leftStick and right are going all the way forward and left - leftMotor will be full speed and rightMotor at slowish speed
+    	// leftStick and right are going all the way forward and right - leftMotor will be slowish and rightMotor at full speed
+    
+    	double getArcadeLeftSpeed = deadBand(Robot.oi.leftY() - Robot.oi.rightX());
+    	double getArcadeRightSpeed = deadBand(Robot.oi.leftY() + Robot.oi.rightX());
 
-    	 double getArcaderightspeed
-    	 = deadBand(Robot.oi.lefty() + Robot.oi.rightx());
-
-    	 SmartDashboard.putNumber("Arcade Left", getArcadeleftspeed);
-    	 SmartDashboard.putNumber("Arcade Right", getArcaderightspeed);
-    	Robot.drivetrain.driveVoltage(getArcadeleftspeed,getArcaderightspeed);
+    	 SmartDashboard.putNumber("Arcade Left", getArcadeLeftSpeed);
+    	 SmartDashboard.putNumber("Arcade Right", getArcadeRightSpeed);
+    	Robot.driveTrain.driveVoltage(getArcadeLeftSpeed,getArcadeRightSpeed);
     }
     
     private double deadBand(double a) {
-    	if(Math.abs(a)>0.15) {
+    	if(Math.abs(a) > 0.15) {
     		return a;
     	} else {
     		return 0;
     	}
     }
     
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
@@ -55,12 +48,8 @@ public class ArcadeDrive extends Command {
     // Called once after isFinished returns true
     protected void end() {
     }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    
     protected void interrupted() {
-    	Robot.drivetrain.driveVoltage(0,0);
+    	Robot.driveTrain.driveVoltage(0,0);
     }
-    
-    
 }

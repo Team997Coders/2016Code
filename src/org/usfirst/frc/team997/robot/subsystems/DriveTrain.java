@@ -20,8 +20,7 @@ public class DriveTrain extends Subsystem {
 	
 	public DriveTrain(int leftPort, int rightPort,
 			          int leftEncoderFirstPort, int leftEncoderSecondPort,
-			          int rightEncoderFirstPort, int rightEncoderSecondPort,
-			          double maxAccelDrive) {
+			          int rightEncoderFirstPort, int rightEncoderSecondPort) {
 		left = new VictorSP(leftPort);
 		right = new VictorSP(rightPort);
 		leftEncoder = new Encoder(leftEncoderFirstPort, leftEncoderSecondPort);

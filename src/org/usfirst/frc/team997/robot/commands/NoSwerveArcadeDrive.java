@@ -12,7 +12,7 @@ public class NoSwerveArcadeDrive extends Command {
     public NoSwerveArcadeDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class NoSwerveArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.driveVoltage(Robot.oi.lefty(),Robot.oi.lefty());
+    	Robot.driveTrain.driveVoltage(Robot.oi.leftY(),Robot.oi.leftY());
     }
     
     // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +36,7 @@ public class NoSwerveArcadeDrive extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drivetrain.driveVoltage(0,0);
+    	Robot.driveTrain.driveVoltage(0,0);
     }
     
     

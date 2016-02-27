@@ -13,7 +13,7 @@ public class GatherTriggerNoSP extends Command {
     public GatherTriggerNoSP() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gathererarm);
+    	requires(Robot.gathererArm);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ public class GatherTriggerNoSP extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gathererarm.safeVoltage(OI.deadband(Robot.oi.getRawTriggerAxis()));
+    	Robot.gathererArm.safeVoltage(OI.deadBand(Robot.oi.getRawTriggerAxis()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

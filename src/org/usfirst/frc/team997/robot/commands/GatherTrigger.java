@@ -20,7 +20,7 @@ public class GatherTrigger extends Command {
     public GatherTrigger() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gathererarm);
+    	requires(Robot.gathererArm);
     }
 
     // Called just before this Command runs the first time
@@ -29,31 +29,31 @@ public class GatherTrigger extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double dead = OI.deadband(Robot.oi.getRawTriggerAxis());
+    	double dead = OI.deadBand(Robot.oi.getRawTriggerAxis());
     	SmartDashboard.putNumber("GatherTrigger", dead);
     	if (dead != 0) {
-    		Robot.gathererarm.disable();
+    		Robot.gathererArm.disable();
     		SmartDashboard.putNumber("GatherTrigger manual", dead);
-    		Robot.gathererarm.safeVoltage(dead);
+    		Robot.gathererArm.safeVoltage(dead);
     		locked=false;
     	} else if (!locked) {
-    		double pos = Robot.gathererarm.getPosition();
+    		double pos = Robot.gathererArm.getPosition();
     		if (pos > RobotMap.Voltages.gathererArmBeforeHitGround)
     			pos = RobotMap.Voltages.gathererArmBeforeHitGround;
     		else if (pos < RobotMap.Voltages.gathererArmBeforeHitRobot)
     			pos = RobotMap.Voltages.gathererArmBeforeHitRobot;
-    		Robot.gathererarm.setSetpoint(pos);
-    		Robot.gathererarm.enable();
+    		Robot.gathererArm.setSetpoint(pos);
+    		Robot.gathererArm.enable();
     		locked = true;
     		System.out.println("Arm Locked");
     	} else {
-    		Robot.gathererarm.enable();
+    		Robot.gathererArm.enable();
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.gathererarm.onTarget();
+        return Robot.gathererArm.onTarget();
     }
 
     // Called once after isFinished returns true

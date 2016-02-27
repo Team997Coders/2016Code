@@ -16,7 +16,7 @@ public class ShooterAngleMedium extends Command {
     public ShooterAngleMedium() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooterpivot);
+    	requires(Robot.shooterPivot);
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class ShooterAngleMedium extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterpivot.setSetpoint(RobotMap.Voltages.shooterPivotMiddle);
+    	Robot.shooterPivot.setSetpoint(RobotMap.Voltages.shooterPivotMiddle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

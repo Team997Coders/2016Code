@@ -12,7 +12,7 @@ public class TankDrive extends Command {
     public TankDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.driveVoltage(Robot.oi.lefty(), Robot.oi.righty());
+    	Robot.driveTrain.driveVoltage(Robot.oi.leftY(), Robot.oi.rightY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +37,6 @@ public class TankDrive extends Command {
     // subsystems is scheduled to run 
     // this is saying if something weird happens or gets interrupted to return to zero meaning don't drive into a wall and stop moving 
     protected void interrupted() {
-    	Robot.drivetrain.driveVoltage(0,0);
+    	Robot.driveTrain.driveVoltage(0,0);
     }
 }

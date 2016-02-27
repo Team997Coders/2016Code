@@ -3,33 +3,23 @@ package org.usfirst.frc.team997.robot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Controller extends Joystick {
-	
-	//creates Joystick named joy. "joy is named after the emotion that fills my heart when
-	//watching Kirito-kun engage in action with his mighty sword" - Sebastian
-	//YAAASSSSSS!!!!!
-	
 	public Joystick joy;
-
+	
 	public Controller(int port) {
-		super(port);
-		// TODO Auto-generated constructor stub
-		
-		//"i should have named it Kirito-kun" - Sebastian
-		
+		super(port);		
 		joy = new Joystick(port);
 	}
 	
 	//getting all the axes of the joystick
-	
-	public double getLeftRawX(){
+	public double getLeftRawX() {
 		return joy.getRawAxis(0);
 	}
 	
-	public double getLeftRawY(){
+	public double getLeftRawY() {
 		return joy.getRawAxis(1);
 	}
 	
-	public double getRightRawX(){
+	public double getRightRawX() {
 		return joy.getRawAxis(4);
 	}
 	
@@ -37,9 +27,8 @@ public class Controller extends Joystick {
 		return joy.getRawAxis(5);
 	}
 	
-	//gets the trigger axis which we have not implemented yet
-	
-	public double getTriggerRight(){ 
+	//gets the trigger axis
+	public double getTriggerRight() { 
 		return joy.getRawAxis(3);
 	}
 	
@@ -47,13 +36,11 @@ public class Controller extends Joystick {
 		return joy.getRawAxis(2);
 	}
 	
-	//
-	
-	public boolean getLB(){
+	public boolean getLB() {
 		return joy.getRawButton(5);
 	}
 	
-	public boolean getRB(){
+	public boolean getRB() {
 		return joy.getRawButton(4);
 	}
 }

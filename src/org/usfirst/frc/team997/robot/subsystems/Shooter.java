@@ -38,14 +38,14 @@ public class Shooter extends Subsystem {
 
     public void retractKicker(){
     	//moves kicker back to default position
-    	shooterKickerSecond.set(RobotMap.kickerRightMax);
-    	shooterKickerFirst.set(RobotMap.kickerLeftMax);
+    	shooterKickerSecond.set(RobotMap.Voltages.kickerRightMax);
+    	shooterKickerFirst.set(RobotMap.Voltages.kickerLeftMax);
     }
     
     public void kickKicker(){    	
     	//kicks out kicker to kicking position
-    	shooterKickerSecond.set(RobotMap.kickerRightMin);
-    	shooterKickerFirst.set(RobotMap.kickerLeftMin);
+    	shooterKickerSecond.set(RobotMap.Voltages.kickerRightMin);
+    	shooterKickerFirst.set(RobotMap.Voltages.kickerLeftMin);
     }
     
     public void speedUp(){

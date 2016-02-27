@@ -38,22 +38,13 @@ public class RobotMap {
 	
 	//Misc. variables
 	public static final double
-	maxAccelDrive                      = /*1*/0,
-	rampAngle                          = 0.20, //Shooter to go over defense
-	armLow                             = 0.75, //arm
-	armHigh                            = 0.3, //ARM
-	collectBallArmPos                  = 0, //ARBITRARY arm
+	shooterRampAngle                   = 0.20, //Shooter to go over defense
 
 	shooterInSpeed                     = 0.45, //shooter
 	shooterShootingSpeed               = 1.0, //shooter
 	
 	gathererInSpeed                    = 0.4, //gatherer arm (?)
 
-	kickerRightMin                     = 1.0, // NEED TO CHANGE distance out when kicking
-	kickerRightMax                     = 0.0, // distance out when retracting
-	kickerLeftMin                      = 0, // NEED TO CHANGE distance out when retracting (unmeasured)
-	kickerLeftMax                      = 1.0, // distance out when kicking (unmeasured)
-	
 	deadBandValue                      = 0.15;
 
 	public static class Voltages {
@@ -63,7 +54,13 @@ public class RobotMap {
 		shooterPivotMiddle             = 0.75, //medium shooter position (see midpoint line 44)
 		collectArmPostion              = 0.75, // Where should the arm be to collect balls
 		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical)
-		gathererArmBeforeHitGround     = 0.87; // Lowest gatherer arm position (flat)
+		gathererArmBeforeHitGround     = 0.87, // Lowest gatherer arm position (flat)
+
+		kickerRightMin                 = 1.0, // NEED TO CHANGE distance out when kicking
+		kickerRightMax                 = 0.0, // distance out when retracting
+		kickerLeftMin                  = 0, // NEED TO CHANGE distance out when retracting (unmeasured)
+		kickerLeftMax                  = 1.0; // distance out when kicking (unmeasured)
+		
 	}
 	
 	public static class PDP {

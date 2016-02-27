@@ -28,14 +28,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *  
  */
 
-/**
- *
- */
 public class AutoBreechPortcullis extends CommandGroup {
-
     public AutoBreechPortcullis() {
     	addParallel(new ShooterAngleLow());
     	addSequential(new ArmAngleLow());
-    	addSequential(new ShooterToAngle(RobotMap.rampAngle));
+    	addSequential(new ShooterToAngle(RobotMap.shooterRampAngle));
     }
 }

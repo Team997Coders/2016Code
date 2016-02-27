@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team997.robot;
 
-import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
@@ -11,13 +10,13 @@ import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -29,25 +28,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	public static Relay clight;
-	//private CameraServer camera;
+	private CameraServer camera;
 	public static final Shooter shooter = new Shooter(
 			RobotMap.shooterBallSensor, RobotMap.shooterMotorPort,
 			RobotMap.servoMotorFirstPort, RobotMap.servoMotorSecondPort);
-	public static final ShooterPivot shooterpivot = new ShooterPivot(RobotMap.aimingMotorPort, RobotMap.shooterPivotAnglePort);
-	public static final DriveTrain drivetrain = 
+	public static final ShooterPivot shooterPivot = new ShooterPivot(
+			RobotMap.aimingMotorPort, RobotMap.shooterPivotAnglePort);
+	public static final DriveTrain driveTrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
 			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 
-			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort, 
-			               RobotMap.maxAccelDrive);
+			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort);
 	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
-	public static final GathererArm gathererarm = new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
-	//public static final GathererArmNoSP gathererarm = new GathererArmNoSP(RobotMap.gatherArmMotorPort);
+	public static final GathererArm gathererArm = 
+			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
+	//public static final GathererArmNoSP gathererArm = new GathererArmNoSP(RobotMap.gatherArmMotorPort);
 	public static OI oi;
 
 	public static ADIS16448_IMU imu;
 
 	private Command autonomousCommand;
-	private SendableChooser chooser;
+	//private SendableChooser chooser;
 
 	//public static Compressor compressor;
 	public static PowerDistributionPanel pdp;
@@ -56,28 +56,26 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		chooser = new SendableChooser();
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		//chooser = new SendableChooser();
+		//chooser.addDefault("Default Auto", new ExampleCommand());
+		//SmartDashboard.putData("Auto mode", chooser);
 
-		//        chooser.addObject("My Auto", new MyAutoCommand());
+		//chooser.addObject("My Auto", new MyAutoCommand());
 		imu = new ADIS16448_IMU();
+		imu.calibrate();
+		
 		pdp = new PowerDistributionPanel();
-		SmartDashboard.putData("Auto mode", chooser);
-		/*
 
         camera = CameraServer.getInstance();
         camera.setQuality(42);
-        camera.startAutomaticCapture("cam0");
+        camera.startAutomaticCapture("cam1");        
+        //clight = new Relay(RobotMap.circleLightPort);
 
-        clight = new Relay(RobotMap.circleLightPort);
-		 */
-		imu.calibrate();
-
-		// Need to reset the servo's position to be ready to capture a ball
+		// Need to reset the servo's position to be ready to capture a ball. Retracts kicker servos.
 		Robot.shooter.retractKicker();
 	}
 
-	public void disabledInit(){
+	public void disabledInit() {
 
 	}
 
@@ -86,7 +84,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
+		//autonomousCommand = (Command) chooser.getSelected();
 
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -108,31 +106,27 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		Robot.gathererarm.lockArmPosition();
+		Robot.gathererArm.lockArmPosition();
 		if (autonomousCommand != null) autonomousCommand.cancel();
 	}
 
 	public void teleopPeriodic() {
-
 		Scheduler.getInstance().run();
-		Smartdashboard();
-
+		smartDashboard();
 	}
 
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
 
-
-	public void Smartdashboard(){
-		Robot.drivetrain.smartDashboard();
+	public void smartDashboard(){
+		Robot.driveTrain.smartDashboard();
 		Robot.shooter.smartDashboard();
-		Robot.gathererarm.smartDashboard();
-		Robot.shooterpivot.smartDashboard();
-		SmartDashboard.putData("Imu", imu);
-		SmartDashboard.putNumber("Imu angle", imu.getAngleY());
-
+		Robot.gathererArm.smartDashboard();
+		Robot.shooterPivot.smartDashboard();
+		
 		//imu info put on the smartdashboard
+		SmartDashboard.putData("Imu", imu);
 		SmartDashboard.putNumber("imu rate X",imu.getRateX());
 		SmartDashboard.putNumber("imu angle X", imu.getAngleX());
 		SmartDashboard.putNumber("imu rate Y", imu.getRateY());
@@ -140,9 +134,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("imu rate Z", imu.getRateZ());
 		SmartDashboard.putNumber("imu angle Z", imu.getAngle());
 		SmartDashboard.putNumber("roll angle", imu.getRoll());
-
-
 	}
-
 
 }

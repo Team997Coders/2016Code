@@ -14,7 +14,7 @@ public class ShooterToAngle extends Command {
     	this.m_angle = angle;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooterpivot);
+    	requires(Robot.shooterPivot);
     }
 
  // RobotBuilder Version: 2.0
@@ -30,18 +30,18 @@ public class ShooterToAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.shooterpivot.setSetpoint(m_angle);
-        Robot.shooterpivot.enable();
+        Robot.shooterPivot.setSetpoint(m_angle);
+        Robot.shooterPivot.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterpivot.setSetpoint(m_angle);
+    	Robot.shooterPivot.setSetpoint(m_angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.shooterpivot.onTarget();
+    	return Robot.shooterPivot.onTarget();
     }
 
     // Called once after isFinished returns true
