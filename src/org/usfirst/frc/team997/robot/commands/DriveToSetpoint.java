@@ -19,6 +19,17 @@ public class DriveToSetpoint extends Command {
     	this.setpoint = distance;
     	this.speed = speed;
     }
+    
+    // set up a default of half speed.  This might still
+    // be too fast.
+    public DriveToSetpoint(double distance) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.driveTrain);
+    	this.setpoint = distance;
+    	this.speed = 0.5;
+    }
+
 
     // Called just before this Command runs the first time
     protected void initialize() {
