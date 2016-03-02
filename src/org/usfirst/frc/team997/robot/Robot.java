@@ -4,7 +4,7 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
-import org.usfirst.frc.team997.robot.subsystems.GathererArmNoSP;
+//import org.usfirst.frc.team997.robot.subsystems.GathererArmNoSP;
 import org.usfirst.frc.team997.robot.subsystems.Shooter;
 import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
 
