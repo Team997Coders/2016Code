@@ -1,6 +1,8 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.DriverTwoJoystickCommandPressed;
+import org.usfirst.frc.team997.robot.commands.DriverTwoJoystickCommandReleased;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
@@ -15,7 +17,17 @@ public class OI {
 	//Controllers
 	private final Controller driverOne;
 	private Joystick driverTwo;
-	
+	// driverTwo     supernes
+	// name		port
+	private final int b		= 9;
+	private final int z     = 8;
+	private final int a		= 7;
+	private final int r		= 6;
+	private final int up	= 1;
+	private final int right	= 2;
+	private final int down	= 3;
+	private final int left	= 4;
+
 	//Buttons 
 	private final Button shootAngleHighButton;
 	private final Button shootAngleMediumButton;
@@ -24,6 +36,7 @@ public class OI {
 	private final Button collectBallButton;
 	private final Button shootButton;
 	private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
+	private final Button toggleManualControlOfDriverTwoJoystick;
 	//private final Button arm;
 	//private final Button shifterButton;
 
@@ -35,7 +48,7 @@ public class OI {
 		//arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
 		
 		//retracts kicker, arm to low, roller arm rolls in, gathers
-		collectBallButton = new JoystickButton(driverOne, 4);
+		collectBallButton = new JoystickButton(driverOne, 4 /* 4 is y */);
 		collectBallButton.whenPressed(new CollectBall());
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
@@ -77,6 +90,10 @@ public class OI {
 		//sets arm to before hits robot position
 		gatherArmRobot = new JoystickButton(driverOne, 5);
 		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+		
+		toggleManualControlOfDriverTwoJoystick = new JoystickButton(driverTwo, z);
+		toggleManualControlOfDriverTwoJoystick.whenPressed(new DriverTwoJoystickCommandPressed());
+		toggleManualControlOfDriverTwoJoystick.whenReleased(new DriverTwoJoystickCommandReleased());
 		
 		//smart dashboard stuff for the shooter
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
