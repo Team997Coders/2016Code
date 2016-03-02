@@ -7,6 +7,8 @@ import org.usfirst.frc.team997.robot.commands.TankDrive;
 import org.usfirst.frc.team997.robot.commands.TankSquared;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,18 +16,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-//this is saying that leftmotor and rightmotor are VictorSP
 public class DriveTrain extends Subsystem {
-	private VictorSP left, right;
+	private PIDController left, right;
+	// left reversed
 	private Encoder leftEncoder, rightEncoder;
 	
 	public DriveTrain(int leftPort, int rightPort,
 			          int leftEncoderFirstPort, int leftEncoderSecondPort,
-			          int rightEncoderFirstPort, int rightEncoderSecondPort) {
-		left = new VictorSP(leftPort);
-		right = new VictorSP(rightPort);
+			          int rightEncoderFirstPort, int rightEncoderSecondPort,
+			          double inchesPerTick) {
 		leftEncoder = new Encoder(leftEncoderFirstPort, leftEncoderSecondPort);
+		leftEncoder.setDistancePerPulse(inchesPerTick);
+		leftEncoder.setPIDSourceType(PIDSourceType.kRate);
+		leftEncoder.setReverseDirection(true);
 		rightEncoder = new Encoder(rightEncoderFirstPort, rightEncoderSecondPort);
+		rightEncoder.setDistancePerPulse(inchesPerTick);
+		rightEncoder.setPIDSourceType(PIDSourceType.kRate);
+		left = new PIDController(3, 0, 0, leftEncoder, new VictorSP(leftPort));
+		left.setInputRange(0, 30000);
+		right = new PIDController(3, 0, 0, rightEncoder, new VictorSP(rightPort));
+		right.setInputRange(0, 30000);
 	}
 	
 	// also checks the gear status so then if gear == 1 the speed is halved and if its 0 its set at full speed.
@@ -43,8 +53,10 @@ public class DriveTrain extends Subsystem {
 	public void driveVoltage(double leftSpeed, double rightSpeed) {
 		SmartDashboard.putNumber("driveVoltage Left", leftSpeed);
 		SmartDashboard.putNumber("driveVoltage Right", rightSpeed);
-		this.left.pidWrite(leftSpeed);
-		this.right.pidWrite(-rightSpeed);
+		left.setSetpoint(leftSpeed * 2048);
+		right.setSetpoint(rightSpeed * 2048);
+		/*this.leftmotor.setDesiredVelocity(leftSpeed);
+		this.rightmotor.setDesiredVelocity(-rightSpeed);*/
 	}
 	
 	public void smartDashboard(){

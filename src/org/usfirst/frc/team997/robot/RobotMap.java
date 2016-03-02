@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team997.robot;
 
 public class RobotMap {
@@ -39,6 +40,17 @@ public class RobotMap {
 	//Misc. variables
 	public static final double
 	shooterRampAngle                   = 0.20, //Shooter to go over defense
+
+	// `2048` tick / rev
+	// `6` in diameter
+	// `6 * pi` in / rev
+	// inches per tick = in / rev * rev / tick
+	driveTrainEncodersInchesPerTick    = 6 * Math.PI / 2048,
+	
+	rampAngle                          = 0.20, //Shooter to go over defense
+	armLow                             = 0.75, //arm
+	armHigh                            = 0.3, //ARM
+	collectBallArmPos                  = 0, //ARBITRARY arm
 
 	shooterInSpeed                     = 0.45, //shooter
 	shooterShootingSpeed               = 1.0, //shooter

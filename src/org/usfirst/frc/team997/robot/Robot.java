@@ -37,7 +37,8 @@ public class Robot extends IterativeRobot {
 	public static final DriveTrain driveTrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
 			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 
-			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort);
+			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort,
+			               RobotMap.driveTrainEncodersInchesPerTick);
 	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
 	public static final GathererArm gathererArm = 
 			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
