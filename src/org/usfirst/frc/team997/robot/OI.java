@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
 	//Controllers
-	private final Controller myController;
+	private final Controller driverOne;
 	private Joystick driverTwo;
 	
 	//Buttons 
@@ -29,13 +29,13 @@ public class OI {
 
 	public OI() {
 		//primary Driver Button/Controls 
-		myController = new Controller(RobotMap.joystickPort);
+		driverOne = new Controller(RobotMap.joystickPort);
 		
 		//arm = new JoystickButton(myController, 3);
 		//arm.whenPressed(new Arm()); //DO NOT TRUST THE VALUES OF THE POSITION, IT'S A LIE!!!
 		
 		//retracts kicker, arm to low, roller arm rolls in, gathers
-		collectBallButton = new JoystickButton(myController, 4);
+		collectBallButton = new JoystickButton(driverOne, 4);
 		collectBallButton.whenPressed(new CollectBall());
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
@@ -67,15 +67,15 @@ public class OI {
 		SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		
 		//sets arm to before hits ground position
-		gatherArmGround = new JoystickButton(myController, 5);
+		gatherArmGround = new JoystickButton(driverOne, 5);
 		gatherArmGround.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		
 		//sets arm to collecting position
-		gatherArmMid = new JoystickButton(myController, 5);
+		gatherArmMid = new JoystickButton(driverOne, 5);
 		gatherArmMid.whenPressed(new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		
 		//sets arm to before hits robot position
-		gatherArmRobot = new JoystickButton(myController, 5);
+		gatherArmRobot = new JoystickButton(driverOne, 5);
 		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
 		
 		//smart dashboard stuff for the shooter
@@ -105,27 +105,27 @@ public class OI {
 	}
 	
 	public double leftY() {
-		return -deadBand(myController.getLeftRawY());
+		return -deadBand(driverOne.getLeftRawY());
 	}
 	
 	public double rightY(){
-		return -deadBand(myController.getRightRawY());
+		return -deadBand(driverOne.getRightRawY());
 	}
 	
 	public void userInfo() {
-		SmartDashboard.putNumber("leftstickY", myController.getLeftRawY());
-		SmartDashboard.putNumber("rightstickY", myController.getRightRawY());
+		SmartDashboard.putNumber("leftstickY", driverOne.getLeftRawY());
+		SmartDashboard.putNumber("rightstickY", driverOne.getRightRawY());
 		SmartDashboard.putNumber("TriggerAxis", this.getRawTriggerAxis());
 	}
 	
 	//gets the value of the triggers on the Primary Drivers triggers.
 	public double getRawTriggerAxis(){
-		return (myController.getTriggerRight() - myController.getTriggerLeft())/2;
+		return (driverOne.getTriggerRight() - driverOne.getTriggerLeft())/2;
 	}
 
 	//this is saying to find the angle of the right joystick
 	public double rightX(){
-		return -myController.getRightRawX();
+		return -driverOne.getRightRawX();
 	}
 	
 	public double userZ() {
