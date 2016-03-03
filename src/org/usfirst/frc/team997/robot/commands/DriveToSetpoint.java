@@ -9,12 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class DriveToSetpoint extends Command {
-	double setpoint;
-	double speed = 0.5;
+	private final double setpoint, speed;
 	
     public DriveToSetpoint(double speed, double distance) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.driveTrain);
     	this.setpoint = distance;
     	this.speed = speed;
@@ -23,13 +20,8 @@ public class DriveToSetpoint extends Command {
     // set up a default of half speed.  This might still
     // be too fast.
     public DriveToSetpoint(double distance) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.driveTrain);
-    	this.setpoint = distance;
-    	this.speed = 0.5;
+        this(0.5, distance);
     }
-
 
     // Called just before this Command runs the first time
     protected void initialize() {
