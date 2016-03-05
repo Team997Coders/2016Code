@@ -1,7 +1,6 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-//import org.usfirst.frc.team997.robot.commands.TankDrive;
-
+import org.usfirst.frc.team997.robot.RobotMap;
 import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 //import org.usfirst.frc.team997.robot.commands.TankDrive;
 //import org.usfirst.frc.team997.robot.commands.TankSquared;
@@ -25,7 +24,12 @@ public class DriveTrain extends Subsystem {
 		left = new VictorSP(leftPort);
 		right = new VictorSP(rightPort);
 		leftEncoder = new Encoder(leftEncoderFirstPort, leftEncoderSecondPort);
+		leftEncoder.reset();
+		leftEncoder.setDistancePerPulse(RobotMap.driveTrainEncoderDistancePerPulse);
+		
 		rightEncoder = new Encoder(rightEncoderFirstPort, rightEncoderSecondPort);
+		rightEncoder.reset();
+		rightEncoder.setDistancePerPulse(RobotMap.driveTrainEncoderDistancePerPulse);
 	}
 	
 	// also checks the gear status so then if gear == 1 the speed is halved and if its 0 its set at full speed.

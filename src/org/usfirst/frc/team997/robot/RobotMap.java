@@ -45,6 +45,11 @@ public class RobotMap {
 	
 	gathererInSpeed                    = 0.4, //gatherer arm (?)
 
+	// 2048 ticks / rev
+	// 6 * pi inch / rev
+	// 6 * pi / 2048 inch / tick
+	driveTrainEncoderDistancePerPulse       = 6 * Math.PI / 2048,
+
 	deadBandValue                      = 0.15;
 
 	public static class Voltages {
