@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-//this is saying that leftmotor and rightmotor are VictorSP
 public class DriveTrain extends Subsystem {
 	private VictorSP left, right;
 	private Encoder leftEncoder, rightEncoder;

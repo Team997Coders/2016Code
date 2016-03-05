@@ -43,6 +43,8 @@ public class OI {
 		
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
+		// start = 10
+
 		shootButton = new JoystickButton(driverTwo, 6);
 		shootButton.whenPressed(new Shoot());
 		
