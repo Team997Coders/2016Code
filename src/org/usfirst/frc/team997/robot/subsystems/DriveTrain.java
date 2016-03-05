@@ -23,6 +23,7 @@ public class DriveTrain extends Subsystem {
 			          int rightEncoderFirstPort, int rightEncoderSecondPort) {
 		left = new VictorSP(leftPort);
 		right = new VictorSP(rightPort);
+
 		leftEncoder = new Encoder(leftEncoderFirstPort, leftEncoderSecondPort);
 		leftEncoder.reset();
 		leftEncoder.setDistancePerPulse(RobotMap.driveTrainEncoderDistancePerPulse);
@@ -53,7 +54,9 @@ public class DriveTrain extends Subsystem {
 	
 	public void smartDashboard(){
 		SmartDashboard.putNumber("DriveTrain Encoder Left Rate", this.leftEncoder.getRate());
+		SmartDashboard.putNumber("DriveTrain Encoder Left Distance", this.leftEncoder.getDistance());
 		SmartDashboard.putNumber("DriveTrain Encoder Right Rate", this.rightEncoder.getRate());
+		SmartDashboard.putNumber("DriveTrain Encoder Right Distance", this.rightEncoder.getDistance());
 	}
 
 	protected void initDefaultCommand() {

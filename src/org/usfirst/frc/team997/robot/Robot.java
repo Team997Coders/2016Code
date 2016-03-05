@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		imu = new ADIS16448_IMU();
-		imu.calibrate();
+//		imu.calibrate();
 		
 		pdp = new PowerDistributionPanel();
 
@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
 		Robot.shooterPivot.smartDashboard();
 		
 		//imu info put on the smartdashboard
-		SmartDashboard.putData("Imu", imu);
+//		SmartDashboard.putData("Imu", imu);
 		SmartDashboard.putNumber("imu rate X",imu.getRateX());
 		SmartDashboard.putNumber("imu angle X", imu.getAngleX());
 		SmartDashboard.putNumber("imu rate Y", imu.getRateY());

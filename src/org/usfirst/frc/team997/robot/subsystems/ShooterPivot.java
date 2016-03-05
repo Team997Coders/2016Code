@@ -18,7 +18,7 @@ public class ShooterPivot extends PIDSubsystem {
 
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		// should the 'P' be negative??
-		super("shooterPivot", -3.0, 0.0, -0.3);
+		super("shooterPivot", -3.5, 0.0, -0.3);
 		getPIDController().setContinuous(false);
 		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotRobot, RobotMap.Voltages.shooterPivotGround);
 		getPIDController().setOutputRange(-0.5, 0.5);
@@ -32,8 +32,8 @@ public class ShooterPivot extends PIDSubsystem {
 		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", pivotMotor);
 		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", shootAngle);
 
-		// setSetpoint(RobotMap.Voltages.shooterPivotMin); 
-		lockArmPosition();
+		setSetpoint(RobotMap.Voltages.shooterPivotGround);
+//		lockArmPosition();
 		enable();
 	}
 
@@ -76,5 +76,6 @@ public class ShooterPivot extends PIDSubsystem {
 		SmartDashboard.putNumber("Shooter Pivot Feedback Pot Voltage", shootAngle.get());
 		SmartDashboard.putNumber("Shooter Pivot Error Term", getPIDController().getError());
 		SmartDashboard.putBoolean("Shooter Pivot On Target?", super.onTarget());
+		
 	}
 }

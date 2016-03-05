@@ -15,7 +15,7 @@ public class ShooterAngleMedium extends Command {
     protected void initialize() {}
 
     protected void execute() {
-    	Robot.shooterPivot.setSetpoint(RobotMap.Voltages.shooterPivotMiddle);
+    	Robot.shooterPivot.setSetpoint(RobotMap.Voltages.shooterPivotMiddleLow);
     }
 
     protected boolean isFinished() {

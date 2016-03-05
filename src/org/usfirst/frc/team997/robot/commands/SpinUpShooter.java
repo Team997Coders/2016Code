@@ -23,6 +23,8 @@ public class SpinUpShooter extends Command {
 		} else {
 			Robot.shooter.slowDown();
 		}
+	
+		//Robot.shooter.speedUp();
 	}
 
 	protected boolean isFinished() {

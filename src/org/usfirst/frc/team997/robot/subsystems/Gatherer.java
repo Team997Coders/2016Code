@@ -19,16 +19,10 @@ public class Gatherer extends Subsystem {
 	public void safeValue(double voltage) {
 		if(Robot.pdp.getCurrent(RobotMap.PDP.Port.gatherRoller) > RobotMap.PDP.Limit.gatherRoller) {
 			rollerMotor.set(0);
+		} else {
+			// ensures motor doesn't exceed power limit
+			rollerMotor.set(-voltage);
 		}
-		
-		else {
-			rollerMotor.set(voltage);
-			//sets motor to non-explosive voltage
-		}
-	}
-
-	public void gathervoltage(double rollerSpeed) {
-		safeValue(rollerSpeed);
 	}
 
 	public void initDefaultCommand() {}
