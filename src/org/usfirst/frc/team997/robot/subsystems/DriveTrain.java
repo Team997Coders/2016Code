@@ -5,14 +5,11 @@ import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 //import org.usfirst.frc.team997.robot.commands.TankDrive;
 //import org.usfirst.frc.team997.robot.commands.TankSquared;
 
-
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,12 +18,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DriveTrain extends Subsystem {
 	private VictorSP left, right;
 	private Encoder leftEncoder, rightEncoder;
-	private Gyro gyro;
 	
 	public DriveTrain(int leftPort, int rightPort,
                           int leftEncoderFirstPort, int leftEncoderSecondPort,
-                          int rightEncoderFirstPort, int rightEncoderSecondPort,
-                          int gyroSlot) {
+                          int rightEncoderFirstPort, int rightEncoderSecondPort) {
 		left = new VictorSP(leftPort);
 		right = new VictorSP(rightPort);
 
@@ -39,8 +34,6 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 		rightEncoder.setDistancePerPulse(RobotMap.driveTrainEncoderDistancePerPulse);
 		LiveWindow.addSensor("Drive Train", "Right Encoder", rightEncoder);
-
-        gyro = new AnalogGyro(gyroSlot);
 	}
 	
 	// also checks the gear status so then if gear == 1 the speed is halved and if its 0 its set at full speed.
@@ -67,21 +60,19 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("DriveTrain Encoder Right Rate", this.rightEncoder.getRate());
 	}
 	
-	public double getAverageEncoders() {
-		return ((double) leftEncoder.get() + (double) rightEncoder.get()) / (double) 2;
+	public double getDeltaEncoderRate() {
+		// left is always zero so pretend they are equal
+		return 0;
 	}
 	
-	public double getGyro() {
-		return gyro.getAngle();
+	public double getAverageEncoderDistance() {
+		return rightEncoder.getDistance();
+		//return ((double) leftEncoder.get() + (double) rightEncoder.get()) / (double) 2;
 	}
 	
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
-	}
-	
-	public void resetGyro() {
-		gyro.reset();
 	}
 
 	protected void initDefaultCommand() {

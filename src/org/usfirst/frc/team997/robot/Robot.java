@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
@@ -37,8 +38,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveTrain driveTrain = 
 			new DriveTrain(RobotMap.leftMotorPort, RobotMap.rightMotorPort,
 			               RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, 
-			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort,
-			               RobotMap.gyroPort);
+			               RobotMap.rightEncoderFirstPort, RobotMap.rightEncoderSecondPort);
 	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
 	public static final GathererArm gathererArm = 
 			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
@@ -75,6 +75,8 @@ public class Robot extends IterativeRobot {
 
 		// Need to reset the servo's position to be ready to capture a ball. Retracts kicker servos.
 		Robot.shooter.retractKicker();
+		
+		autonomousCommand = new DriveToSetpoint(100);
 	}
 
 	public void disabledInit() {

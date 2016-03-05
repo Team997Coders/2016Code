@@ -26,12 +26,11 @@ public class DriveToSetpoint extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.resetEncoders();
-    	Robot.driveTrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double adjust = Robot.driveTrain.getGyro() / 10;
+    	double adjust = Robot.driveTrain.getDeltaEncoderRate() / 10;
 
     	final double threshold = .1;
     	// ensure doesn't drastically swerve from readings.
@@ -45,7 +44,7 @@ public class DriveToSetpoint extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.driveTrain.getAverageEncoders() > setpoint;
+        return Robot.driveTrain.getAverageEncoderDistance() > setpoint;
     }
 
     // Called once after isFinished returns true

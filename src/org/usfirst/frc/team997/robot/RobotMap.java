@@ -26,7 +26,6 @@ public class RobotMap {
 	shooterPivotAnglePort              = 0, // shooter angle
 	shooterBallSensor                  = 1, // infrared ball sensor
 	gathererArmAnglePort               = 2, // shooter
-	gyroPort                           = 42, // TODO: FIX THIS PORT
 
 	// Spike/Relay
 	circleLightPort                    = 0, // misc
