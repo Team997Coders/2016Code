@@ -32,6 +32,6 @@ public class AutoBreechPortcullis extends CommandGroup {
     public AutoBreechPortcullis() {
     	addParallel(new ShooterAngleLow());
     	addSequential(new ArmAngleLow());
-    	addSequential(new ShooterToAngle(RobotMap.shooterRampAngle));
+    	addSequential(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
     }
 }

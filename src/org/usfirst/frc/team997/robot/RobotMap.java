@@ -37,8 +37,6 @@ public class RobotMap {
 	
 	//Misc. variables
 	public static final double
-	shooterRampAngle                   = 0.20, //Shooter to go over defense
-
 	shooterInSpeed                     = 0.45, //shooter
 	shooterShootingSpeed               = 1.0, //shooter
 	
