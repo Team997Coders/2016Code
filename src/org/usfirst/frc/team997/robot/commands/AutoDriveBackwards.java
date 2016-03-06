@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDriveBackwards extends CommandGroup {
     
     public  AutoDriveBackwards() {
-        addParallel(new ShooterAngleLow());
-        addSequential(new ArmAngleLow());
+        addParallel(ShooterToAngle.shooterAngleLow);
+        addSequential(GathererToAngle.armAngleLow);
         addSequential(new DriveToSetpointBackwards(-100));
     }
 }
