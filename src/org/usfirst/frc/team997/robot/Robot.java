@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
@@ -42,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public static final GathererArm gathererArm = 
 			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
 	//public static final GathererArmNoSP gathererArm = new GathererArmNoSP(RobotMap.gatherArmMotorPort);
+
 	public static OI oi;
 
 	public static ADIS16448_IMU imu;
@@ -73,6 +75,8 @@ public class Robot extends IterativeRobot {
 
 		// Need to reset the servo's position to be ready to capture a ball. Retracts kicker servos.
 		Robot.shooter.retractKicker();
+		
+		autonomousCommand = new DriveToSetpoint(100);
 	}
 
 	public void disabledInit() {

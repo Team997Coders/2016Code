@@ -27,7 +27,6 @@ public class RobotMap {
 	shooterBallSensor                  = 1, // infrared ball sensor
 	gathererArmAnglePort               = 2, // shooter
 
-
 	// Spike/Relay
 	circleLightPort                    = 0, // misc
 	flashLightPort                     = 1, // misc
