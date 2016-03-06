@@ -30,6 +30,7 @@ public class Shoot extends Command {
     }
 
     protected void end() {
+    	SpinUpShooter.globalSpinUp = false;
     	Robot.shooter.slowDown();
     	Robot.shooter.retractKicker();
     	timer.stop();
