@@ -1,11 +1,16 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class GathererToAngle extends Command {
-	private double angle;
+	public static final GathererToAngle
+		armAngleLow = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround),
+		armAngleHigh = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot);
+
+	private final double angle;
 
     public GathererToAngle(double angle) {
     	this.angle = angle;

@@ -30,8 +30,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoBreechPortcullis extends CommandGroup {
     public AutoBreechPortcullis() {
-    	addParallel(new ShooterAngleLow());
-    	addSequential(new ArmAngleLow());
+    	addParallel(ShooterToAngle.shooterAngleLow);
+    	addSequential(GathererToAngle.armAngleLow);
     	addSequential(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
     }
 }
