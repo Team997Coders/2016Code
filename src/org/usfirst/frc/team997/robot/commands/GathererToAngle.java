@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class GathererToAngle extends Command {
 	public static final GathererToAngle
-		armAngleLow = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround),
-		armAngleHigh = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot);
+		low = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround),
+		high = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot);
 
 	private final double angle;
 

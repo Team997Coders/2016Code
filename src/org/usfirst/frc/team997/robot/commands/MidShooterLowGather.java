@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MidShooterLowGather extends CommandGroup {
     
     public  MidShooterLowGather() {
-    	addParallel(ShooterToAngle.shooterAngleMiddleLow);
-    	addParallel(GathererToAngle.armAngleLow);
+    	addParallel(ShooterToAngle.middleLow);
+    	addParallel(GathererToAngle.low);
     }
 }

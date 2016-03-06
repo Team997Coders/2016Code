@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShooterToAngle extends Command {
 	public static final ShooterToAngle
-		shooterAngleHigh = new ShooterToAngle(RobotMap.Voltages.shooterPivotGround),
-		shooterAngleLow = new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot),
-		shooterAngleMiddleLow = new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow),
-		shooterAngleMiddleHigh = new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh);
+		high = new ShooterToAngle(RobotMap.Voltages.shooterPivotGround),
+		low = new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot),
+		middleLow = new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow),
+		middleHigh = new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh);
 
 	private double angle;
 
