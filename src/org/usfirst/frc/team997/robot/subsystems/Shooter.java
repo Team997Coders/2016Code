@@ -76,6 +76,7 @@ public class Shooter extends Subsystem {
     	//SmartDashboard.putNumber("Average Speed of Shooter", shooterCounter.getSamplesToAverage());
 		//SmartDashboard.putNumber("Period", shooterCounter.getPeriod());
 		SmartDashboard.putNumber("Shooter Ball Distance Sensor", shooterBallSensor.getAverageVoltage());
+		SmartDashboard.putBoolean("Shooter Ball Collected?", isBallCollected());
 		//SmartDashboard.putNumber("SENSOR SHOOTER VALUE", shooterSensor.getAccumulatorValue());
     }
 	
