@@ -37,7 +37,7 @@ public class CollectBall extends Command {
 
     protected boolean isFinished() {
     	//stops when the shooter sensor detects the ball
-        return Robot.shooter.getShooterSensor();
+        return Robot.shooter.isBallCollected();
     }
 
     protected void end() {

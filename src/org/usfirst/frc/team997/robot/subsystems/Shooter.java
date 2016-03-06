@@ -67,7 +67,7 @@ public class Shooter extends Subsystem {
     	}
     }
     
-    public boolean getShooterSensor() {
+    public boolean isBallCollected() {
     	return shooterBallSensor.getAverageVoltage() > 1;
 	}
     
