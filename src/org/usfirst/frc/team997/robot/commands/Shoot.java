@@ -26,7 +26,7 @@ public class Shoot extends Command {
     }
 
     protected boolean isFinished() {
-        return timer.get() > 2;
+        return timer.get() > 4;
     }
 
     protected void end() {
