@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.CollectBall;
+import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
@@ -36,7 +37,7 @@ public class OI {
 		
 		//retracts kicker, arm to low, roller arm rolls in, gathers
 		collectBallButton = new JoystickButton(driverOne, 4);
-		collectBallButton.whenPressed(new CollectBall());
+		collectBallButton.whenPressed(new CollectBall/*Toggle*/());
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 

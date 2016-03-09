@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class CollectBall extends Command {
+	boolean run = false;
 	/** this command will lower and start the gatherer, and shooter to have them 
 	 *  gather in until the ball is in the shooter 
 	 * 
@@ -19,7 +20,7 @@ public class CollectBall extends Command {
     	requires(Robot.gatherer);
     }
 
-    protected void initialize() {}
+    protected void initialize() {run = true;}
 
     protected void execute() {
     	//makes sure kicker is retracted before gathering
@@ -37,10 +38,11 @@ public class CollectBall extends Command {
 
     protected boolean isFinished() {
     	//stops when the shooter sensor detects the ball
-        return Robot.shooter.isBallCollected();
+        return !run || Robot.shooter.isBallCollected();
     }
 
     protected void end() {
+    	run = false;
     	Robot.shooter.slowDown();
     	Robot.gatherer.safeValue(0);
     }
