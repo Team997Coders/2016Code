@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
 		// Need to reset the servo's position to be ready to capture a ball. Retracts kicker servos.
 		Robot.shooter.retractKicker();
 		
-		autonomousCommand = new DriveToSetpoint(100);
+		autonomousCommand = new AutoDriveForward();
 	}
 
 	public void disabledInit() {
