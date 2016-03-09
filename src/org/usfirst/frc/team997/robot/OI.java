@@ -57,7 +57,7 @@ public class OI {
 		SmartDashboard.putData("Shooter To Middle", shootAngleMiddleLowButton);
 		
 		shootAngleMiddleHighButton = new JoystickButton(driverTwo, 4);
-		shootAngleMiddleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow));
+		shootAngleMiddleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
 		SmartDashboard.putData("Shooter to Middle High", shootAngleMiddleHighButton);
 		
 		//sets shooter angle to low position
