@@ -84,7 +84,8 @@ public class OI {
 		
 		//smart dashboard stuff for the shooter
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
-		SmartDashboard.putData("Shooter Pivot Midpoint", new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow));  
+		SmartDashboard.putData("Shooter Pivot Midpoint Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow));
+		SmartDashboard.putData("Shooter Pivot Midpoint High", new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
 		SmartDashboard.putData("Shooter Pivot High", new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
 		
 		//smart dashboard stuff for gatherer arm
