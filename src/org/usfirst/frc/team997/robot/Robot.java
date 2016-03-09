@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.AutoDriveBackwards;
+import org.usfirst.frc.team997.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
@@ -18,6 +20,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -49,20 +52,20 @@ public class Robot extends IterativeRobot {
 	public static ADIS16448_IMU imu;
 
 	private Command autonomousCommand;
-	//private SendableChooser chooser;
+//	private SendableChooser chooser;
 
 	//public static Compressor compressor;
 	public static PowerDistributionPanel pdp;
 
-
 	public void robotInit() {
 		oi = new OI();
 
-		//chooser = new SendableChooser();
-		//chooser.addDefault("Default Auto", new ExampleCommand());
-		//SmartDashboard.putData("Auto mode", chooser);
+//		chooser = new SendableChooser();
+//		chooser.addDefault("Forward", new AutoDriveForward());
+//		chooser.addObject("Backward", new AutoDriveBackwards());
 
-		//chooser.addObject("My Auto", new MyAutoCommand());
+//		SmartDashboard.putData("Auto mode", chooser);
+
 		imu = new ADIS16448_IMU();
 //		imu.calibrate();
 		
@@ -102,8 +105,12 @@ public class Robot extends IterativeRobot {
 		} */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null) autonomousCommand.start();
+//		if (autonomousCommand != null) autonomousCommand.start();
+		getSelected().start();
 	}
+	
+	private Command getSelected() { return autonomousCommand; }
+	//private Command getSelected() { return (Command) chooser.getSelected(); }
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -111,7 +118,8 @@ public class Robot extends IterativeRobot {
 
 	public void teleopInit() {
 		Robot.gathererArm.lockArmPosition();
-		if (autonomousCommand != null) autonomousCommand.cancel();
+//		if (autonomousCommand != null) autonomousCommand.cancel();
+		getSelected().start();
 	}
 
 	public void teleopPeriodic() {
