@@ -11,8 +11,7 @@ import org.usfirst.frc.team997.robot.subsystems.GathererArm;
 import org.usfirst.frc.team997.robot.subsystems.Shooter;
 import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
 
-import com.analog.adis16448.frc.ADIS16448_IMU;
-
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -46,10 +45,10 @@ public class Robot extends IterativeRobot {
 	public static final GathererArm gathererArm = 
 			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
 	//public static final GathererArmNoSP gathererArm = new GathererArmNoSP(RobotMap.gatherArmMotorPort);
+	
+	public static ADXRS450_Gyro gyro;
 
 	public static OI oi;
-
-	public static ADIS16448_IMU imu;
 
 	private Command autonomousCommand;
 //	private SendableChooser chooser;
@@ -65,9 +64,9 @@ public class Robot extends IterativeRobot {
 //		chooser.addObject("Backward", new AutoDriveBackwards());
 
 //		SmartDashboard.putData("Auto mode", chooser);
-
-		imu = new ADIS16448_IMU();
-//		imu.calibrate();
+		
+		gyro = new ADXRS450_Gyro();
+		gyro.calibrate();
 		
 		pdp = new PowerDistributionPanel();
 
@@ -91,6 +90,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
+		gyro.reset();
 		//autonomousCommand = (Command) chooser.getSelected();
 
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -138,14 +138,8 @@ public class Robot extends IterativeRobot {
 		Robot.shooterPivot.smartDashboard();
 		
 		//imu info put on the smartdashboard
-//		SmartDashboard.putData("Imu", imu);
-		SmartDashboard.putNumber("imu rate X",imu.getRateX());
-		SmartDashboard.putNumber("imu angle X", imu.getAngleX());
-		SmartDashboard.putNumber("imu rate Y", imu.getRateY());
-		SmartDashboard.putNumber("imu angle Y", imu.getAngleY());
-		SmartDashboard.putNumber("imu rate Z", imu.getRateZ());
-		SmartDashboard.putNumber("imu angle Z", imu.getAngle());
-		SmartDashboard.putNumber("roll angle", imu.getRoll());
+		SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+		SmartDashboard.putNumber("Gyro Rate", Robot.gyro.getRate());
 	}
 
 }
