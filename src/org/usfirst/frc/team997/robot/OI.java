@@ -3,6 +3,7 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.commands.CollectBall;
 import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
+import org.usfirst.frc.team997.robot.commands.KillGather;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
 import org.usfirst.frc.team997.robot.commands.SpinUpShooter;
@@ -93,6 +94,7 @@ public class OI {
 		//SmartDashboard.putData("Gatherer Arm Low", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		//SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		//SmartDashboard.putData("Gatherer Arm High", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+		SmartDashboard.putData("Kill the gatherer", new KillGather());
 		
 	}
 
