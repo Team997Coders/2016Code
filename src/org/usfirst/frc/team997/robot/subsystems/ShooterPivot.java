@@ -32,7 +32,7 @@ public class ShooterPivot extends PIDSubsystem {
 		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", pivotMotor);
 		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", shootAngle);
 
-		setSetpoint(RobotMap.Voltages.shooterPivotGround);
+		setSetpoint(RobotMap.Voltages.shooterPivotMiddleLow);
 //		lockArmPosition();
 		enable();
 	}
