@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterPivot extends PIDSubsystem {
 	private Talon pivotMotor;
 	private AnalogPotentiometer shootAngle;
+	private static final double absoluteTolerance = 0.01;
 
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		// should the 'P' be negative??
@@ -37,6 +38,10 @@ public class ShooterPivot extends PIDSubsystem {
 		enable();
 	}
 
+	
+	public boolean onTarget() {
+		return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
+	}
 	protected double returnPIDInput() {
 		return shootAngle.get();
 	}

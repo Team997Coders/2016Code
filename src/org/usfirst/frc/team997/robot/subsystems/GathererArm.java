@@ -12,11 +12,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class GathererArm extends PIDSubsystem {
 	private VictorSP armMotor;
 	private AnalogPotentiometer armAngle;
+	private static final double absoluteTolerance = 0.02;
 	
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
     	super("gathererArm", 4.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
-    	getPIDController().setAbsoluteTolerance(0.1);
+//    	getPIDController().setAbsoluteTolerance(absoluteTolerance);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
         getPIDController().setOutputRange(-0.5, 0.5);
 
@@ -32,6 +33,10 @@ public class GathererArm extends PIDSubsystem {
     	//enable();
     }
     
+    public boolean onTarget() {
+    	return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
+    }
+
     public void initDefaultCommand() {
     	setDefaultCommand(new GatherTrigger());
     }
