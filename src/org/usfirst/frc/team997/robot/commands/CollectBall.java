@@ -47,7 +47,9 @@ public class CollectBall extends Command {
     	Robot.gatherer.safeValue(0);
     }
 
-    protected void interrupted() {}
+    protected void interrupted() {
+    	this.end();
+    }
     
 }
 

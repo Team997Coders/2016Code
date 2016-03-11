@@ -17,5 +17,7 @@ public class CollectBallToggle extends Command {
 	protected void execute() {}
 	protected boolean isFinished() {return true;}
 	protected void end() {}
-	protected void interrupted() {}
+	protected void interrupted() {
+		this.end();
+	}
 }
