@@ -119,7 +119,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		Robot.gathererArm.lockArmPosition();
 //		if (autonomousCommand != null) autonomousCommand.cancel();
-		getSelected().start();
+		//getSelected().start();
 	}
 
 	public void teleopPeriodic() {
