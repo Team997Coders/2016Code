@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	private Command autonomousCommand;
-//	private SendableChooser chooser;
+	private SendableChooser chooser;
 
 	//public static Compressor compressor;
 	public static PowerDistributionPanel pdp;
@@ -60,12 +60,12 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-//		chooser = new SendableChooser();
-//		chooser.addDefault("Forward", new AutoDriveForward());
-//		chooser.addObject("Backward", new AutoDriveBackwards());
-//		chooser.addObject("Nothing", new NullCommand());
+		chooser = new SendableChooser();
+		chooser.addDefault("Forward", new AutoDriveForward());
+		chooser.addObject("Backward", new AutoDriveBackwards()); //use this for low bar
+		chooser.addObject("Nothing", new NullCommand());
 
-//		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto mode", chooser);
 		
 		gyro = new ADXRS450_Gyro();
 		gyro.calibrate();
@@ -111,8 +111,8 @@ public class Robot extends IterativeRobot {
 		getSelected().start();
 	}
 	
-	private Command getSelected() { return autonomousCommand; }
-	//private Command getSelected() { return (Command) chooser.getSelected(); }
+//	private Command getSelected() { return autonomousCommand; }
+	private Command getSelected() { return (Command) chooser.getSelected(); }
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
