@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		gyro.reset();
+		Robot.driveTrain.resetEncoders();
 		//autonomousCommand = (Command) chooser.getSelected();
 		// schedule the autonomous command (example)
 //		if (autonomousCommand != null) autonomousCommand.start();
