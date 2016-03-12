@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class GathererArm extends PIDSubsystem {
 	private VictorSP armMotor;
 	private AnalogPotentiometer armAngle;
-	private static final double absoluteTolerance = 0.02;
+	private static final double absoluteTolerance = 0.01;
 	
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
     	super("gathererArm", 4.0, 0.0, 0.5);
