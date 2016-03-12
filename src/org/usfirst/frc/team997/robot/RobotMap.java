@@ -59,6 +59,7 @@ public class RobotMap {
 		collectArmPostion              = 0.75, // Where should the arm be to collect balls
 		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical)
 		gathererArmBeforeHitGround     = 0.87, // Lowest gatherer arm position (flat)
+		gathererArmMid                 = 0.51, //mid gatherer arm position (avg between high and low)
 
 		kickerRightMin                 = 1.0, // NEED TO CHANGE distance out when kicking
 		kickerRightMax                 = 0.0, // distance out when retracting

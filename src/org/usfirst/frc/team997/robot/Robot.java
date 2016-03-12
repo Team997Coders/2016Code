@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.AutoCheval;
 import org.usfirst.frc.team997.robot.commands.AutoDriveBackwards;
 import org.usfirst.frc.team997.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
@@ -63,6 +64,7 @@ public class Robot extends IterativeRobot {
 		chooser = new SendableChooser();
 		chooser.addDefault("Forward", new AutoDriveForward());
 		chooser.addObject("Backward", new AutoDriveBackwards()); //use this for low bar
+		chooser.addObject("Cheval", new AutoCheval());
 		chooser.addObject("Nothing", new NullCommand());
 
 		SmartDashboard.putData("Auto mode", chooser);
@@ -80,7 +82,7 @@ public class Robot extends IterativeRobot {
 		// Need to reset the servo's position to be ready to capture a ball. Retracts kicker servos.
 		Robot.shooter.retractKicker();
 		
-		autonomousCommand = new AutoDriveForward();
+		autonomousCommand = new AutoCheval();
 	}
 
 	public void disabledInit() {
