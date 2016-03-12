@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoDriveForward extends CommandGroup {
     public AutoDriveForward() {
-    	addParallel(ShooterToAngle.middleLow);
-    	addSequential(GathererToAngle.low);
+    	// needs in parallel as they don't finish for some reason
+    	addParallel(ShooterToAngle.middleLow());
+    	addParallel(GathererToAngle.mid());
     	addSequential(new DriveToSetpoint(100));
     }
 }

@@ -6,9 +6,9 @@ import org.usfirst.frc.team997.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class GathererToAngle extends Command {
-	public static final GathererToAngle
-		low = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround),
-		high = new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot);
+	public static GathererToAngle low() { return new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround); }
+	public static GathererToAngle high() { return new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot); }
+	public static GathererToAngle mid() {return new GathererToAngle(RobotMap.Voltages.gathererArmMid); }
 
 	private final double angle;
 

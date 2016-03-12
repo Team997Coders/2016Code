@@ -9,11 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShooterToAngle extends Command {
-	public static final ShooterToAngle
-		high = new ShooterToAngle(RobotMap.Voltages.shooterPivotGround),
-		low = new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot),
-		middleLow = new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow),
-		middleHigh = new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh);
+	public static ShooterToAngle high() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotGround); }
+	public static ShooterToAngle low() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot); }
+	public static ShooterToAngle middleLow() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow); }
+	public static ShooterToAngle middleHigh() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh); }
 
 	private double angle;
 
