@@ -94,18 +94,6 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		gyro.reset();
 		//autonomousCommand = (Command) chooser.getSelected();
-
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-
 		// schedule the autonomous command (example)
 //		if (autonomousCommand != null) autonomousCommand.start();
 		getSelected().start();
