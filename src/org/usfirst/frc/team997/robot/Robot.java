@@ -4,6 +4,7 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.commands.AutoDriveBackwards;
 import org.usfirst.frc.team997.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
+import org.usfirst.frc.team997.robot.commands.NullCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
@@ -62,6 +63,7 @@ public class Robot extends IterativeRobot {
 //		chooser = new SendableChooser();
 //		chooser.addDefault("Forward", new AutoDriveForward());
 //		chooser.addObject("Backward", new AutoDriveBackwards());
+//		chooser.addObject("Nothing", new NullCommand());
 
 //		SmartDashboard.putData("Auto mode", chooser);
 		
