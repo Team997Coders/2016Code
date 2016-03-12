@@ -33,9 +33,9 @@ public class GathererArm extends PIDSubsystem {
     	//enable();
     }
     
-    public boolean onTarget() {
-    	return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
-    }
+//    public boolean onTarget() {
+//    	return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
+//    }
 
     public void initDefaultCommand() {
     	setDefaultCommand(new GatherTrigger());

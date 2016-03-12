@@ -39,9 +39,10 @@ public class ShooterPivot extends PIDSubsystem {
 	}
 
 	
-	public boolean onTarget() {
-		return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
-	}
+//	public boolean onTarget() {
+//		return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
+//	}
+
 	protected double returnPIDInput() {
 		double angle = shootAngle.get();
 		if (angle < .5) {
