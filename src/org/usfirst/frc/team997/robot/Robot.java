@@ -4,7 +4,6 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.commands.AutoCheval;
 import org.usfirst.frc.team997.robot.commands.AutoDriveBackwards;
 import org.usfirst.frc.team997.robot.commands.AutoDriveForward;
-import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
 import org.usfirst.frc.team997.robot.commands.NullCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
@@ -17,6 +16,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -48,43 +48,63 @@ public class Robot extends IterativeRobot {
 			new GathererArm(RobotMap.gatherArmMotorPort, RobotMap.gathererArmAnglePort);
 	//public static final GathererArmNoSP gathererArm = new GathererArmNoSP(RobotMap.gatherArmMotorPort);
 	
+	public Preferences prefs;
+	
 	public static ADXRS450_Gyro gyro;
 
 	public static OI oi;
 
-	private Command autonomousCommand;
+	public Command autonomousCommand;
 	private SendableChooser chooser;
 
-	//public static Compressor compressor;
 	public static PowerDistributionPanel pdp;
 
 	public void robotInit() {
 		oi = new OI();
+		
+		readPrefs();
 
 		chooser = new SendableChooser();
-		chooser.addDefault("Forward", new AutoDriveForward());
-		chooser.addObject("Backward", new AutoDriveBackwards()); //use this for low bar
+		chooser.addObject("Forward", new AutoDriveForward());
+		chooser.addDefault("Backward", new AutoDriveBackwards()); //use this for low bar
 		chooser.addObject("Cheval", new AutoCheval());
 		chooser.addObject("Nothing", new NullCommand());
 
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		gyro = new ADXRS450_Gyro();
-		gyro.calibrate();
+		gyro.calibrate();  // Try not to access the gyro or move the robot during the calibration
+							// One reference says that this could take 5 seconds to complete
 		
 		pdp = new PowerDistributionPanel();
 
         camera = CameraServer.getInstance();
         camera.setQuality(42);
         camera.startAutomaticCapture("cam1");        
-        //clight = new Relay(RobotMap.circleLightPort);
-
-		// Need to reset the servo's position to be ready to capture a ball. Retracts kicker servos.
 		Robot.shooter.retractKicker();
 		
 		autonomousCommand = new AutoCheval();
+		
+		RobotMap.learnMode = false;
 	}
 
+	/*
+	 * These preferences are saved to the flash memory on the RoboRio and are persistant across reboot cycles.  We need to
+	 * add these values to the prefs dialog in the smart dashboard.
+	 */
+	private void readPrefs() {
+		// Gatherer Arm Positions
+		RobotMap.Voltages.gathererArmBeforeHitGround = prefs.getDouble("gathererArmBeforeHitGround", RobotMap.InitVoltages.gathererArmBeforeHitGround);
+		RobotMap.Voltages.gathererArmBeforeHitRobot = prefs.getDouble("gathererArmBeforeHitRobot", RobotMap.InitVoltages.gathererArmBeforeHitRobot);
+		RobotMap.Voltages.collectArmPostion = prefs.getDouble("collectArmPosition", RobotMap.InitVoltages.collectArmPostion);
+		
+		// Shooter Pivot Positions
+		RobotMap.Voltages.shooterPivotGround = prefs.getDouble("shooterPivotGround", RobotMap.InitVoltages.shooterPivotGround);
+		RobotMap.Voltages.shooterPivotMiddleLow = prefs.getDouble("shooterPivotMiddleLow", RobotMap.InitVoltages.shooterPivotMiddleLow);
+		RobotMap.Voltages.shooterPivotMiddleHigh = prefs.getDouble("shooterPivotMiddleHigh", RobotMap.InitVoltages.shooterPivotMiddleHigh);
+		RobotMap.Voltages.shooterPivotRobot = prefs.getDouble("shooterPivotRobot", RobotMap.InitVoltages.shooterPivotRobot);
+	}
+	
 	public void disabledInit() {
 
 	}
@@ -96,13 +116,9 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		gyro.reset();
 		Robot.driveTrain.resetEncoders();
-		//autonomousCommand = (Command) chooser.getSelected();
-		// schedule the autonomous command (example)
-//		if (autonomousCommand != null) autonomousCommand.start();
 		getSelected().start();
 	}
 	
-//	private Command getSelected() { return autonomousCommand; }
 	private Command getSelected() { return (Command) chooser.getSelected(); }
 
 	public void autonomousPeriodic() {

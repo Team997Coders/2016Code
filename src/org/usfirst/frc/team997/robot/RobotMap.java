@@ -1,5 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 public class RobotMap {
 	static final int
 	// NAME                            = PORT
@@ -48,18 +50,23 @@ public class RobotMap {
 	driveTrainEncoderDistancePerPulse  = 6 * Math.PI / 2048,
 
 	deadBandValue                      = 0.15;
+	
+	public static boolean learnMode = false;
+	public Command lastCommand;
 
-	public static class Voltages {
+	public static class InitVoltages {
 		public static final double
 		shooterPivotRobot              = 0.80, // 0.68, // Lowest shooter position
 		shooterPivotGround             = 0.92, // 0.83, // Highest shooter position
 		shooterPivotMiddleLow          = 0.87, // 0.77, // Low Medium shooter position
 		shooterPivotMiddleHigh         = 0.84, // 0.72, // High Medium shooter position
+		shooterShiftInc                = 0.01, // Increment for manual override
 
 		collectArmPostion              = 0.75, // Where should the arm be to collect balls
 		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical)
 		gathererArmBeforeHitGround     = 0.87, // Lowest gatherer arm position (flat)
 		gathererArmMid                 = 0.51, //mid gatherer arm position (avg between high and low)
+		gathererShiftInc               = 0.05, // gathers shift increment
 
 		kickerRightMin                 = 1.0, // NEED TO CHANGE distance out when kicking
 		kickerRightMax                 = 0.0, // distance out when retracting
@@ -67,6 +74,21 @@ public class RobotMap {
 		kickerLeftMax                  = 1.0; // distance out when kicking (unmeasured)
 		
 	}
+	
+	// save variables to hold preferences values.
+	public static class Voltages {
+		public static double
+		shooterPivotRobot, 			// Lowest shooter position
+		shooterPivotGround, 		// Highest shooter position
+		shooterPivotMiddleLow,      // Low Medium shooter position
+		shooterPivotMiddleHigh,     // High Medium shooter position
+	
+		collectArmPostion,          // Where should the arm be to collect balls
+		gathererArmBeforeHitRobot,  // Highest gatherer arm position (vertical)
+		gathererArmBeforeHitGround, // Lowest gatherer arm position (flat)
+		gathererArmMid;             //mid gatherer arm position (avg between high and low)	
+	}
+
 	
 	public static class PDP {
 		public static class Port {

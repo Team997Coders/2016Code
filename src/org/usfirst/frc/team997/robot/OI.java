@@ -1,13 +1,13 @@
 package org.usfirst.frc.team997.robot;
 
-import org.usfirst.frc.team997.robot.commands.CollectBall;
 import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
+import org.usfirst.frc.team997.robot.commands.LearnShift;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
-import org.usfirst.frc.team997.robot.commands.SpinUpShooter;
 import org.usfirst.frc.team997.robot.commands.SpinUpShooterToggle;
+import org.usfirst.frc.team997.robot.commands.ToggleLearnMode;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -24,7 +24,7 @@ public class OI {
 	                     shootAngleMiddleHighButton, shootAngleLowButton;
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
-	private final Button shootButton;
+	private final Button shootButton, learnUpButton, learnDwnButton;
 	private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
 	//private final Button arm;
 	//private final Button shifterButton;
@@ -95,6 +95,14 @@ public class OI {
 		//SmartDashboard.putData("Gatherer Arm to Collect", new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		//SmartDashboard.putData("Gatherer Arm High", new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
 		SmartDashboard.putData("Kill the gatherer", new KillGather());
+		
+		// Add in the learn mode to reset mid shooter heights
+		SmartDashboard.putBoolean("Learn Mode", RobotMap.learnMode);
+		SmartDashboard.putData("Learn Mode Toggle", new ToggleLearnMode());
+		learnUpButton = new JoystickButton(driverTwo, 5);
+		learnUpButton.whenPressed(new LearnShift(true)); // true = up
+		learnDwnButton = new JoystickButton(driverTwo, 7);
+		learnDwnButton.whenPressed(new LearnShift(false));
 		
 	}
 
