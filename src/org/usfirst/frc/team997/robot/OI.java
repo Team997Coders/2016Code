@@ -1,12 +1,10 @@
 package org.usfirst.frc.team997.robot;
 
-import org.usfirst.frc.team997.robot.commands.CollectBall;
 import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
-import org.usfirst.frc.team997.robot.commands.SpinUpShooter;
 import org.usfirst.frc.team997.robot.commands.SpinUpShooterToggle;
 
 import edu.wpi.first.wpilibj.Joystick;

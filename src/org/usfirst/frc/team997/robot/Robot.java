@@ -4,7 +4,6 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.commands.AutoCheval;
 import org.usfirst.frc.team997.robot.commands.AutoDriveBackwards;
 import org.usfirst.frc.team997.robot.commands.AutoDriveForward;
-import org.usfirst.frc.team997.robot.commands.DriveToSetpoint;
 import org.usfirst.frc.team997.robot.commands.NullCommand;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.Gatherer;
@@ -52,7 +51,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 
-	private Command autonomousCommand;
+	public Command autonomousCommand;
 	private SendableChooser chooser;
 
 	//public static Compressor compressor;
