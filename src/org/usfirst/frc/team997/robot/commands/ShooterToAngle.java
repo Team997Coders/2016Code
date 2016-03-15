@@ -21,22 +21,27 @@ public class ShooterToAngle extends Command {
     	requires(Robot.shooterPivot);
     }
 
-    protected void initialize() {
+    @Override
+	protected void initialize() {
         Robot.shooterPivot.setSetpoint(angle);
         Robot.shooterPivot.enable();
     }
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	Robot.shooterPivot.setSetpoint(angle);
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
     	return Robot.shooterPivot.onTarget();
     }
 
-    protected void end() {}
+    @Override
+	protected void end() {}
 
-    protected void interrupted() {
+    @Override
+	protected void interrupted() {
         this.end();
     }
 }

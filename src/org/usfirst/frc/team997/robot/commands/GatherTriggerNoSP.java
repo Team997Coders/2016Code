@@ -11,17 +11,22 @@ public class GatherTriggerNoSP extends Command {
     	requires(Robot.gathererArm);
     }
 
-    protected void initialize() {}
+    @Override
+	protected void initialize() {}
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	Robot.gathererArm.safeVoltage(OI.deadBand(Robot.oi.getRawTriggerAxis()));
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return false;
     }
 
-    protected void end() {}
+    @Override
+	protected void end() {}
 
-    protected void interrupted() {}
+    @Override
+	protected void interrupted() {}
 }

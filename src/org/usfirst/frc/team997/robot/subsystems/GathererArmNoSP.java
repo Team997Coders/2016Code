@@ -17,7 +17,8 @@ public class GathererArmNoSP extends Subsystem {
 		armMotor.set(voltage);
 	}
 	
-    public void initDefaultCommand() {
+    @Override
+	public void initDefaultCommand() {
     	setDefaultCommand(new GatherTriggerNoSP());
     }
     

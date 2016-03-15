@@ -13,9 +13,11 @@ public class TankSquared extends Command {
     	requires(Robot.driveTrain);
     }
 
-    protected void initialize() {}
+    @Override
+	protected void initialize() {}
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	
     	double leftSq = Robot.oi.leftY()*Robot.oi.leftY();
     	double rightSq = Robot.oi.rightY()*Robot.oi.rightY();
@@ -31,11 +33,14 @@ public class TankSquared extends Command {
     	Robot.driveTrain.driveVoltage(leftSq, rightSq);
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return false;
     }
 
-    protected void end() {}
+    @Override
+	protected void end() {}
 
-    protected void interrupted() {}
+    @Override
+	protected void interrupted() {}
 }

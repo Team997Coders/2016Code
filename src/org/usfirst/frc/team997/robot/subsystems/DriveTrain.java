@@ -77,6 +77,7 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 	}
 
+	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ArcadeDrive());
 		//setDefaultCommand(new TankDrive());
