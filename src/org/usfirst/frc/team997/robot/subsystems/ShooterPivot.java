@@ -23,7 +23,7 @@ public class ShooterPivot extends PIDSubsystem {
 		getPIDController().setContinuous(false);
 		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotRobot, RobotMap.Voltages.shooterPivotGround);
 		getPIDController().setOutputRange(-0.5, 0.5);
-		 getPIDController().setAbsoluteTolerance(absoluteTolerance);
+		//getPIDController().setAbsoluteTolerance(absoluteTolerance);
 		getPIDController().setPercentTolerance(5.0);
 
 		pivotMotor = new Talon(aimingMotorPort);
