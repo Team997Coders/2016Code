@@ -80,7 +80,8 @@ public class Shooter extends Subsystem {
 		//SmartDashboard.putNumber("SENSOR SHOOTER VALUE", shooterSensor.getAccumulatorValue());
     }
 	
-    public void initDefaultCommand() {
+    @Override
+	public void initDefaultCommand() {
     	// SpinUpShooter will spin up or slow down the shooter, based on SpinUpShooterToggle.
     	setDefaultCommand(new SpinUpShooter());
     }

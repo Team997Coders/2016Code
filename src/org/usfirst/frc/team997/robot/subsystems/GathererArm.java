@@ -37,18 +37,21 @@ public class GathererArm extends PIDSubsystem {
 //    	return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
 //    }
 
-    public void initDefaultCommand() {
+    @Override
+	public void initDefaultCommand() {
     	setDefaultCommand(new GatherTrigger());
     }
     
-    protected double returnPIDInput() {
+    @Override
+	protected double returnPIDInput() {
     	//return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmBeforeHitRobot;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     	
     	// remember the arm feedback is backwards!
     	return armAngle.get();
     }
   
-    protected void usePIDOutput(double voltage) {
+    @Override
+	protected void usePIDOutput(double voltage) {
     	armMotor.pidWrite(voltage);
     }
     

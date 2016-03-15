@@ -14,10 +14,12 @@ public class ArcadeDrive extends Command {
     	requires(Robot.driveTrain);
     }
 
-    protected void initialize() {
+    @Override
+	protected void initialize() {
     }
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	// leftStick moves up  than motors dance on forward 
     	// leftStick moves down than motors go backwards
     	// rightStick moves to the left leftMotor goes back and right motor goes forward 
@@ -41,15 +43,18 @@ public class ArcadeDrive extends Command {
     	}
     }
     
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return false;
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    @Override
+	protected void end() {
     }
     
-    protected void interrupted() {
+    @Override
+	protected void interrupted() {
     	Robot.driveTrain.driveVoltage(0,0);
     }
 }

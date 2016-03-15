@@ -6,13 +6,18 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class NullCommand extends Command {
-    protected void initialize() {}
-    protected void execute() {}
+    @Override
+	protected void initialize() {}
+    @Override
+	protected void execute() {}
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return true;
     }
 
-    protected void end() {}
-    protected void interrupted() {}
+    @Override
+	protected void end() {}
+    @Override
+	protected void interrupted() {}
 }

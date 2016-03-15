@@ -43,6 +43,7 @@ public class ShooterPivot extends PIDSubsystem {
 //		return Math.abs(getPosition() - getSetpoint()) < absoluteTolerance;
 //	}
 
+	@Override
 	protected double returnPIDInput() {
 		double angle = shootAngle.get();
 		if (angle < .5) {
@@ -51,10 +52,12 @@ public class ShooterPivot extends PIDSubsystem {
 		return angle;
 	}
 
+	@Override
 	protected void usePIDOutput(double output) {
 		pivotMotor.pidWrite(output);
 	}
 
+	@Override
 	public void initDefaultCommand() {}
 
 	public void lockArmPosition() {

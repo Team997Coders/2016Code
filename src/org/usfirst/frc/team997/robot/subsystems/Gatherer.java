@@ -25,6 +25,7 @@ public class Gatherer extends Subsystem {
 		}
 	}
 
+	@Override
 	public void initDefaultCommand() {}
 }
 

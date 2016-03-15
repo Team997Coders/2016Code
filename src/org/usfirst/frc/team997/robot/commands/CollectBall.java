@@ -20,9 +20,11 @@ public class CollectBall extends Command {
     	requires(Robot.gatherer);
     }
 
-    protected void initialize() {run = true;}
+    @Override
+	protected void initialize() {run = true;}
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	//makes sure kicker is retracted before gathering
     	Robot.shooter.retractKicker();
     	
@@ -36,18 +38,21 @@ public class CollectBall extends Command {
     	Robot.gatherer.safeValue(RobotMap.gathererInSpeed);
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
     	//stops when the shooter sensor detects the ball
         return !run || Robot.shooter.isBallCollected();
     }
 
-    protected void end() {
+    @Override
+	protected void end() {
     	run = false;
     	Robot.shooter.slowDown();
     	Robot.gatherer.safeValue(0);
     }
 
-    protected void interrupted() {
+    @Override
+	protected void interrupted() {
     	this.end();
     }
     

@@ -25,13 +25,15 @@ public class DriveToSetpointBackwards extends Command {
     }
     
     // Called just before this Command runs the first time
-    protected void initialize() {
+    @Override
+	protected void initialize() {
     	//makes sure we can trust the encoder values
     	Robot.driveTrain.resetEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    @Override
+	protected void execute() {
     	
     	double adjust = Robot.driveTrain.getDeltaEncoderRate() / 10;
     	final double threshold = .1;
@@ -47,18 +49,21 @@ public class DriveToSetpointBackwards extends Command {
 
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return Robot.driveTrain.getAverageEncoderDistance() < setpoint;
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    @Override
+	protected void end() {
     	Robot.driveTrain.driveVoltage(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted() {
+    @Override
+	protected void interrupted() {
     	Robot.driveTrain.driveVoltage(0, 0);
     }
 }

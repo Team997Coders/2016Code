@@ -17,22 +17,27 @@ public class GathererToAngle extends Command {
     	requires(Robot.gathererArm);
     }
 
-    protected void initialize() {
+    @Override
+	protected void initialize() {
         Robot.gathererArm.setSetpoint(angle);
         Robot.gathererArm.enable();
     }
 
-    protected void execute() {
+    @Override
+	protected void execute() {
         Robot.gathererArm.setSetpoint(angle);
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return Robot.gathererArm.onTarget();
     }
 
-    protected void end() {}
+    @Override
+	protected void end() {}
 
-    protected void interrupted() {
+    @Override
+	protected void interrupted() {
         this.end();
     }
 }

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class CollectBallToggle extends Command {
 	private CollectBall cb = new CollectBall();
 
+	@Override
 	protected void initialize() {
 		if (cb.run) {
 			cb.run = false;
@@ -14,9 +15,13 @@ public class CollectBallToggle extends Command {
 		}
 	}
 
+	@Override
 	protected void execute() {}
+	@Override
 	protected boolean isFinished() {return true;}
+	@Override
 	protected void end() {}
+	@Override
 	protected void interrupted() {
 		this.end();
 	}

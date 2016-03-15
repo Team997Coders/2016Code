@@ -14,29 +14,34 @@ public class Shoot extends Command {
     	timer = new Timer();
     }
 
-    protected void initialize() {
+    @Override
+	protected void initialize() {
     	//resetting the timer in case of weirdness
     	timer.reset();
     	//starting the timer for the shooter to operate
     	timer.start();
     }
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	Robot.shooter.kickKicker();
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return timer.get() > 4;
     }
 
-    protected void end() {
+    @Override
+	protected void end() {
     	SpinUpShooter.globalSpinUp = false;
     	Robot.shooter.slowDown();
     	Robot.shooter.retractKicker();
     	timer.stop();
     }
 
-    protected void interrupted() {
+    @Override
+	protected void interrupted() {
     	Robot.shooter.slowDown();
     }
 }

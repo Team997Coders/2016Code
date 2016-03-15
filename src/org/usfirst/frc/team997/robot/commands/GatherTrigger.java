@@ -19,9 +19,11 @@ public class GatherTrigger extends Command {
     	requires(Robot.gathererArm);
     }
 
-    protected void initialize() {}
+    @Override
+	protected void initialize() {}
 
-    protected void execute() {
+    @Override
+	protected void execute() {
     	double dead = OI.deadBand(Robot.oi.getRawTriggerAxis());
     	SmartDashboard.putNumber("GatherTrigger", dead);
     	if (dead != 0) {
@@ -44,11 +46,14 @@ public class GatherTrigger extends Command {
     	}
     }
 
-    protected boolean isFinished() {
+    @Override
+	protected boolean isFinished() {
         return Robot.gathererArm.onTarget();
     }
 
-    protected void end() {}
+    @Override
+	protected void end() {}
 
-    protected void interrupted() {}
+    @Override
+	protected void interrupted() {}
 }

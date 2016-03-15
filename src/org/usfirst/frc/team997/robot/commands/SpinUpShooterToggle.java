@@ -9,15 +9,20 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpinUpShooterToggle extends Command {
     public SpinUpShooterToggle() {}
 
-    protected void initialize() {
+    @Override
+	protected void initialize() {
     	SpinUpShooter.globalSpinUp = !SpinUpShooter.globalSpinUp;
     }
     
-    protected void execute() {}
+    @Override
+	protected void execute() {}
     
-    protected boolean isFinished() {return true;}
+    @Override
+	protected boolean isFinished() {return true;}
     
-    protected void end() {}
+    @Override
+	protected void end() {}
     
-    protected void interrupted() {}
+    @Override
+	protected void interrupted() {}
 }
