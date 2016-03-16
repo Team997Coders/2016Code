@@ -16,8 +16,6 @@ public class LearnShift extends Command {
     	// up = true, down = false
     	this.isDirectionUp = dir;
     	
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.shooterPivot);
     }
 
@@ -26,11 +24,10 @@ public class LearnShift extends Command {
     	current = Robot.shooterPivot.getPosition();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// we are not learning... just drop through
-    	if (RobotMap.learnMode == false) {
-    		this.end();
+    	if (!RobotMap.learnMode) {
+    		return;
     	}
     	
     	// get the current position of the shooter pivot
@@ -42,42 +39,29 @@ public class LearnShift extends Command {
     	}
 
     	// compute the middle position between the top and bottom of the shooter pivot positions
-    	double midpoint = (RobotMap.Voltages.shooterPivotGround + (RobotMap.Voltages.shooterPivotRobot - RobotMap.Voltages.shooterPivotGround)/2.0);
+    	double midpoint = (RobotMap.Voltages.shooterPivotGround + RobotMap.Voltages.shooterPivotRobot) / 2.0;
 
     	// should we re-define the direction flag?  I wish java had the binary option like '?' in perl.
     	double incdir = 1.0;
     	if (!this.isDirectionUp) {
     		incdir = -incdir;
     	}
-    	
+
     	// this will store the new setpoint
-    	double newSetpoint =  current + incdir * RobotMap.InitVoltages.shooterShiftInc;
+    	double newSetpoint = current + incdir * RobotMap.InitVoltages.shooterShiftInc;
     	
-    		// shift up.  Use high setpoint if we are above the middle point, else se the lower setpoint
+    	// shift up.  Use high setpoint if we are above the middle point, else set the lower setpoint
    		if (current < midpoint) { 
    			RobotMap.Voltages.shooterPivotMiddleLow = newSetpoint;
-   		}
-   		else if (current > midpoint) {
+   		} else if (current > midpoint) {
    			RobotMap.Voltages.shooterPivotMiddleHigh = newSetpoint;
    		}
 
    		// update the setpoint while I am at it
 	    Robot.shooterPivot.setSetpoint(newSetpoint);
-    	
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	this.end();
-    }
+    protected boolean isFinished() { return true; }
+    protected void end() {}
+    protected void interrupted() { this.end(); }
 }
