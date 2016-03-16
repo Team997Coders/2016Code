@@ -21,12 +21,7 @@ public class ToggleLearnMode extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (RobotMap.learnMode == false) {
-    		RobotMap.learnMode = true;
-    	}
-    	else {
-    		RobotMap.learnMode = false;
-    	}
+    	RobotMap.learnMode = !RobotMap.learnMode;
     	SmartDashboard.putBoolean("Learn Mode", RobotMap.learnMode);
     }
 
