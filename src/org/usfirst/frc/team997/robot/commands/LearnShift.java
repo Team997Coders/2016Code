@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LearnShift extends Command {
 	private double current;  // current pivot position
-	private boolean direction; // which direction are we going to move?
+	private boolean isDirectionUp; // which direction are we going to move?
 
     public LearnShift(boolean dir) {
     	// up = true, down = false
-    	this.direction = dir;
+    	this.isDirectionUp = dir;
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -46,8 +46,8 @@ public class LearnShift extends Command {
 
     	// should we re-define the direction flag?  I wish java had the binary option like '?' in perl.
     	double incdir = 1.0;
-    	if (this.direction == false ) {
-    		incdir = -1.0;
+    	if (!this.isDirectionUp) {
+    		incdir = -incdir;
     	}
     	
     	// this will store the new setpoint
