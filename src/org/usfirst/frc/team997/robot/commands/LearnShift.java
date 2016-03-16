@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LearnShift extends Command {
-	private double current;  // current pivot position
 	private boolean isDirectionUp; // which direction are we going to move?
 
     public LearnShift(boolean dir) {
@@ -19,10 +18,7 @@ public class LearnShift extends Command {
     	requires(Robot.shooterPivot);
     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	current = Robot.shooterPivot.getPosition();
-    }
+    protected void initialize() {}
 
     protected void execute() {
     	// we are not learning... just drop through
@@ -30,8 +26,7 @@ public class LearnShift extends Command {
     		return;
     	}
     	
-    	// get the current position of the shooter pivot
-    	current = Robot.shooterPivot.getPosition();
+    	double current = Robot.shooterPivot.getPosition();  // current pivot position
 
     	// check limits
     	if (current >= RobotMap.Voltages.shooterPivotRobot || current <= RobotMap.Voltages.shooterPivotGround) {
