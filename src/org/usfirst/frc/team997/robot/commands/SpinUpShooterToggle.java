@@ -1,5 +1,8 @@
 package org.usfirst.frc.team997.robot.commands;
 
+import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,22 +10,40 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 
 public class SpinUpShooterToggle extends Command {
-    public SpinUpShooterToggle() {}
+	public SpinUpShooterToggle() {
+	}
 
-    @Override
+	@Override
 	protected void initialize() {
-    	SpinUpShooter.globalSpinUp = !SpinUpShooter.globalSpinUp;
-    }
-    
-    @Override
-	protected void execute() {}
-    
-    @Override
-	protected boolean isFinished() {return true;}
-    
-    @Override
-	protected void end() {}
-    
-    @Override
-	protected void interrupted() {}
+		Shooter.globalSpinUp++;
+
+		if (Shooter.globalSpinUp > 2) {
+			Shooter.globalSpinUp = 0;
+		}
+
+	}
+
+	@Override
+	protected void execute() {
+		if (Robot.shooter.globalSpinUp == 2) {
+			Robot.shooter.speedUp();
+		} else if (Robot.shooter.globalSpinUp == 1) {
+			Robot.shooter.speedSlow();
+		} else {
+			Robot.shooter.stop();
+		}
+	}
+
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
+
+	@Override
+	protected void end() {
+	}
+
+	@Override
+	protected void interrupted() {
+	}
 }

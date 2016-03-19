@@ -47,7 +47,7 @@ public class CollectBall extends Command {
     @Override
 	protected void end() {
     	run = false;
-    	Robot.shooter.slowDown();
+    	Robot.shooter.stop();
     	Robot.gatherer.safeValue(0);
     }
 

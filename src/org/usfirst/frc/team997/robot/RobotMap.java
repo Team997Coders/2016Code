@@ -41,6 +41,7 @@ public class RobotMap {
 	public static final double
 	shooterInSpeed                     = 0.45, //shooter
 	shooterShootingSpeed               = 1.0, //shooter
+	shooterSlowSpeed                   = 0.5, //shooter
 	
 	gathererInSpeed                    = 0.4, //gatherer arm (?)
 
@@ -71,7 +72,15 @@ public class RobotMap {
 		kickerRightMin                 = 1.0, // NEED TO CHANGE distance out when kicking
 		kickerRightMax                 = 0.0, // distance out when retracting
 		kickerLeftMin                  = 0, // NEED TO CHANGE distance out when retracting (unmeasured)
-		kickerLeftMax                  = 1.0; // distance out when kicking (unmeasured)
+		kickerLeftMax                  = 1.0, // distance out when kicking (unmeasured)
+		
+		shooterPivotkP                 = -3.5, 
+		shooterPivotkI                 = 0.0,
+		shooterPivotkD                 = -0.3,
+		
+		gathererArmkP                  = 4.0,
+		gathererArmkI                  = 0.0,
+		gathererArmkD                  = 0.5;
 		
 	}
 	

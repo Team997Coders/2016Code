@@ -10,6 +10,8 @@ import org.usfirst.frc.team997.robot.subsystems.Gatherer;
 import org.usfirst.frc.team997.robot.subsystems.GathererArm;
 import org.usfirst.frc.team997.robot.subsystems.Shooter;
 import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
+import org.usfirst.frc.team997.robot.RobotPrefs;
+
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -39,12 +41,12 @@ public class Robot extends IterativeRobot {
 			RobotMap.leftEncoderFirstPort, RobotMap.leftEncoderSecondPort, RobotMap.rightEncoderFirstPort,
 			RobotMap.rightEncoderSecondPort);
 	public static final Gatherer gatherer = new Gatherer(RobotMap.rollerMotorPort);
-	public Preferences prefs;
+	public static Preferences prefs;
 
 	public static final GathererArm gathererArm = new GathererArm(RobotMap.gatherArmMotorPort,
 			RobotMap.gathererArmAnglePort);
 
-	public static ADXRS450_Gyro gyro;
+	//public static ADXRS450_Gyro gyro;
 
 	public static OI oi;
 
@@ -52,12 +54,14 @@ public class Robot extends IterativeRobot {
 	private SendableChooser chooser;
 
 	public static PowerDistributionPanel pdp;
-
+	
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		prefs = Preferences.getInstance();
 		
-		readPrefs();
+		oi = new OI();
+	
+		RobotPrefs.readPrefs();
 
 		chooser = new SendableChooser();
 		chooser.addObject("Forward", new AutoDriveForward());
@@ -67,8 +71,8 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Auto mode", chooser);
 
-		gyro = new ADXRS450_Gyro();
-		gyro.calibrate();  // Try not to access the gyro or move the robot during the calibration
+		//gyro = new ADXRS450_Gyro();
+		//gyro.calibrate();  // Try not to access the gyro or move the robot during the calibration
 							// One reference says that this could take 5 seconds to complete
 		
 		pdp = new PowerDistributionPanel();
@@ -90,18 +94,6 @@ public class Robot extends IterativeRobot {
 	 * These preferences are saved to the flash memory on the RoboRio and are persistant across reboot cycles.  We need to
 	 * add these values to the prefs dialog in the smart dashboard.
 	 */
-	private void readPrefs() {
-		// Gatherer Arm Positions
-		RobotMap.Voltages.gathererArmBeforeHitGround = prefs.getDouble("gathererArmBeforeHitGround", RobotMap.InitVoltages.gathererArmBeforeHitGround);
-		RobotMap.Voltages.gathererArmBeforeHitRobot = prefs.getDouble("gathererArmBeforeHitRobot", RobotMap.InitVoltages.gathererArmBeforeHitRobot);
-		RobotMap.Voltages.collectArmPostion = prefs.getDouble("collectArmPosition", RobotMap.InitVoltages.collectArmPostion);
-		
-		// Shooter Pivot Positions
-		RobotMap.Voltages.shooterPivotGround = prefs.getDouble("shooterPivotGround", RobotMap.InitVoltages.shooterPivotGround);
-		RobotMap.Voltages.shooterPivotMiddleLow = prefs.getDouble("shooterPivotMiddleLow", RobotMap.InitVoltages.shooterPivotMiddleLow);
-		RobotMap.Voltages.shooterPivotMiddleHigh = prefs.getDouble("shooterPivotMiddleHigh", RobotMap.InitVoltages.shooterPivotMiddleHigh);
-		RobotMap.Voltages.shooterPivotRobot = prefs.getDouble("shooterPivotRobot", RobotMap.InitVoltages.shooterPivotRobot);
-	}
 	
 	@Override
 	public void disabledInit() {
@@ -111,11 +103,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		smartDashboard();
+	
 	}
 
 	@Override
 	public void autonomousInit() {
-		gyro.reset();
+		//gyro.reset();
 		Robot.driveTrain.resetEncoders();
 		if (getSelected() != null) {
 			getSelected().start();
@@ -156,8 +150,10 @@ public class Robot extends IterativeRobot {
 		Robot.shooterPivot.smartDashboard();
 
 		// imu info put on the smartdashboard
-		SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
-		SmartDashboard.putNumber("Gyro Rate", Robot.gyro.getRate());
+		//SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+		//SmartDashboard.putNumber("Gyro Rate", Robot.gyro.getRate());
+		
+
 	}
 
 }

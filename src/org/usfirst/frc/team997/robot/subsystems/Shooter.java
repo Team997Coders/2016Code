@@ -1,7 +1,6 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.RobotMap;
-import org.usfirst.frc.team997.robot.commands.SpinUpShooter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Counter;
@@ -18,6 +17,8 @@ public class Shooter extends Subsystem {
 	private Counter shooterCounter;
 	private AnalogInput shooterBallSensor; // ball sensor
 	private Servo shooterKickerFirst, shooterKickerSecond;
+	
+	public static int globalSpinUp = 0;
 
     public Shooter(int shootSensorPort, int shootMotorPort, int shootServoFirstPort, int shootServoSecondPort){
     	//shooterSensor detects when ball is fully in shooter grasp
@@ -49,12 +50,17 @@ public class Shooter extends Subsystem {
     }
     
     public void speedUp(){
-    	//causes shooterMotor (controlling the shooter wheels) to speed up
+    	//causes shooterMotor (controlling the shooter wheels) to speed up)
     	shooterMotor.set(RobotMap.shooterShootingSpeed);
     }
     
-    public void slowDown(){
-    	//causes shooterMotor (controlling the shooter wheels) to slow down to stop
+    public void speedSlow(){
+    	//causes shooterMotor (controlling the shooter wheels) to speed up to slow shot speed)
+    	shooterMotor.set(RobotMap.shooterSlowSpeed);
+    }
+    
+    public void stop(){
+    	//causes shooterMotor (controlling the shooter wheels) to slow down to stop)
     	shooterMotor.set(0);
     }
     
@@ -78,11 +84,9 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("Shooter Ball Distance Sensor", shooterBallSensor.getAverageVoltage());
 		SmartDashboard.putBoolean("Shooter Ball Collected?", isBallCollected());
 		//SmartDashboard.putNumber("SENSOR SHOOTER VALUE", shooterSensor.getAccumulatorValue());
+		SmartDashboard.putNumber("Shooter Speed Value", (double) Shooter.globalSpinUp);
     }
 	
     @Override
-	public void initDefaultCommand() {
-    	// SpinUpShooter will spin up or slow down the shooter, based on SpinUpShooterToggle.
-    	setDefaultCommand(new SpinUpShooter());
-    }
+	public void initDefaultCommand() {}
 }
