@@ -26,7 +26,6 @@ public class OI {
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
 	private final Button shootButton, learnUpButton, learnDwnButton;
-	private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
 	private final Button spitBallButton;
 	//private final Button arm;
 	//private final Button shifterButton;
@@ -49,7 +48,7 @@ public class OI {
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
-		
+
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
 		shootButton = new JoystickButton(driverTwo, 6);
@@ -80,16 +79,17 @@ public class OI {
 		//SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		
 		//sets arm to before hits ground position
-		gatherArmGround = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
-		gatherArmGround.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
+		//gatherArmGround = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
+		//gatherArmGround.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		
 		//sets arm to collecting position
-		gatherArmMid = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
-		gatherArmMid.whenPressed(new GathererToAngle(RobotMap.Voltages.collectArmPostion));
+		//gatherArmMid = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
+		//gatherArmMid.whenPressed(new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		
 		//sets arm to before hits robot position
-		gatherArmRobot = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
-		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+		//gatherArmRobot = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
+		//gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+
 		
 		//smart dashboard stuff for the shooter
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
