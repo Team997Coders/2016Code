@@ -25,7 +25,7 @@ public class OI {
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
 	private final Button shootButton, learnUpButton, learnDwnButton;
-	private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
+	//private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
 	//private final Button arm;
 	//private final Button shifterButton;
 
