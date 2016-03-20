@@ -53,7 +53,9 @@ public class RobotMap {
 	deadBandValue                      = 0.15;
 	
 	public static boolean learnMode = false;
-	public Command lastCommand;
+	public static boolean PrefsWritten = false;
+	public static boolean AutoRan = false;
+	public static boolean TeleopRan = false;
 
 	public static class InitVoltages {
 		public static final double
