@@ -7,6 +7,7 @@ import org.usfirst.frc.team997.robot.commands.LearnShift;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
 import org.usfirst.frc.team997.robot.commands.SpinUpShooterToggle;
+import org.usfirst.frc.team997.robot.commands.SpitBall;
 import org.usfirst.frc.team997.robot.commands.ToggleLearnMode;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,7 +26,7 @@ public class OI {
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
 	private final Button shootButton, learnUpButton, learnDwnButton;
-	//private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
+	private final Button spitBallButton;
 	//private final Button arm;
 	//private final Button shifterButton;
 
@@ -40,6 +41,14 @@ public class OI {
 		collectBallButton = new JoystickButton(driverOne, 4);
 		collectBallButton.whenPressed(new CollectBallToggle());
 		
+		//kicks kicker, sets arm to high, shoots ball slow
+		spitBallButton = new JoystickButton(driverOne, 1);//IS THIS A GOOD BUTTON TO BIND TO??? TEST
+		spitBallButton.whenPressed(new SpitBall());
+		SmartDashboard.putData("Spit Ball", spitBallButton);
+		
+		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
+		//shifterButton.whenPressed(new ToggleShift()); 
+
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
 		shootButton = new JoystickButton(driverTwo, 6);
@@ -53,33 +62,34 @@ public class OI {
 		//sets shooter angle to medium position
 		shootAngleMiddleLowButton = new JoystickButton (driverTwo, 2);
 		shootAngleMiddleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow));
-		SmartDashboard.putData("Shooter To Middle", shootAngleMiddleLowButton);
+		//SmartDashboard.putData("Shooter To Middle", shootAngleMiddleLowButton);
 		
 		shootAngleMiddleHighButton = new JoystickButton(driverTwo, 4);
 		shootAngleMiddleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
-		SmartDashboard.putData("Shooter to Middle High", shootAngleMiddleHighButton);
+		//SmartDashboard.putData("Shooter to Middle High", shootAngleMiddleHighButton);
 		
 		//sets shooter angle to low position
 		shootAngleLowButton = new JoystickButton(driverTwo, 3);
 		shootAngleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
-		SmartDashboard.putData("Shooter to Ground", shootAngleLowButton);
+		//SmartDashboard.putData("Shooter to Ground", shootAngleLowButton);
 		
 		//sets shooter angle to high position
 		shootAngleHighButton = new JoystickButton (driverTwo, 1);
 		shootAngleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
-		SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
+		//SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		
 		//sets arm to before hits ground position
-		//gatherArmGround = new JoystickButton(driverOne, 5);
+		//gatherArmGround = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
 		//gatherArmGround.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		
 		//sets arm to collecting position
-		//gatherArmMid = new JoystickButton(driverOne, 5);
+		//gatherArmMid = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
 		//gatherArmMid.whenPressed(new GathererToAngle(RobotMap.Voltages.collectArmPostion));
 		
 		//sets arm to before hits robot position
-		//gatherArmRobot = new JoystickButton(driverOne, 5);
+		//gatherArmRobot = new JoystickButton(driverOne, 5);//NEED TO FIX ALL FIVES
 		//gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+
 		
 		//smart dashboard stuff for the shooter
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
@@ -115,6 +125,10 @@ public class OI {
 		} else {
 			return 0;
 		}
+	}
+	
+	public int getPOV() {
+		return driverTwo.getPOV();
 	}
 	
 	public double leftY() {

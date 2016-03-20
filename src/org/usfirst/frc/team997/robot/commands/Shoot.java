@@ -34,14 +34,14 @@ public class Shoot extends Command {
 
     @Override
 	protected void end() {
-    	SpinUpShooter.globalSpinUp = false;
-    	Robot.shooter.slowDown();
+    	Robot.shooter.globalSpinUp = 0;
+    	Robot.shooter.stop();
     	Robot.shooter.retractKicker();
     	timer.stop();
     }
 
     @Override
 	protected void interrupted() {
-    	Robot.shooter.slowDown();
+    	Robot.shooter.stop();
     }
 }
