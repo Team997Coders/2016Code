@@ -12,7 +12,6 @@ import org.usfirst.frc.team997.robot.subsystems.Shooter;
 import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
 import org.usfirst.frc.team997.robot.RobotPrefs;
 
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -46,7 +45,7 @@ public class Robot extends IterativeRobot {
 	public static final GathererArm gathererArm = new GathererArm(RobotMap.gatherArmMotorPort,
 			RobotMap.gathererArmAnglePort);
 
-	//public static ADXRS450_Gyro gyro;
+	// public static ADXRS450_Gyro gyro;
 
 	public static OI oi;
 
@@ -54,47 +53,54 @@ public class Robot extends IterativeRobot {
 	private SendableChooser chooser;
 
 	public static PowerDistributionPanel pdp;
-	
+
 	@Override
 	public void robotInit() {
 		prefs = Preferences.getInstance();
-		
+
 		oi = new OI();
-	
-		RobotPrefs.readPrefs();
+
+		RobotPrefs.initPrefs();
 
 		chooser = new SendableChooser();
 		chooser.addObject("Forward", new AutoDriveForward());
-		chooser.addDefault("Backward", new AutoDriveBackwards()); //use this for low bar
+		chooser.addDefault("Backward", new AutoDriveBackwards()); // use this
+																	// for low
+																	// bar
 		chooser.addObject("Cheval", new AutoCheval());
 		chooser.addObject("Nothing", new NullCommand());
 
 		SmartDashboard.putData("Auto mode", chooser);
 
-		//gyro = new ADXRS450_Gyro();
-		//gyro.calibrate();  // Try not to access the gyro or move the robot during the calibration
-							// One reference says that this could take 5 seconds to complete
-		
+		// gyro = new ADXRS450_Gyro();
+		// gyro.calibrate(); // Try not to access the gyro or move the robot
+		// during the calibration
+		// One reference says that this could take 5 seconds to complete
+
 		pdp = new PowerDistributionPanel();
 
-        camera = CameraServer.getInstance();
-        camera.setQuality(42);
-        camera.startAutomaticCapture("cam1");        
+		camera = CameraServer.getInstance();
+		camera.setQuality(42);
+		camera.startAutomaticCapture("cam1");
 
 		// Need to reset the servo's position to be ready to capture a ball.
 		// Retracts kicker servos.
 		Robot.shooter.retractKicker();
 
 		autonomousCommand = new AutoCheval();
-		
+
 		RobotMap.learnMode = false;
+		RobotMap.PrefsWritten = false;
+		RobotMap.AutoRan = false;
+		RobotMap.TeleopRan = false;
 	}
 
 	/*
-	 * These preferences are saved to the flash memory on the RoboRio and are persistant across reboot cycles.  We need to
-	 * add these values to the prefs dialog in the smart dashboard.
+	 * These preferences are saved to the flash memory on the RoboRio and are
+	 * persistant across reboot cycles. We need to add these values to the prefs
+	 * dialog in the smart dashboard.
 	 */
-	
+
 	@Override
 	public void disabledInit() {
 
@@ -103,13 +109,17 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		RobotPrefs.readPrefs();
 		smartDashboard();
-	
+		if (RobotMap.PrefsWritten == false && RobotMap.TeleopRan == true) {
+			RobotPrefs.writePrefs();
+			RobotMap.PrefsWritten = true;
+		}
 	}
 
 	@Override
 	public void autonomousInit() {
-		//gyro.reset();
+		// gyro.reset();
 		Robot.driveTrain.resetEncoders();
 		if (getSelected() != null) {
 			getSelected().start();
@@ -125,6 +135,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		smartDashboard();
+		RobotMap.AutoRan = true;
 	}
 
 	@Override
@@ -136,6 +147,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		smartDashboard();
+		RobotMap.TeleopRan = true;
 	}
 
 	@Override
@@ -150,9 +162,8 @@ public class Robot extends IterativeRobot {
 		Robot.shooterPivot.smartDashboard();
 
 		// imu info put on the smartdashboard
-		//SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
-		//SmartDashboard.putNumber("Gyro Rate", Robot.gyro.getRate());
-		
+		// SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngle());
+		// SmartDashboard.putNumber("Gyro Rate", Robot.gyro.getRate());
 
 	}
 

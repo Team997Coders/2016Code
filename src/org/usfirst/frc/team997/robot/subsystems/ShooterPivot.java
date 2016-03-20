@@ -15,18 +15,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterPivot extends PIDSubsystem {
 	private Talon pivotMotor;
 	private AnalogPotentiometer shootAngle;
-	private static final double absoluteTolerance = 0.01;
 
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
 		// should the 'P' be negative??
 		super("shooterPivot", 
-				RobotMap.InitVoltages.shooterPivotkP, 
-				RobotMap.InitVoltages.shooterPivotkI, 
-				RobotMap.InitVoltages.shooterPivotkD);
+				RobotMap.Voltages.shooterPivotkP, 
+				RobotMap.Voltages.shooterPivotkI, 
+				RobotMap.Voltages.shooterPivotkD);
 		getPIDController().setContinuous(false);
 		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotRobot, RobotMap.Voltages.shooterPivotGround);
 		getPIDController().setOutputRange(-0.5, 0.5);
-		//getPIDController().setAbsoluteTolerance(absoluteTolerance);
 		getPIDController().setPercentTolerance(5.0);
 
 		pivotMotor = new Talon(aimingMotorPort);

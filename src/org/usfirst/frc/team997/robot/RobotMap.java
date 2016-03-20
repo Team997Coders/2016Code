@@ -95,7 +95,16 @@ public class RobotMap {
 		collectArmPostion,          // Where should the arm be to collect balls
 		gathererArmBeforeHitRobot,  // Highest gatherer arm position (vertical)
 		gathererArmBeforeHitGround, // Lowest gatherer arm position (flat)
-		gathererArmMid;             //mid gatherer arm position (avg between high and low)	
+		gathererArmMid,             //mid gatherer arm position (avg between high and low)	
+
+		shooterPivotkP, 
+		shooterPivotkI,
+		shooterPivotkD,
+		
+		gathererArmkP,
+		gathererArmkI,
+		gathererArmkD;
+
 	}
 
 	
