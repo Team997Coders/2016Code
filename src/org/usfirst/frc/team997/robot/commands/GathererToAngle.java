@@ -9,6 +9,7 @@ public class GathererToAngle extends Command {
 	public static GathererToAngle low() { return new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround); }
 	public static GathererToAngle high() { return new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot); }
 	public static GathererToAngle mid() {return new GathererToAngle(RobotMap.Voltages.gathererArmMid); }
+	public static GathererToAngle collect() {return new GathererToAngle(RobotMap.Voltages.collectArmPostion); }
 
 	private final double angle;
 

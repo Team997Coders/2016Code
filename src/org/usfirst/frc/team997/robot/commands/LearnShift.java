@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
+import org.usfirst.frc.team997.robot.subsystems.ShooterPivot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,7 +19,9 @@ public class LearnShift extends Command {
     	requires(Robot.shooterPivot);
     }
 
-    protected void initialize() {}
+    protected void initialize() {
+    	Robot.shooterPivot.enable();
+    }
 
     protected void execute() {
     	// we are not learning... just drop through
@@ -34,7 +37,7 @@ public class LearnShift extends Command {
     	}
 
     	// compute the middle position between the top and bottom of the shooter pivot positions
-    	double midpoint = (RobotMap.Voltages.shooterPivotGround + RobotMap.Voltages.shooterPivotRobot) / 2.0;
+    	double midpoint = RobotMap.Voltages.shooterPivotGround + (RobotMap.Voltages.shooterPivotRobot - RobotMap.Voltages.shooterPivotGround) / 2.0;
 
     	// should we re-define the direction flag?  I wish java had the binary option like '?' in perl.
     	double incdir = 1.0;
@@ -54,6 +57,7 @@ public class LearnShift extends Command {
 
    		// update the setpoint while I am at it
 	    Robot.shooterPivot.setSetpoint(newSetpoint);
+	    current = newSetpoint;
     }
 
     protected boolean isFinished() { return true; }

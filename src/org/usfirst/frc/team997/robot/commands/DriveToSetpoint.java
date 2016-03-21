@@ -27,21 +27,28 @@ public class DriveToSetpoint extends Command {
     @Override
 	protected void initialize() {
     	Robot.driveTrain.resetEncoders();
+    	Robot.gyro.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
-    	double adjust = Robot.driveTrain.getDeltaEncoderRate() / 10;
+     	final double threshold = 0.1;
+     	int sign = (int) Math.signum(this.setpoint); //-1, 0, 1 depending on sign of the input
 
-    	final double threshold = .1;
+    	//final double Kp = 0.03;
+    	
+    	//double angle = Robot.gyro.getAngle(); // get current heading
+        //double adjust = Kp*angle;
+    	double adjust = Robot.driveTrain.getDeltaEncoderRate() / 10;
+        
     	// ensure doesn't drastically swerve from readings.
     	if (adjust > threshold) adjust = threshold;
     	else if (adjust < -threshold) adjust = -threshold;
     	
     	SmartDashboard.putNumber("Gyro Drive Straight Adjustment: ", adjust);
 
-    	Robot.driveTrain.driveVoltage(this.speed - adjust, this.speed + adjust);
+    	Robot.driveTrain.driveVoltage(sign*(this.speed - adjust), sign*(this.speed + adjust));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -54,9 +61,7 @@ public class DriveToSetpoint extends Command {
     @Override
 	protected void end() {
     	Robot.driveTrain.driveVoltage(0, 0);
-    }
-
-    // Called when another command which requires one or more of the same
+    }    // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
 	protected void interrupted() {

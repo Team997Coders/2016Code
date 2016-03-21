@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 	public static final GathererArm gathererArm = new GathererArm(RobotMap.gatherArmMotorPort,
 			RobotMap.gathererArmAnglePort);
 
-	// public static ADXRS450_Gyro gyro;
+	public static ADXRS450_Gyro gyro;
 
 	public static OI oi;
 
@@ -72,8 +72,8 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Auto mode", chooser);
 
-		// gyro = new ADXRS450_Gyro();
-		// gyro.calibrate(); // Try not to access the gyro or move the robot
+		gyro = new ADXRS450_Gyro();
+		gyro.calibrate(); // Try not to access the gyro or move the robot
 		// during the calibration
 		// One reference says that this could take 5 seconds to complete
 
