@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
 import org.usfirst.frc.team997.robot.commands.LearnShift;
+import org.usfirst.frc.team997.robot.commands.ReverseGatherToggle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
 import org.usfirst.frc.team997.robot.commands.SpinUpShooterToggle;
@@ -27,6 +28,7 @@ public class OI {
 	private final Button collectBallButton;
 	private final Button shootButton, learnUpButton, learnDwnButton;
 	private final Button spitBallButton;
+	private final Button reverseGatherButton;
 	//private final Button arm;
 	//private final Button shifterButton;
 
@@ -45,6 +47,11 @@ public class OI {
 		spitBallButton = new JoystickButton(driverOne, 1);//IS THIS A GOOD BUTTON TO BIND TO??? TEST
 		spitBallButton.whenPressed(new SpitBall());
 		SmartDashboard.putData("Spit Ball", spitBallButton);
+		
+		//if shooter broken, use gather wheels to spit out ball
+		reverseGatherButton = new JoystickButton(driverOne, 2);
+		reverseGatherButton.whenPressed(new ReverseGatherToggle());
+		SmartDashboard.putData("Reverse Gather", reverseGatherButton);
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
@@ -106,7 +113,7 @@ public class OI {
 		// Add in the learn mode to reset mid shooter heights
 		SmartDashboard.putBoolean("Learn Mode", RobotMap.learnMode);
 		SmartDashboard.putData("Learn Mode Toggle", new ToggleLearnMode());
-		learnUpButton = new JoystickButton(driverTwo, 5);
+		learnUpButton = new JoystickButton(driverTwo, 9);
 		learnUpButton.whenPressed(new LearnShift(true)); // true = up
 		learnDwnButton = new JoystickButton(driverTwo, 7);
 		learnDwnButton.whenPressed(new LearnShift(false));
