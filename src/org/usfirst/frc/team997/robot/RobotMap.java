@@ -39,8 +39,9 @@ public class RobotMap {
 	public static final double
 	shooterInSpeed                     = 0.45, //shooter
 	shooterShootingSpeed               = 1.0, //shooter
+	shooterSlowSpeed                   = 0.5,
 	
-	gathererInSpeed                    = 0.4, //gatherer arm (?)
+	gathererInSpeed                    = 0.8, //gatherer arm (?)
 
 	// 2048 ticks / rev
 	// 6 * pi inch / rev
@@ -51,15 +52,15 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterPivotRobot              = 0.80, // 0.68, // Lowest shooter position
-		shooterPivotGround             = 0.92, // 0.83, // Highest shooter position
-		shooterPivotMiddleLow          = 0.87, // 0.77, // Low Medium shooter position
-		shooterPivotMiddleHigh         = 0.84, // 0.72, // High Medium shooter position
+		shooterPivotRobot              = 0.51, // Lowest shooter position
+		shooterPivotGround             = 0.675, // Highest shooter position
+		shooterPivotMiddleLow          = 0.63, // Low Medium shooter position
+		shooterPivotMiddleHigh         = 0.60, // High Medium shooter position
 
 		collectArmPostion              = 0.75, // Where should the arm be to collect balls
-		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical)
-		gathererArmBeforeHitGround     = 0.87, // Lowest gatherer arm position (flat)
-		gathererArmMid                 = 0.51, //mid gatherer arm position (avg between high and low)
+		gathererArmBeforeHitRobot      = 0.262, // Highest gatherer arm position (vertical)
+		gathererArmBeforeHitGround     = 0.90, // Lowest gatherer arm position (flat)
+		gathererArmMid                 = 0.38, //mid gatherer arm position (avg between high and low)
 
 		kickerRightMin                 = 1.0, // NEED TO CHANGE distance out when kicking
 		kickerRightMax                 = 0.0, // distance out when retracting
