@@ -10,7 +10,7 @@ public class ReverseGatherToggle extends Command {
 	private ReverseGather rg = new ReverseGather();
 
     protected void initialize() {
-    	if(rg.run) {
+    	if (rg.run) {
     		rg.run = false;
     	} else {
 			Scheduler.getInstance().add(rg);
