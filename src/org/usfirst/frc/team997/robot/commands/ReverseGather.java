@@ -12,8 +12,6 @@ public class ReverseGather extends Command {
 	boolean run = false;
 
     public ReverseGather() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.gatherer);
     }
 

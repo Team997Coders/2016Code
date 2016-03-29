@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoBreechForward extends CommandGroup {
     
     public  AutoBreechForward() {
-        // Add Commands here:
     	addSequential(new LogOnInitBoolean("AutoBreechForward running", true));
 
     	// needs in parallel as they don't finish for some reason
