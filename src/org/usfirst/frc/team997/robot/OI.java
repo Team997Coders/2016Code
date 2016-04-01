@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
 	//Controllers
-	private final Controller driverOne;
-	private Joystick driverTwo;
+	public final Controller driverOne;
+	public Joystick driverTwo;
 	
 	//Buttons 
 	private final Button shootAngleHighButton, shootAngleMiddleLowButton, 
