@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot.commands;
 
+import org.usfirst.frc.team997.robot.DoubleReference;
 import org.usfirst.frc.team997.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,6 +20,30 @@ public class SpeedControl extends Command {
     	requires(Robot.driveTrain);
     }
     
+    private double algorithm(final double current, final DoubleReference last, final String side) {
+    	boolean maxedOut = true;
+    	double ret = current;
+    	if (current == 0) {
+    		last.value = 0;
+    		maxedOut = false;
+    	} else if (current - last.value > maxAccel) {
+    		last.value += maxAccel;
+    		ret = last.value;
+    	} else if (last.value - current > maxAccel) {
+    		last.value -= maxAccel;
+    		ret = last.value;
+    	} else {
+    		if ((last.value < 0 && current > 0) || (last.value > 0 && current < 0)) {
+    			maxedOut = true;
+    		} else {
+    			maxedOut = false;
+    		}
+    		last.value = current;
+    	}
+		SmartDashboard.putBoolean("Max out " + side, maxedOut);
+    	return ret;
+    }
+
     protected void initialize() {}
     protected void execute() {
     	double left = controlMap.getLeft(Robot.oi.driverOne);
@@ -27,42 +52,13 @@ public class SpeedControl extends Command {
     	SmartDashboard.putNumber("Input Left", left);
     	SmartDashboard.putNumber("Input Right", right);
 
-    	if (left == 0) {
-    		lastLeft = 0;
-    		SmartDashboard.putBoolean("Max out Left", false);
-    	} else if (left - lastLeft > maxAccel) {
-    		lastLeft += maxAccel;
-    		left = lastLeft;
-    		SmartDashboard.putBoolean("Max out Left", true);
-    	} else if (lastLeft - left > maxAccel) {
-    		lastLeft -= maxAccel;
-    		left = lastLeft;
-    		SmartDashboard.putBoolean("Max out Left", true);
-    	} else if ((lastLeft < 0 && left > 0) || (lastLeft > 0 && left < 0)) {
-    		lastLeft = left;
-    		SmartDashboard.putBoolean("Max out Left", true);
-    	} else {
-    		lastLeft = left;
-    		SmartDashboard.putBoolean("Max out Left", false);
-    	}
-    	if (right == 0) {
-    		lastRight = 0;
-    		SmartDashboard.putBoolean("Max out Right", false);
-    	} else if (right - lastRight > maxAccel) {
-    		lastRight += maxAccel;
-    		right = lastRight;
-    		SmartDashboard.putBoolean("Max out Right", true);
-    	} else if (lastRight - right> maxAccel) {
-    		lastRight -= maxAccel;
-    		right = lastRight;
-    		SmartDashboard.putBoolean("Max out Right", true);
-    	} else if ((lastRight < 0 && right > 0) || (lastRight > 0 && right < 0)) {
-    		lastRight = right;
-    		SmartDashboard.putBoolean("Max out Right", true);
-    	} else {
-    		lastRight = right;
-    		SmartDashboard.putBoolean("Max out Right", false);
-    	}
+    	DoubleReference lastL = new DoubleReference(lastLeft);
+    	left = algorithm(left, lastL, "Left");
+    	lastLeft = lastL.value;
+    	DoubleReference lastR = new DoubleReference(lastRight);
+    	right = algorithm(right, lastR, "Right");
+    	lastRight = lastR.value;
+
     	Robot.driveTrain.driveVoltage(left, right);
     }
     protected boolean isFinished() {return false;}
