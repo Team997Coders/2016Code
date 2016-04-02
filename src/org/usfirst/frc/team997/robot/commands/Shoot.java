@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -32,16 +33,15 @@ public class Shoot extends Command {
         return timer.get() > 4;
     }
 
-    @Override
-	protected void end() {
-    	SpinUpShooter.globalSpinUp = false;
-    	Robot.shooter.slowDown();
+    protected void end() {
+    	Shooter.globalSpinUp = 0;
+    	Robot.shooter.stop();
     	Robot.shooter.retractKicker();
     	timer.stop();
     }
 
     @Override
-	protected void interrupted() {
-    	Robot.shooter.slowDown();
+    protected void interrupted() {
+    	Robot.shooter.stop();
     }
 }

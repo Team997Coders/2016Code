@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.AutoBreechForward;
 import org.usfirst.frc.team997.robot.commands.AutoCheval;
 import org.usfirst.frc.team997.robot.commands.AutoDriveBackwards;
 import org.usfirst.frc.team997.robot.commands.AutoDriveForward;
@@ -58,6 +59,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Backward", new AutoDriveBackwards()); // use this for the low bar
 		chooser.addObject("Cheval", new AutoCheval());
 		chooser.addObject("Nothing", new NullCommand());
+		chooser.addObject("BreechForward", new AutoBreechForward());
 
 		SmartDashboard.putData("Auto mode", chooser);
 
@@ -85,6 +87,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		smartDashboard();
 	}
 
 	@Override

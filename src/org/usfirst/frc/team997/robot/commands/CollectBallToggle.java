@@ -22,7 +22,5 @@ public class CollectBallToggle extends Command {
 	@Override
 	protected void end() {}
 	@Override
-	protected void interrupted() {
-		this.end();
-	}
+	protected void interrupted() {this.end();}
 }

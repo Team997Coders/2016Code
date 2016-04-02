@@ -3,6 +3,7 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
+import org.usfirst.frc.team997.robot.commands.ReverseGatherToggle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
 import org.usfirst.frc.team997.robot.commands.SpinUpShooterToggle;
@@ -14,8 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
 	//Controllers
-	private final Controller driverOne;
-	private Joystick driverTwo;
+	public final Controller driverOne;
+	public Joystick driverTwo;
 	
 	//Buttons 
 	private final Button shootAngleHighButton, shootAngleMiddleLowButton, 
@@ -23,9 +24,11 @@ public class OI {
 	private final Button spinUpShooterButton;
 	private final Button collectBallButton;
 	private final Button shootButton;
-	private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
+	//private final Button gatherArmGround, gatherArmRobot, gatherArmMid;
 	//private final Button arm;
 	//private final Button shifterButton;
+	
+	private final Button reverseGatherButton;
 
 	public OI() {
 		//primary Driver Button/Controls 
@@ -37,6 +40,10 @@ public class OI {
 		//retracts kicker, arm to low, roller arm rolls in, gathers
 		collectBallButton = new JoystickButton(driverOne, 4);
 		collectBallButton.whenPressed(new CollectBallToggle());
+		
+		//reverse gatherer wheels to spit out a ball if shooter is dead
+		reverseGatherButton = new JoystickButton(driverOne, 3);
+		reverseGatherButton.whenPressed(new ReverseGatherToggle());
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
@@ -70,7 +77,7 @@ public class OI {
 		shootAngleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
 		SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		
-		//sets arm to before hits ground position
+		/*//sets arm to before hits ground position
 		gatherArmGround = new JoystickButton(driverOne, 5);
 		gatherArmGround.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitGround));
 		
@@ -80,7 +87,7 @@ public class OI {
 		
 		//sets arm to before hits robot position
 		gatherArmRobot = new JoystickButton(driverOne, 5);
-		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
+		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));*/
 		
 		//smart dashboard stuff for the shooter
 		SmartDashboard.putData("Shooter Pivot Low", new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
