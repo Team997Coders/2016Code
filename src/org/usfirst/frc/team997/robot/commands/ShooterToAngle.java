@@ -9,39 +9,39 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShooterToAngle extends Command {
-	public static ShooterToAngle high() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotGround); }
-	public static ShooterToAngle low() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot); }
-	public static ShooterToAngle middleLow() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow); }
-	public static ShooterToAngle middleHigh() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh); }
+        public static ShooterToAngle high() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotGround); }
+        public static ShooterToAngle low() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot); }
+        public static ShooterToAngle middleLow() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow); }
+        public static ShooterToAngle middleHigh() { return new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh); }
 
-	private double angle;
+        private double angle;
 
     public ShooterToAngle(double angle) {
-    	this.angle = angle;
-    	requires(Robot.shooterPivot);
+        this.angle = angle;
+        requires(Robot.shooterPivot);
     }
 
     @Override
-	protected void initialize() {
+        protected void initialize() {
         Robot.shooterPivot.setSetpoint(angle);
         Robot.shooterPivot.enable();
     }
 
     @Override
-	protected void execute() {
-    	Robot.shooterPivot.setSetpoint(angle);
+        protected void execute() {
+        Robot.shooterPivot.setSetpoint(angle);
     }
 
     @Override
-	protected boolean isFinished() {
-    	return Robot.shooterPivot.onTarget();
+        protected boolean isFinished() {
+        return Robot.shooterPivot.onTarget();
     }
 
     @Override
-	protected void end() {}
+        protected void end() {}
 
     @Override
-	protected void interrupted() {
+        protected void interrupted() {
         this.end();
     }
 }

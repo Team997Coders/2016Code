@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Camera extends Subsystem {
     @Override
-	public void initDefaultCommand() {
+        public void initDefaultCommand() {
     }
 }
 

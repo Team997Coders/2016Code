@@ -14,30 +14,30 @@ public class SpinUpShooterToggle extends Command {
 
     @Override
     protected void initialize() {
-    	Shooter.globalSpinUp++;
-    	
-    	if(Shooter.globalSpinUp > 2) {
-    		Shooter.globalSpinUp = 0;
-    	}
+        Shooter.globalSpinUp++;
+
+        if(Shooter.globalSpinUp > 2) {
+                Shooter.globalSpinUp = 0;
+        }
     }
-    
+
     @Override
     protected void execute() {
-    	if(Shooter.globalSpinUp == 2) {
-    		Robot.shooter.speedUp();
-    	} else if(Shooter.globalSpinUp == 1) {
-    		Robot.shooter.speedSlow();
-    	} else {
-    		Robot.shooter.stop();
-    	}
+        if(Shooter.globalSpinUp == 2) {
+                Robot.shooter.speedUp();
+        } else if(Shooter.globalSpinUp == 1) {
+                Robot.shooter.speedSlow();
+        } else {
+                Robot.shooter.stop();
+        }
     }
-    
+
     @Override
-	protected boolean isFinished() {return true;}
-    
+        protected boolean isFinished() {return true;}
+
     @Override
-	protected void end() {}
-    
+        protected void end() {}
+
     @Override
-	protected void interrupted() {}
+        protected void interrupted() {}
 }

@@ -7,27 +7,27 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TankDrive extends Command {
 
     public TankDrive() {
-    	requires(Robot.driveTrain);
+        requires(Robot.driveTrain);
     }
 
     @Override
-	protected void initialize() {}
+        protected void initialize() {}
 
     @Override
-	protected void execute() {
-    	Robot.driveTrain.driveVoltage(Robot.oi.leftY(), Robot.oi.rightY());
+        protected void execute() {
+        Robot.driveTrain.driveVoltage(Robot.oi.leftY(), Robot.oi.rightY());
     }
 
     @Override
-	protected boolean isFinished() {
+        protected boolean isFinished() {
         return false;
     }
 
     @Override
-	protected void end() {}
+        protected void end() {}
 
     @Override
-	protected void interrupted() {
-    	Robot.driveTrain.driveVoltage(0,0);
+        protected void interrupted() {
+        Robot.driveTrain.driveVoltage(0,0);
     }
 }
