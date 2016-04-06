@@ -6,15 +6,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class AutoBreechForward extends CommandGroup {
-    
+
     public  AutoBreechForward() {
-    	addSequential(new LogOnInitBoolean("AutoBreechForward running", true));
+        addSequential(new LogOnInitBoolean("AutoBreechForward running", true));
 
-    	// needs in parallel as they don't finish for some reason
-    	addParallel(ShooterToAngle.middleHigh());
-    	addParallel(GathererToAngle.mid());
-    	addSequential(new DriveToSetpoint(200));
+        // needs in parallel as they don't finish for some reason
+        addParallel(ShooterToAngle.middleHigh());
+        addParallel(GathererToAngle.mid());
+        addSequential(new DriveToSetpoint(200));
 
-    	addSequential(new LogOnInitBoolean("AutoBreechForward running", false));
+        addSequential(new LogOnInitBoolean("AutoBreechForward running", false));
     }
 }
