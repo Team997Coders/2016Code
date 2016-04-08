@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		Robot.gathererArm.lockArmPosition();
+		//include lockShootPosition() for shooterpivot?
 	}
 
 	@Override

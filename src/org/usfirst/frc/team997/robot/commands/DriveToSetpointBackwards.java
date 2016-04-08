@@ -21,7 +21,7 @@ public class DriveToSetpointBackwards extends Command {
 
     //set default speed
     public DriveToSetpointBackwards(double distance) {
-    	this(0.5, distance);
+    	this(0.75, distance);
     }
     
     // Called just before this Command runs the first time

@@ -12,7 +12,7 @@ public class AutoDriveForward extends CommandGroup {
     	// needs in parallel as they don't finish for some reason
     	addParallel(ShooterToAngle.middleLow());
     	addParallel(GathererToAngle.low());
-    	addSequential(new DriveToSetpoint(200));
+    	addSequential(new DriveToSetpoint(100));
 
     	addSequential(new LogOnInitBoolean("AutoDriveForward running", false));
     }

@@ -23,9 +23,9 @@ public class SpinUpShooter extends Command {
 		if (globalSpinUp) {
 			Robot.shooter.speedUp();
 		} else {
-			Robot.shooter.slowDown();
+			Robot.shooter.stop();
 		}
-	
+
 		//Robot.shooter.speedUp();
 	}
 
@@ -36,11 +36,11 @@ public class SpinUpShooter extends Command {
 
 	@Override
 	protected void end() {
-		Robot.shooter.slowDown();
+		Robot.shooter.stop();
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.shooter.slowDown();
+		Robot.shooter.stop();
 	}
 }

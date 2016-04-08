@@ -46,8 +46,9 @@ public class ShooterPivot extends PIDSubsystem {
 	@Override
 	protected double returnPIDInput() {
 		double angle = shootAngle.get();
-		if (angle < .5) {
-			angle += 0.91; 
+		
+		if (angle < 0.5) {
+			angle += 0.91;  //if angle too low, increase it
 		}
 		return angle;
 	}
@@ -60,7 +61,7 @@ public class ShooterPivot extends PIDSubsystem {
 	@Override
 	public void initDefaultCommand() {}
 
-	public void lockArmPosition() {
+	public void lockShootPosition() {
 		setSetpoint(shootAngle.get());
 		System.out.println("Shooter Angle Position Locked at" + shootAngle.get());
 		enable();
@@ -73,10 +74,10 @@ public class ShooterPivot extends PIDSubsystem {
 		// positive voltage makes the arm go up.
 		if (angle > RobotMap.Voltages.shooterPivotGround && voltage > 0) {
 			// arm is down and we don't want it to go lower
-			lockArmPosition();
+			lockShootPosition();
 		} else if (angle < RobotMap.Voltages.shooterPivotRobot && voltage < 0) {
 			// arm is up and we don't want it going any further back
-			lockArmPosition();
+			lockShootPosition();
 		} else {
 			pivotMotor.set(voltage);
 		}

@@ -52,15 +52,15 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterPivotRobot              = 0.51, // Lowest shooter position     
-		shooterPivotGround             = 0.675, // Highest shooter position     
+		shooterPivotRobot              = 0.51, // Highest shooter position     
+		shooterPivotGround             = 0.675, // Lowest shooter position     
 		shooterPivotMiddleLow          = 0.63, // Low Medium shooter position       
 		shooterPivotMiddleHigh         = 0.57, // High Medium shooter position
 
-		collectArmPostion              = 0.45, // Where should the arm be to collect balls
-		gathererArmBeforeHitRobot      = 0.10, // Highest gatherer arm position (vertical)
-		gathererArmBeforeHitGround     = 0.64, // Lowest gatherer arm position (flat)
-		gathererArmMid                 = 0.26, //mid gatherer arm position (avg between high and low)
+		collectArmPostion              = 0.675, // Where should the arm be to collect balls
+		gathererArmBeforeHitRobot      = 0.131, // Highest gatherer arm position (vertical)
+		gathererArmBeforeHitGround     = 0.774, // Lowest gatherer arm position (flat)
+		gathererArmMid                 = 0.453, //mid gatherer arm position (avg between high and low)
 
 		kickerRightMin                 = 1.0, // NEED TO CHANGE distance out when kicking
 		kickerRightMax                 = 0.0, // distance out when retracting
