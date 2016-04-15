@@ -12,7 +12,7 @@ public class AutoDriveBackwards extends CommandGroup {
         //Use this auto routine for the low bar.
         addParallel(ShooterToAngle.high()); //actually makes shooter low
         addParallel(GathererToAngle.low());
-        addSequential(new DriveToSetpointBackwards(-100));
+        addSequential(new DriveToSetpointBackwards(-100)); 
         addSequential(new LogOnInitBoolean("AutoDriveBackwards running", false));
     }
 }

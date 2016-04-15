@@ -13,7 +13,7 @@ public class AutoBreechForward extends CommandGroup {
     	// needs in parallel as they don't finish for some reason
     	addParallel(ShooterToAngle.middleHigh());
     	addParallel(GathererToAngle.low());
-    	addSequential(new DriveToSetpoint(75));
+    	addSequential(new DriveToSetpoint(85));
 
     	addSequential(new LogOnInitBoolean("AutoBreechForward running", false));
     }

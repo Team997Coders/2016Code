@@ -68,7 +68,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public double getAverageEncoderDistance() {
-		return rightEncoder.getDistance();
+		return leftEncoder.getDistance();
 		//return ((double) leftEncoder.get() + (double) rightEncoder.get()) / (double) 2;
 	}
 	

@@ -58,7 +58,7 @@ public class RobotMap {
 		shooterPivotMiddleHigh         = 0.57, // High Medium shooter position
 
 		collectArmPostion              = 0.675, // Where should the arm be to collect balls
-		gathererArmBeforeHitRobot      = 0.131, // Highest gatherer arm position (vertical)
+		gathererArmBeforeHitRobot      = 0.193, // Highest gatherer arm position (vertical) CHANGED FROM .134 after motor adjustment
 		gathererArmBeforeHitGround     = 0.774, // Lowest gatherer arm position (flat)
 		gathererArmMid                 = 0.453, //mid gatherer arm position (avg between high and low)
 
