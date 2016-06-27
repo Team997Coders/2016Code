@@ -1,7 +1,6 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
-import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
 import org.usfirst.frc.team997.robot.commands.ReverseGatherToggle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
