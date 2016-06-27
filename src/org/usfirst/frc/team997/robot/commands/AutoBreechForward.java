@@ -3,7 +3,7 @@ package org.usfirst.frc.team997.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ *USED FOR PORTCULLIS IGNORE THE "PORTCULLIS" COMMAND IT IS A LIE!!!!
  */
 public class AutoBreechForward extends CommandGroup {
     
@@ -12,8 +12,8 @@ public class AutoBreechForward extends CommandGroup {
 
     	// needs in parallel as they don't finish for some reason
     	addParallel(ShooterToAngle.middleHigh());
-    	addParallel(GathererToAngle.mid());
-    	addSequential(new DriveToSetpoint(200));
+    	addParallel(GathererToAngle.low());
+    	addSequential(new DriveToSetpoint(85));
 
     	addSequential(new LogOnInitBoolean("AutoBreechForward running", false));
     }

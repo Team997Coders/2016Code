@@ -15,11 +15,11 @@ public class GathererArm extends PIDSubsystem {
 	private static final double absoluteTolerance = 0.01;
 	
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
-    	super("gathererArm", 4.0, 0.0, 0.5);
+    	super("gathererArm", 1.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
-        getPIDController().setOutputRange(-0.5, 0.5);
+        getPIDController().setOutputRange(-0.5, 0.5);    
 
     	armMotor = new VictorSP(gatherArmMotorPort);
     	armAngle = new AnalogPotentiometer(armAnglePort);
@@ -46,7 +46,7 @@ public class GathererArm extends PIDSubsystem {
 	protected double returnPIDInput() {
     	//return armAngle.getAverageVoltage() / RobotMap.Voltages.gathererArmBeforeHitRobot;  //TODO NEED TO DIVIDE BY MAX VOLTAGE(CURRENTLY UNKNOWN)
     	
-    	// remember the arm feedback is backwards!
+    	//remember the arm feedback is backwards!
     	return armAngle.get();
     }
   
