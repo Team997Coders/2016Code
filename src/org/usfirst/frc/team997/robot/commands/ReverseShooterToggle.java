@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  *
  */
-public class ReverseGatherToggle extends Command {
-	private ReverseGather rg = new ReverseGather();
+public class ReverseShooterToggle extends Command {
+	private ReverseShooter rg = new ReverseShooter();
 
     protected void initialize() {
     	if (rg.run) {

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class SpeedControl extends Command {
-	private static final double maxAccel = .025;
+	private static final double maxAccel = .015; //decreased from 0.025 for safe mode by Julia on 8-5-16
 	
 	private double lastLeft = 0, lastRight = 0;
 	

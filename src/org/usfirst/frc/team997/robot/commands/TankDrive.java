@@ -11,7 +11,9 @@ public class TankDrive extends Command {
     }
 
     @Override
-	protected void initialize() {}
+	protected void initialize() {
+    	ShooterToAngle.middleHigh();
+    }
 
     @Override
 	protected void execute() {
