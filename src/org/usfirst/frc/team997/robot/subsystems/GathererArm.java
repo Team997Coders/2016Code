@@ -18,7 +18,8 @@ public class GathererArm extends PIDSubsystem {
     	super("gathererArm", 1.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
-    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
+    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, 
+    			RobotMap.Voltages.gathererArmBeforeHitGround);
         getPIDController().setOutputRange(-0.5, 0.5);    
 
     	armMotor = new VictorSP(gatherArmMotorPort);

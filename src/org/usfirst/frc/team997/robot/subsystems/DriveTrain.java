@@ -82,5 +82,5 @@ public class DriveTrain extends Subsystem {
 		setDefaultCommand(new ArcadeDrive());
 		//setDefaultCommand(new TankDrive());
 		//setDefaultCommand(new TankSquared());
+		}
 	}
-}
