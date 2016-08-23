@@ -19,7 +19,7 @@ public class GathererArm extends PIDSubsystem {
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
-        getPIDController().setOutputRange(-0.5, 0.5);    
+        getPIDController().setOutputRange(-0.5, 0.75); // modified gatherer has less torque to lift arm.  Needs more power up!
 
     	armMotor = new VictorSP(gatherArmMotorPort);
     	armAngle = new AnalogPotentiometer(armAnglePort);
@@ -65,7 +65,8 @@ public class GathererArm extends PIDSubsystem {
     	double angle = armAngle.get();
     	// gatherer arm goes from low=5.5 to high=2.3 in reverse
     	// we don't want the arm going higher than 2.3 or lower than 5.5
-    	// positive voltage makes the arm go up.
+    	// positive voltage makes the arm go Up.
+    	// arm motion up causes the angle sensor reading to go Down
     	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0) {
     		// arm is down and we don't want it to go lower
     		lockArmPosition();
@@ -80,9 +81,10 @@ public class GathererArm extends PIDSubsystem {
     public void smartDashboard() {
     	SmartDashboard.putNumber("GathererArm Setpoint", super.getSetpoint());
     	SmartDashboard.putNumber("GathererArm Angle", armAngle.get());
-    	SmartDashboard.putNumber("GathererArm Average Error Term", getPIDController().getAvgError());
+    	SmartDashboard.putNumber("GathererArm Motor Power", getPIDController().get());
+    	//SmartDashboard.putNumber("GathererArm Average Error Term", getPIDController().getAvgError());
     	SmartDashboard.putNumber("GathererArm Error Term", getPIDController().getError());
     	SmartDashboard.putBoolean("GathererArm PID Status", getPIDController().isEnabled());
-    	SmartDashboard.putBoolean("GathererArm On Target?", super.onTarget());
+    	SmartDashboard.putBoolean("GathererArm On Target?", this.onTarget());
     }
 }
