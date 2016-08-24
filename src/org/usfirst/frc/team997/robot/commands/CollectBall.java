@@ -34,6 +34,9 @@ public class CollectBall extends Command {
     	//sets arm to lowest position
     	Robot.gathererArm.setSetpoint(RobotMap.Voltages.collectArmPostion);
     	
+    	//sets shooter to lowest position
+    	Robot.shooterPivot.setSetpoint(RobotMap.Voltages.shooterPivotGround);
+    	
     	//makes the wheel on the end of the gatherer arm roll the ball in
     	Robot.gatherer.safeValue(RobotMap.gathererInSpeed);
     }

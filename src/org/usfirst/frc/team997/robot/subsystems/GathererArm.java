@@ -15,11 +15,11 @@ public class GathererArm extends PIDSubsystem {
 	private static final double absoluteTolerance = 0.01;
 	
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
-    	super("gathererArm", 1.0, 0.0, 0.5);
+    	super("gathererArm", -4.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
-    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, RobotMap.Voltages.gathererArmBeforeHitGround);
-        getPIDController().setOutputRange(-0.5, 0.5);    
+    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitRobot, RobotMap.Voltages.gathererArmBeforeHitGround);
+        getPIDController().setOutputRange(-0.75, 0.5);    
 
     	armMotor = new VictorSP(gatherArmMotorPort);
     	armAngle = new AnalogPotentiometer(armAnglePort);
@@ -66,10 +66,10 @@ public class GathererArm extends PIDSubsystem {
     	// gatherer arm goes from low=5.5 to high=2.3 in reverse
     	// we don't want the arm going higher than 2.3 or lower than 5.5
     	// positive voltage makes the arm go up.
-    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0) {
+    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage < 0) {
     		// arm is down and we don't want it to go lower
     		lockArmPosition();
-    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage < 0) {
+    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage > 0) {
     		// arm is up and we don't want it going any further back
     	    lockArmPosition();
     	} else {
@@ -80,6 +80,7 @@ public class GathererArm extends PIDSubsystem {
     public void smartDashboard() {
     	SmartDashboard.putNumber("GathererArm Setpoint", super.getSetpoint());
     	SmartDashboard.putNumber("GathererArm Angle", armAngle.get());
+    	SmartDashboard.putNumber("GathererArm output", getPIDController().get());
     	SmartDashboard.putNumber("GathererArm Average Error Term", getPIDController().getAvgError());
     	SmartDashboard.putNumber("GathererArm Error Term", getPIDController().getError());
     	SmartDashboard.putBoolean("GathererArm PID Status", getPIDController().isEnabled());

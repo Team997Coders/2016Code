@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
 import org.usfirst.frc.team997.robot.commands.KillRobot;
+import org.usfirst.frc.team997.robot.commands.ReverseGather;
 import org.usfirst.frc.team997.robot.commands.ReverseShooterToggle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
@@ -45,7 +46,7 @@ public class OI {
 		
 		//reverse gatherer wheels to spit out a ball if shooter is dead
 		reverseGatherButton = new JoystickButton(driverOne, 3);
-		reverseGatherButton.whenPressed(new ReverseShooterToggle());
+		reverseGatherButton.whenPressed(new ReverseGather());
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
@@ -61,21 +62,21 @@ public class OI {
 		SmartDashboard.putData("Spin Up shooter", spinUpShooterButton);
 		
 		//sets shooter angle to medium position
-		shootAngleMiddleLowButton = new JoystickButton (driverTwo, 2);
+		shootAngleMiddleLowButton = new JoystickButton (driverTwo, 3);
 		shootAngleMiddleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow));
 		SmartDashboard.putData("Shooter To Middle", shootAngleMiddleLowButton);
 		
-		shootAngleMiddleHighButton = new JoystickButton(driverTwo, 4);
+		shootAngleMiddleHighButton = new JoystickButton(driverTwo, 1);
 		shootAngleMiddleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
 		SmartDashboard.putData("Shooter to Middle High", shootAngleMiddleHighButton);
 		
 		//sets shooter angle to low position
-		shootAngleLowButton = new JoystickButton(driverTwo, 3);
+		shootAngleLowButton = new JoystickButton(driverTwo, 2);
 		shootAngleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
 		SmartDashboard.putData("Shooter to Ground", shootAngleLowButton);
 		
 		//sets shooter angle to high position
-		shootAngleHighButton = new JoystickButton (driverTwo, 1);
+		shootAngleHighButton = new JoystickButton (driverTwo, 4);
 	    shootAngleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
 		SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		
@@ -93,7 +94,7 @@ public class OI {
 		gatherArmRobot.whenPressed(new GathererToAngle(RobotMap.Voltages.gathererArmBeforeHitRobot));
 		
 		//Emergency kill switch for robot
-		killRobot = new JoystickButton(driverOne, 6);
+		killRobot = new JoystickButton(driverTwo, 6);
 		killRobot.whenPressed(new KillRobot());
 		
 		//smart dashboard stuff for the shooter
