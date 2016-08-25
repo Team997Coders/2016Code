@@ -4,7 +4,7 @@ import org.usfirst.frc.team997.robot.commands.CollectBallToggle;
 import org.usfirst.frc.team997.robot.commands.GathererToAngle;
 import org.usfirst.frc.team997.robot.commands.KillGather;
 import org.usfirst.frc.team997.robot.commands.KillRobot;
-import org.usfirst.frc.team997.robot.commands.ReverseGather;
+//import org.usfirst.frc.team997.robot.commands.ReverseGather;
 import org.usfirst.frc.team997.robot.commands.ReverseShooterToggle;
 import org.usfirst.frc.team997.robot.commands.Shoot;
 import org.usfirst.frc.team997.robot.commands.ShooterToAngle;
@@ -31,7 +31,7 @@ public class OI {
 	//private final Button arm;
 	//private final Button shifterButton;
 	
-	private final Button reverseGatherButton;
+	//private final Button reverseGatherButton;
 
 	public OI() {
 		//primary Driver Button/Controls 
@@ -45,8 +45,8 @@ public class OI {
 		collectBallButton.whenPressed(new CollectBallToggle());
 		
 		//reverse gatherer wheels to spit out a ball if shooter is dead
-		reverseGatherButton = new JoystickButton(driverOne, 3);
-		reverseGatherButton.whenPressed(new ReverseGather());
+		//reverseGatherButton = new JoystickButton(driverOne, 3);
+		//reverseGatherButton.whenPressed(new ReverseGather());
 		
 		//shifterButton = new JoystickButton(myController, 4); //don't need unless driver wants it! 
 		//shifterButton.whenPressed(new ToggleShift()); 
