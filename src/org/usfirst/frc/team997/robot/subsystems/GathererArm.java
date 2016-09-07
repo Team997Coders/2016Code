@@ -15,7 +15,7 @@ public class GathererArm extends PIDSubsystem {
 	private static final double absoluteTolerance = 0.01;
 	
     public GathererArm(int gatherArmMotorPort, int armAnglePort) {
-    	super("gathererArm", 1.0, 0.0, 0.5);
+    	super("gathererArm", -4.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
     	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, 
