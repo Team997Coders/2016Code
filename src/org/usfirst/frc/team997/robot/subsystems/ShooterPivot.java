@@ -5,33 +5,45 @@ import org.usfirst.frc.team997.robot.RobotMap;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Describe the system:  How the pivot moves with respect to the sensor values and the
- * motor voltages.
+ * Shooter Pivot Angle Subsystem:
+ * 
+ * Control the angle of the shooter.  The shooter moves between end-points that sre set
+ * for gathering balls from the floor to the high point against the upper portion of
+ * the robot set for the high position limit.
+ * 
+ * Since the mechanical design of the shooter pivot placed the sensor on the off side, as the angle
+ * increases up toward the robot the value returned by the sensor goes down.  Depending on the
+ * mechanical position of the wiper will set the actual mapping of the wiper position and the 
+ * shooter pivot position.
+ * 
+ * Note that currently the wiper is over rotated in the pivot and now as the arm rotates up the 
+ * sensor value goes past the low value of 0.2V and it wraps around to the high value of 4.8V.
  */
 public class ShooterPivot extends PIDSubsystem {
 	private Talon pivotMotor;
-	private AnalogPotentiometer shootAngle;
+	private Potentiometer shootAngle;
 	private static final double absoluteTolerance = 0.01;
 
 	public ShooterPivot(int aimingMotorPort, int shooterAnglePort) {
-		// should the 'P' be negative??
+		// should the 'P' be negative?? Yes - since the sensor value goes down as angle goes up
 		super("shooterPivot", -3.5, 0.0, -0.3);
 		getPIDController().setContinuous(false);
-		getPIDController().setInputRange(RobotMap.Voltages.shooterPivotRobot, RobotMap.Voltages.shooterPivotGround);
-		getPIDController().setOutputRange(-0.5, 0.5);
-		 getPIDController().setAbsoluteTolerance(absoluteTolerance);
-		getPIDController().setPercentTolerance(5.0);
+		setInputRange(RobotMap.Voltages.shooterPivotRobot, RobotMap.Voltages.shooterPivotGround);
+		setOutputRange(-0.5, 0.5);
+		setAbsoluteTolerance(absoluteTolerance);
+		setPercentTolerance(5.0);
 
 		pivotMotor = new Talon(aimingMotorPort);
 		shootAngle = new AnalogPotentiometer(shooterAnglePort);
 
+		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", (Talon) pivotMotor);
+		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", (AnalogPotentiometer) shootAngle);
 		LiveWindow.addActuator("ShooterPivot", "ShooterPositionController", getPIDController());
-		LiveWindow.addActuator("ShooterPivot", "ShooterAngleMotor", pivotMotor);
-		LiveWindow.addSensor("ShooterPivot", "ShooterAngleSensor", shootAngle);
 
 		setSetpoint(RobotMap.Voltages.shooterPivotMiddleLow);
 //		lockArmPosition();
@@ -84,9 +96,9 @@ public class ShooterPivot extends PIDSubsystem {
 	}
 
 	public void smartDashboard() {
-		SmartDashboard.putBoolean("Shooter Pivot PID Status", getPIDController().isEnabled());
-		SmartDashboard.putNumber("Shooter Pivot Setpoint: ", super.getSetpoint());
-		SmartDashboard.putNumber("Shooter Pivot Position: ", super.getPosition());
+		SmartDashboard.putBoolean("Shooter Pivot Enabled?", getPIDController().isEnabled());
+		SmartDashboard.putNumber("Shooter Pivot Setpoint: ",  super.getSetpoint());
+		SmartDashboard.putNumber("Shooter Pivot Position: ",  super.getPosition());
 		SmartDashboard.putNumber("Shooter Pivot Feedback Pot Voltage", shootAngle.get());
 		SmartDashboard.putNumber("Shooter Pivot Error Term", getPIDController().getError());
 		SmartDashboard.putBoolean("Shooter Pivot On Target?", super.onTarget());
