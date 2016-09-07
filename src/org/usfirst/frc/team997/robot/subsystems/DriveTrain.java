@@ -50,9 +50,9 @@ public class DriveTrain extends Subsystem {
 
 	public void driveVoltage(double leftSpeed, double rightSpeed) {
 		SmartDashboard.putNumber("driveVoltage Left", leftSpeed);
-		SmartDashboard.putNumber("driveVoltage Right", rightSpeed);
-		this.left.pidWrite(leftSpeed/2); //changed to halfspeed for safemode by Julia on 8-5-16
-		this.right.pidWrite(-rightSpeed/2); //changed to halfspeed for safemode by Julia on 8-5-16
+		SmartDashboard.putNumber("driveVoltage Right", rightSpeed); 
+		this.left.pidWrite(leftSpeed); 
+		this.right.pidWrite(-rightSpeed); 
 	}
 	
 	public void smartDashboard(){

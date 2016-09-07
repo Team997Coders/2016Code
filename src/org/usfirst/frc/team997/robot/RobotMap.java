@@ -52,13 +52,13 @@ public class RobotMap {
 
 	public static class Voltages {
 		public static final double
-		shooterPivotRobot              = 0.47, // Highest shooter position     
-		shooterPivotGround             = 0.7, // Lowest shooter position     
+		shooterPivotRobot              = 0.49, // Highest shooter position     
+		shooterPivotGround             = 0.65, // Lowest shooter position     
 		shooterPivotMiddleLow          = 0.6, // Low Medium shooter position       
 		shooterPivotMiddleHigh         = 0.53, // High Medium shooter position
 
-		collectArmPostion              = 0.4, // Where should the arm be to collect balls
-		gathererArmBeforeHitRobot      = 0.15, // Highest gatherer arm position (vertical) CHANGED FROM .134 after motor adjustment
+		collectArmPostion              = 0.45, // Where should the arm be to collect balls
+		gathererArmBeforeHitRobot      = 0.2, // Highest gatherer arm position (vertical) CHANGED FROM .134 after motor adjustment
 		gathererArmBeforeHitGround     = 0.56, // Lowest gatherer arm position (flat)
 		gathererArmMid                 = 0.4, //mid gatherer arm position (avg between high and low)
 

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 /**
  *
  */
@@ -64,13 +65,18 @@ public class Shooter extends Subsystem {
     }
     
     public void gatherBall(){
-    	//gathers ball as long as the sensor is not activated
+    	
+  //  	gathers ball as long as the sensor is not activated
     	if (shooterBallSensor.getAverageVoltage() > 1){
     		shooterMotor.set(0);
-    	} else {
+   	} else {
     		shooterMotor.set(-RobotMap.shooterInSpeed);
     	}
     }
+    
+//    public void gatherBall(){
+//   	shooterMotor.set(-RobotMap.shooterInSpeed);
+//   }
     
     public boolean isBallCollected() {
     	return shooterBallSensor.getAverageVoltage() > 1;

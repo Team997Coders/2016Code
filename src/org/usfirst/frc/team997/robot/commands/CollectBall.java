@@ -6,11 +6,13 @@ import org.usfirst.frc.team997.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * 
  */
+
 public class CollectBall extends Command {
 	boolean run = false;
-	/** this command will lower and start the gatherer, and shooter to have them 
+	/** 
+	 * this command will lower and start the gatherer, and shooter to have them 
 	 *  gather in until the ball is in the shooter 
 	 * 
 	 */
@@ -19,6 +21,8 @@ public class CollectBall extends Command {
     	requires(Robot.gathererArm);
     	requires(Robot.gatherer);
     }
+    
+    
 
     @Override
 	protected void initialize() {run = true;}
@@ -39,13 +43,15 @@ public class CollectBall extends Command {
     	
     	//makes the wheel on the end of the gatherer arm roll the ball in
     	Robot.gatherer.safeValue(RobotMap.gathererInSpeed);
+    	
+    	
     }
 
-    @Override
-	protected boolean isFinished() {
-    	//stops when the shooter sensor detects the ball
+   @Override	protected boolean isFinished() {
+    	// stops when the shooter sensor detects the ball
         return !run || Robot.shooter.isBallCollected();
-    }
+    	
+  }
 
     @Override
 	protected void end() {
