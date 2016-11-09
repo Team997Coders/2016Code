@@ -24,7 +24,7 @@ public class GatherTrigger extends Command {
 
     @Override
 	protected void execute() {
-    	double dead = OI.deadBand(Robot.oi.getRawTriggerAxis());
+    	double dead = OI.deadBand((Robot.oi.getRawTriggerAxis())*0.7);
     	SmartDashboard.putNumber("GatherTrigger", dead);
     	if (dead != 0) {
     		Robot.gathererArm.disable();
