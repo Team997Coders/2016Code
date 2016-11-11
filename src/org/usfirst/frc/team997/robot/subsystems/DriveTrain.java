@@ -47,12 +47,21 @@ public class DriveTrain extends Subsystem {
 //			rightmotor.set(rightspeed );
 //		}
 //	}
+	public double negSqrt(double thing) {
+		if(thing < 0) {
+			return thing = Math.sqrt(-thing)/-2;
+		} else {
+			return thing = Math.sqrt(thing)/2;
+		}
+	}
 
 	public void driveVoltage(double leftSpeed, double rightSpeed) {
-		leftSpeed = Math.sqrt(leftSpeed)/2;
+		leftSpeed = negSqrt(leftSpeed);
 		SmartDashboard.putNumber("driveVoltage Left", leftSpeed);
-		rightSpeed = Math.sqrt(rightSpeed)/2;
+		
+		rightSpeed = negSqrt(rightSpeed);
 		SmartDashboard.putNumber("driveVoltage Right", rightSpeed);
+		
 		this.left.pidWrite(leftSpeed);
 		this.right.pidWrite(-rightSpeed);
 	}
