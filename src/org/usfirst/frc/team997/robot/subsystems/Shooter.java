@@ -63,9 +63,9 @@ public class Shooter extends Subsystem {
     	shooterMotor.set(0);
     }
     
-    public void gatherBall(){
+    public void gatherBall() {
     	//gathers ball as long as the sensor is not activated
-    	if (shooterBallSensor.getAverageVoltage() > 1){
+    	if (false){//isBallCollected()){
     		shooterMotor.set(0);
     	} else {
     		shooterMotor.set(-RobotMap.shooterInSpeed);
@@ -73,7 +73,7 @@ public class Shooter extends Subsystem {
     }
     
     public boolean isBallCollected() {
-    	return shooterBallSensor.getAverageVoltage() > 1;
+    	return false;//shooterBallSensor.getAverageVoltage() > 1;
 	}
     
     public void smartDashboard() {

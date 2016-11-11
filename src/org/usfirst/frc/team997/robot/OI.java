@@ -49,30 +49,31 @@ public class OI {
 		
 		//Secondary Driver Buttons/Controls
 		driverTwo = new Joystick(RobotMap.joystickPortTwo);
-		shootButton = new JoystickButton(driverTwo, 6);
+		
+		shootButton = new JoystickButton(driverTwo, 9);
 		shootButton.whenPressed(new Shoot());
 		
 		//spin or slow down shooter based on toggle button state
-		spinUpShooterButton = new JoystickButton(driverTwo, 8);
+		spinUpShooterButton = new JoystickButton(driverTwo, 10);
 		spinUpShooterButton.whenPressed(new SpinUpShooterToggle());
 		SmartDashboard.putData("Spin Up shooter", spinUpShooterButton);
 		
 		//sets shooter angle to medium position
-		shootAngleMiddleLowButton = new JoystickButton (driverTwo, 2);
+		shootAngleMiddleLowButton = new JoystickButton (driverTwo, 1);
 		shootAngleMiddleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleLow));
 		SmartDashboard.putData("Shooter To Middle", shootAngleMiddleLowButton);
 		
-		shootAngleMiddleHighButton = new JoystickButton(driverTwo, 4);
+		shootAngleMiddleHighButton = new JoystickButton(driverTwo, 3);
 		shootAngleMiddleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotMiddleHigh));
 		SmartDashboard.putData("Shooter to Middle High", shootAngleMiddleHighButton);
 		
 		//sets shooter angle to low position
-		shootAngleLowButton = new JoystickButton(driverTwo, 3);
+		shootAngleLowButton = new JoystickButton(driverTwo, 2);
 		shootAngleLowButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotGround));
 		SmartDashboard.putData("Shooter to Ground", shootAngleLowButton);
 		
 		//sets shooter angle to high position
-		shootAngleHighButton = new JoystickButton (driverTwo, 1);
+		shootAngleHighButton = new JoystickButton (driverTwo, 4);
 		shootAngleHighButton.whenPressed(new ShooterToAngle(RobotMap.Voltages.shooterPivotRobot));
 		SmartDashboard.putData("Shooter to Robot", shootAngleHighButton);
 		

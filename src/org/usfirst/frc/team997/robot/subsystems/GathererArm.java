@@ -18,8 +18,8 @@ public class GathererArm extends PIDSubsystem {
     	super("gathererArm", -4.0, 0.0, 0.5);
     	getPIDController().setContinuous(false);
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
-    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitGround, 
-    			RobotMap.Voltages.gathererArmBeforeHitGround);
+    	getPIDController().setInputRange(RobotMap.Voltages.gathererArmBeforeHitRobot - .7, 
+    			RobotMap.Voltages.gathererArmBeforeHitGround + .7);
         getPIDController().setOutputRange(-0.5, 0.75); // modified gatherer has less torque to lift arm.  Needs more power up!
 
     	armMotor = new VictorSP(gatherArmMotorPort);
@@ -68,10 +68,10 @@ public class GathererArm extends PIDSubsystem {
     	// we don't want the arm going higher than 2.3 or lower than 5.5
     	// positive voltage makes the arm go Up.
     	// arm motion up causes the angle sensor reading to go Down
-    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage > 0) {
+    	if (angle > RobotMap.Voltages.gathererArmBeforeHitGround && voltage < 0) {
     		// arm is down and we don't want it to go lower
     		lockArmPosition();
-    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage < 0) {
+    	} else if (angle < RobotMap.Voltages.gathererArmBeforeHitRobot && voltage > 0) {
     		// arm is up and we don't want it going any further back
     	    lockArmPosition();
     	} else {
