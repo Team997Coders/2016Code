@@ -38,7 +38,7 @@ public class RobotMap {
 	//Misc. variables
 	public static final double
 	shooterInSpeed                     = 0.45, //shooter
-	shooterShootingSpeed               = 1.0, //shooter
+	shooterShootingSpeed               = 1.2, //shooter
 	shooterSlowSpeed                   = 0.5,
 	
 	gathererInSpeed                    = 0.8, //gatherer arm (?)
